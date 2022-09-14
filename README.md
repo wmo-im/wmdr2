@@ -1,6 +1,6 @@
 # wmdr2
 
-WIGOS Metadata Representation 2 (UML model and schema)
+WIGOS Metadata Representation 2 (UML model and schema). A model viewer is available at https://wmo-im.github.io/wmdr2/html/.
 
 ## Related Publications
 
