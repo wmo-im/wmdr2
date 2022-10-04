@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>WMDR2.0::FacilitySet</title>
+<title>WMDR2.0::FacilityLog</title>
 <link href="../css/ea.css" rel="stylesheet" type="text/css" />
 <script>
 function initPage(src) {	
@@ -34,11 +34,11 @@ function nameClassifier(name, separator)
 <div class="pageHeader"></div>
 <div class="PageBody">
 	<div id="name_classifier" style="display: none;"></div>
-	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("FacilitySet", " : "))</script>  : Public  &lt;&lt;FeatureType&gt;&gt; Class</span>
+	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("FacilityLog", " : "))</script>  : Public  &lt;&lt;FeatureType&gt;&gt; Class</span>
 	<table border="0" cellpadding="0" cellspacing="0" class="ObjectDetails">
 		<tr>
 			<td width="15%" class="ObjectDetailsTopic">Created:</td>
-			<td width="85%" class="ObjectDetailsValue">5/19/2016 9:25:18 AM</td>
+			<td width="85%" class="ObjectDetailsValue">8/11/2015 2:31:27 PM</td>
 		</tr>
 		<tr>
 			<td class="ObjectDetailsTopic">Modified:</td>
@@ -87,22 +87,89 @@ function nameClassifier(name, separator)
 		</tr>
 		<tr id="adv00" style="display: none;">
 			<td class="ObjectDetailsTopic" style="padding-left: 18px;">UUID:</td>
-			<td class="ObjectDetailsValue">{885E69E1-43FA-406a-B68F-DC9A187BBB5F}</td>
+			<td class="ObjectDetailsValue">{6A20689A-4048-49dc-A01E-6A5FDB6A8C40}</td>
 		</tr>
 		<tr id="adv01" style="display: none;">
 			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Appears In:</td>
-			<td class="ObjectDetailsValue"><a href="EA11.htm">WMDR2.0 ObservingFacility (Host)</a>, WMOUnified, <a href="EA1.htm">WMDR2.0 Full Model</a>, WMOUnified medium level</td>
+			<td class="ObjectDetailsValue"><a href="EA11.htm">WMDR2.0 ObservingFacility (Host)</a>, <a href="EA5.htm">WMDR2.0 Logging</a>, <a href="EA3.htm">WMDR2.0 Full Model</a></td>
 		</tr>
 	</table>
-	<div class="ObjectDetailsNotes">A set of reated ObservingFacilities. Relation (grouping) criteria can vary and may be program/network specific. EXAMPLES The NASA A-Train may be considered a FacilitySet comprised of several individual satellites. In GAW, some Global stations consist of several distinct observing facilities. One approach of documenting observational metadata is to define a separate ObservingFacility for each organization of network/program involved at a particular location. The relation between these can then be established by creating a FacilitySet.&lt;br/&gt;&lt;br/&gt;Multiple WIGOS Station Identifiers can be declared as a comma-separated list using the attribute gml:identifier. By convention, the first entry is considered to be the primary WIGOS Station Identifier.&lt;br/&gt;The name of the FacilitySet can be specified using the attribute gml:name. &lt;br/&gt;&lt;br/&gt;</div>
+	<div class="ObjectDetailsNotes">4-04 The FacilityLog is used to capture notable events and extra information about the observing facility or its surroundings. &lt;br/&gt;</div>
 
 	<div class="TableGroup" id="TableGroup">
 		<ul class="ItemTitle">
+			<li onClick="parent.toggleItem('Attributes');" id="AttributesTitle">Attributes</li>
 			<li onClick="parent.toggleItem('AssociationsFrom');" id="AssociationsFromTitle">Associations From</li>
 			<li onClick="parent.toggleItem('TaggedVal');" id="TaggedValTitle">Tagged Values</li>
 			<li onClick="parent.toggleItem('CustomProperties');" id="CustomPropertiesTitle">Advanced</li>
 			<li onClick="parent.toggleItem('Links');" id="LinksTitle">Other Links</li>
 		</ul>
+<div class="ItemBody" id="AttributesTable">
+	<table border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="100%" class="TableHeading">Attribute</td>
+		</tr>
+						<tr>
+				<td width="100%" class="TableRow">
+					<i>Public <a href="./EA1/EA123.htm">EventType</a></i><br /><strong>&nbsp;&nbsp;typeOfEvent</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes79')" style="text-decoration: none; color: #000000;"><img src="../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes79" border="0" />Details:</a>
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes79_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes79_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes79_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes79_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes79_04" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td>Range:0 to 1</td>
+						</tr>
+						<tr id="DetailsImageAttributes79_05" style="display: none;">
+							<td width="75"><i>Transient: </i></td>
+							<td>False</td>
+						</tr>
+						<tr id="DetailsImageAttributes79_06" style="display: none;">
+							<td width="75"><i>Derived: </i></td>
+							<td>False</td>
+						</tr>
+							<tr id="DetailsImageAttributes79_07" style="display: none;">
+							<td width="75"><i>IsID: </i></td>
+						<td>False</td>
+						</tr>
+					</table>
+					
+					sequenceNumber=1<br>
+						<div class="ObjectDetailsNotes"><table>
+	<tr>
+		<td valign="top">
+			<i>Notes: </i><span style="margin-left: .4cm;"> </span>
+		</td>
+		<td>
+			The type of event, taken from the EventType codelist (e.g. tree removal, storm damage etc).&lt;br/&gt;
+		</td>
+	</tr>
+</table></div>
+
+						
+				</td>
+			</tr>
+	</table>
+</div>
 		<div class="ItemBody" id="AssociationsFromTable">
 			<table border="0" cellspacing="0" cellpadding="0" class="Table">
 				<tr>
@@ -112,7 +179,7 @@ function nameClassifier(name, separator)
 				</tr>
 				<tr>
 					<td width="40%" class="TableRow" valign="top">
-						<a href="EA39.htm">«FeatureType» ObservingFacility</a><br />
+						<a href="EA46.htm">«FeatureType» ObservingFacility</a><br />
 						Class &nbsp;
 					</td>
 					<td width="30%" class="TableRow" valign="top">
@@ -120,14 +187,14 @@ function nameClassifier(name, separator)
 						&nbsp;
 					</td>
 					<td width="30%" class="TableRow" valign="top">
-						<strong>Name:</strong> facilitySet<br />
+						<strong>Name:</strong> facilityLog<br />
 						&nbsp;	
 					</td>
 				</tr>
 				<tr>
 					<td class="TableRowBottomDashed"  colspan="3">
-						<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageLink124" onclick="parent.toggleDiv('detailsDIVLink124','DetailsImageLink124')" />Details:
-							<div id="detailsDIVLink124" class="DetailsDiv" >
+						<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageLink80" onclick="parent.toggleDiv('detailsDIVLink80','DetailsImageLink80')" />Details:
+							<div id="detailsDIVLink80" class="DetailsDiv" >
 							&nbsp;
 							</div>
 						</div>
@@ -148,8 +215,8 @@ function nameClassifier(name, separator)
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
-					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario125" onclick="parent.toggleDiv('detailsDIVScenario125','DetailsImageScenario125')" />Details:
-						<div id="detailsDIVScenario125" class="DetailsDiv" >
+					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario81" onclick="parent.toggleDiv('detailsDIVScenario81','DetailsImageScenario81')" />Details:
+						<div id="detailsDIVScenario81" class="DetailsDiv" >
 						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br />Description: Create a named complex type ( property type ) that requires the instance to be encoded inline<br /></div>
 
 						</div>
@@ -161,8 +228,8 @@ function nameClassifier(name, separator)
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
-					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario126" onclick="parent.toggleDiv('detailsDIVScenario126','DetailsImageScenario126')" />Details:
-						<div id="detailsDIVScenario126" class="DetailsDiv" >
+					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario82" onclick="parent.toggleDiv('detailsDIVScenario82','DetailsImageScenario82')" />Details:
+						<div id="detailsDIVScenario82" class="DetailsDiv" >
 						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br />Description: Identifies the class as a collection<br /></div>
 
 						</div>
@@ -174,8 +241,8 @@ function nameClassifier(name, separator)
 			</tr>	
 			<tr>
 				<td class="TableRowBottomDashed"  colspan="2">
-					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario127" onclick="parent.toggleDiv('detailsDIVScenario127','DetailsImageScenario127')" />Details:
-						<div id="detailsDIVScenario127" class="DetailsDiv" >
+					<div class="DetailsDivParent"><img src="../images/minus03.gif" align="absmiddle" id="DetailsImageScenario83" onclick="parent.toggleDiv('detailsDIVScenario83','DetailsImageScenario83')" />Details:
+						<div id="detailsDIVScenario83" class="DetailsDiv" >
 						<div class="ObjectDetailsNotes">Values: true,false<br />Default: false<br />Description: Suppress creation of a named complex type ( property type ) that supports inline or byReference encoding<br /></div>
 
 						</div>
@@ -206,10 +273,10 @@ function nameClassifier(name, separator)
 					<td width="40%" class="TableHeading">Notes</td>
 				</tr>
 				<tr>
-					<td width="30%" class="TableRow" valign="top"><a href="EA39.htm">«FeatureType» ObservingFacility</a></td>
+					<td width="30%" class="TableRow" valign="top"><a href="EA38.htm">«FeatureType» LogEntry</a></td>
 					<td width="10%" class="TableRow" valign="top">Class</td>
-					<td width="10%" class="TableRow" valign="top">Weak</td>
-					<td width="10%" class="TableRow" valign="top">From</td>
+					<td width="10%" class="TableRow" valign="top">Generalization</td>
+					<td width="10%" class="TableRow" valign="top">To</td>
 					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
 				</tr>
 
