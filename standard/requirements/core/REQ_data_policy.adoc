@@ -1,0 +1,7 @@
+[[req_core_data_policy]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/data_policy*
+^|A |The `+properties.wmo:dataPolicy+` property SHALL be `+core+` or `+recommended+`.
+^|B |When the `+properties.wmo:dataPolicy+` property is `+recommended+`, data licensing SHALL be provided by at least one `+links+` item with link relations (`+rel+`) of `+license+`.
+|===

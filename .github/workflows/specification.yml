@@ -1,0 +1,57 @@
+name: build specifications and KPIs
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'standard/**'
+    - 'kpi/**'
+
+env:
+  SPEC_FILE_BASENAME: wmdr2-STABLE
+  KPI_FILE_BASENAME: wmdr2-kpi-DRAFT
+
+jobs:
+  build-wmdr2:
+    name: Generate documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y \
+          && sudo apt-get install -y pandoc \
+          && sudo gem install asciidoctor asciidoctor-pdf
+      - name: checkout repository
+        uses: actions/checkout@master
+      - name: build specification
+        run: |
+          mkdir -p /tmp/wmdr2/standard/images \
+          && cd standard \
+          && asciidoctor --trace -o /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.html index.adoc \
+          && asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.docx \
+          && asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.pdf index.adoc \
+          && cp images/*.png /tmp/wmdr2/standard/images \
+          && cd ..
+      - name: build KPIs
+        run: |
+          mkdir -p /tmp/wmdr2/standard/images \
+          && cd kpi \
+          && asciidoctor --trace -o /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.html index.adoc \
+          && asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.docx \
+          && asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.pdf index.adoc \
+          && cd ..
+      - name: checkout gh-pages branch
+        uses: actions/checkout@master
+        with:
+          ref: gh-pages
+      - name: update gh-pages branch and publish
+        run: | 
+          git checkout gh-pages
+          git config --global user.email "tomkralidis@gmail.com"
+          git config --global user.name "Tom Kralidis"
+          rm -rf standard kpi
+          mv -f /tmp/wmdr2/* .
+          git add .
+          git commit -am "update WMDR 2 build"
+          git push

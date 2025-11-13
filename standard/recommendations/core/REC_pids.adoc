@@ -1,0 +1,6 @@
+[[rec_core_pids]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/pids*
+^|A |A WMDR SHOULD provide persistent identifier references via items in the `+properties.externalIds+` array property, where the value of `+scheme+` is based on an established persistent identifier scheme (such as `+https://doi.org+`, `+https://arks.org+` or `+https://handle.net+`), and the `+value+` property is the persistent identifier (for example, `https://dx.doi.org/10.14287/10000001`).
+|===

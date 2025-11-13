@@ -1,0 +1,7 @@
+[[req_core_conformance]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/conformance*
+^|A |A WMDR SHALL provide information on conformance via the OGC API – Records (OARec) record `+conformsTo+` property.
+^|B |The `+conformsTo+` property SHALL advertise conformance to WMDR.
+|===

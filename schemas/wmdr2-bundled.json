@@ -1,0 +1,1002 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml",
+  "title": "WMDR station metadata record definition",
+  "description": "WMDR station metadata record definition",
+  "required": [
+    "id",
+    "conformsTo",
+    "type",
+    "geometry",
+    "properties",
+    "links"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "description": "A unique identifier of the catalog record."
+    },
+    "conformsTo": {
+      "type": "array",
+      "contains": {
+        "const": "http://wis.wmo.int/spec/wmdr/2/conf/core"
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Feature"
+      ]
+    },
+    "geometry": {
+      "oneOf": [
+        {
+          "enum": [
+            null
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Point"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiPoint"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "LineString"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiLineString"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Polygon"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 4,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiPolygon"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "minItems": 4,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "geometries"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "GeometryCollection"
+                  ]
+                },
+                "geometries": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/properties/geometry/oneOf/1"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "contacts",
+        "created"
+      ],
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "allOf": [
+              {
+                "required": [
+                  "organization"
+                ],
+                "additionalProperties": false,
+                "type": "object",
+                "description": "Identification of, and means of communication with, person responsible\nfor the resource.",
+                "anyOf": [
+                  {
+                    "required": [
+                      "name"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "organization"
+                    ]
+                  }
+                ],
+                "properties": {
+                  "identifier": {
+                    "type": "string",
+                    "description": "A value uniquely identifying a contact."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the responsible person."
+                  },
+                  "position": {
+                    "type": "string",
+                    "description": "The name of the role or position of the responsible person taken\nfrom the organization's formal organizational hierarchy or chart."
+                  },
+                  "organization": {
+                    "type": "string",
+                    "description": "Organization/affiliation of the contact."
+                  },
+                  "logo": {
+                    "description": "Graphic identifying a contact. The link relation should be `icon`\nand the media type should be an image media type.",
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "$ref": "#/properties/linkTemplates/items/allOf/0"
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "href"
+                            ],
+                            "properties": {
+                              "href": {
+                                "type": "string",
+                                "format": "uri"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "rel",
+                          "type"
+                        ],
+                        "properties": {
+                          "rel": {
+                            "enum": [
+                              "icon"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "phones": {
+                    "type": "array",
+                    "description": "Telephone numbers at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "value"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "The value is the phone number itself.",
+                          "pattern": "^\\+[1-9]{1}[0-9]{3,14}$"
+                        },
+                        "roles": {
+                          "description": "The type of phone number (e.g. home, work, fax, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "emails": {
+                    "type": "array",
+                    "description": "Email addresses at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "value"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "The value is the email number itself.",
+                          "format": "email"
+                        },
+                        "roles": {
+                          "description": "The type of email (e.g. home, work, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "addresses": {
+                    "type": "array",
+                    "description": "Physical location at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "deliveryPoint": {
+                          "type": "array",
+                          "description": "Address lines for the location.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City for the location."
+                        },
+                        "administrativeArea": {
+                          "type": "string",
+                          "description": "State or province of the location."
+                        },
+                        "postalCode": {
+                          "type": "string",
+                          "description": "ZIP or other postal code."
+                        },
+                        "country": {
+                          "type": "string",
+                          "description": "Country of the physical address.  ISO 3166-1 is recommended."
+                        },
+                        "roles": {
+                          "description": "The type of address (e.g. office, home, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "description": "On-line information about the contact.",
+                    "items": {
+                      "allOf": [
+                        {
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/logo/allOf/0"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "hoursOfService": {
+                    "type": "string",
+                    "description": "Time period when the contact can be contacted."
+                  },
+                  "contactInstructions": {
+                    "type": "string",
+                    "description": "Supplemental instructions on how or when to contact the\nresponsible party."
+                  },
+                  "roles": {
+                    "description": "The set of named duties, job functions and/or permissions\nassociated with this contact.\n(e.g. developer, administrator, etc.).",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "externalIds": {
+          "type": "array",
+          "description": "An identifier for the resource assigned by an\nexternal (to the catalog) entity.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scheme": {
+                "type": "string",
+                "description": "A reference to an authority or identifier\nfor a knowledge organization system from\nwhich the external identifier was obtained.\nIt is recommended that the identifier be a\nresolvable URI."
+              },
+              "value": {
+                "type": "string",
+                "description": "The value of the identifier."
+              }
+            },
+            "required": [
+              "value"
+            ]
+          }
+        },
+        "created": {
+          "type": "string",
+          "description": "The date this record was created in the server.",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "description": "The most recent date on which the record was changed.",
+          "format": "date-time"
+        },
+        "wmo:dataPolicy": {
+          "type": "string",
+          "description": "The data policy definition as per the WMO Unified Data Policy Resolution (Res.1) [23].",
+          "enum": [
+            "core",
+            "recommended"
+          ]
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/wmo-im/wcmp2/main/schema/link.yaml",
+        "title": "WCMP link object definition",
+        "description": "WCMP link object definition",
+        "type": "object",
+        "required": [
+          "href"
+        ],
+        "properties": {
+          "rel": {
+            "type": "string",
+            "description": "The type or semantics of the relation.",
+            "example": "alternate"
+          },
+          "type": {
+            "type": "string",
+            "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+            "example": "application/geo+json"
+          },
+          "hreflang": {
+            "type": "string",
+            "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+            "example": "en"
+          },
+          "title": {
+            "type": "string",
+            "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+            "example": "Trierer Strasse 70, 53115 Bonn"
+          },
+          "length": {
+            "type": "integer"
+          },
+          "channel": {
+            "type": "string",
+            "description": "topic to subscribe to for broker workflow"
+          },
+          "security": {
+            "type": "object",
+            "patternProperties": {
+              "^[a-zA-Z0-9\\.\\-_]+$": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Schema_Reference"
+                  },
+                  {
+                    "$ref": "#/definitions/Schema_SecurityScheme"
+                  }
+                ]
+              }
+            }
+          },
+          "distribution": {
+            "type": "object",
+            "description": "the additional information qualifying the service and allowing to build and display the \"access\" information in a portal",
+            "properties": {
+              "availableFormats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "available format short name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "the individual format description to allow building the portal information"
+                    },
+                    "numberOFiles": {
+                      "type": "string",
+                      "description": "typical number of files disseminated by the distribution mechanism over a period of time"
+                    },
+                    "typicalFilesize": {
+                      "type": "string",
+                      "description": "size of a typical individual file (e.g. KB, MB, GB)"
+                    },
+                    "typicalFilename": {
+                      "type": "string",
+                      "description": "example filename"
+                    },
+                    "samples": {
+                      "description": "links of samples that can be openly accessed by users to provide a better understanding of the data",
+                      "items": {
+                        "type": "object",
+                        "$ref": "#/properties/links/items/properties/distribution/properties/availableFormats/items/properties/documentation/items"
+                      }
+                    },
+                    "documentation": {
+                      "type": "array",
+                      "description": "links to the associated documentation available for this format when applicable",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "rel"
+                            ],
+                            "properties": {
+                              "rel": {
+                                "type": "string",
+                                "description": "The type or semantics of the relation.",
+                                "example": "alternate"
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+                                "example": "application/geo+json"
+                              },
+                              "hreflang": {
+                                "type": "string",
+                                "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+                                "example": "en"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+                                "example": "Trierer Strasse 70, 53115 Bonn"
+                              },
+                              "length": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "href"
+                            ],
+                            "properties": {
+                              "href": {
+                                "type": "string",
+                                "description": "The URI of the link target.",
+                                "example": "https://data.example.com/buildings/123"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "linkTemplates": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "type": "string",
+                "description": "The type or semantics of the relation."
+              },
+              "type": {
+                "type": "string",
+                "description": "A hint indicating what the media type of the\nresult of dereferencing the link should be."
+              },
+              "hreflang": {
+                "type": "string",
+                "description": "A hint indicating what the language of the\nresult of dereferencing the link should be."
+              },
+              "title": {
+                "type": "string",
+                "description": "Used to label the destination of a link\nsuch that it can be used as a human-readable\nidentifier."
+              },
+              "length": {
+                "type": "integer"
+              },
+              "profile": {
+                "type": "array",
+                "description": "One or more identifiers that provide information about additional\nsemantics (constraints, conventions, extensions), in addition to \nthose defined by the media type, that are associated with the\ntarget resource.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created": {
+                "type": "string",
+                "description": "Date of creation of the resource pointed to\nby the link.",
+                "format": "date-time"
+              },
+              "updated": {
+                "type": "string",
+                "description": "Most recent date on which the resource pointed\nto by the link was changed.",
+                "format": "date-time"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "uriTemplate"
+            ],
+            "properties": {
+              "uriTemplate": {
+                "type": "string",
+                "description": "Supplies a resolvable URI to a remote resource\n(or resource fragment)."
+              },
+              "varBase": {
+                "type": "string",
+                "description": "The base URI to which the variable name can be\nappended to retrieve the definition of the\nvariable as a JSON Schema fragment.",
+                "format": "uri-reference"
+              },
+              "variables": {
+                "type": "object",
+                "description": "This object contains one key per substitution\nvariable in the templated URL.  Each key defines\nthe schema of one substitution variable using a\nJSON Schema fragment and can thus include things\nlike the data type of the variable, enumerations,\nminimum values, maximum values, etc."
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Schema_APIKeySecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "in"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "header",
+            "query",
+            "cookie"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_AuthorizationCodeOAuthFlow": {
+      "type": "object",
+      "required": [
+        "authorizationUrl",
+        "tokenUrl"
+      ],
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_ClientCredentialsFlow": {
+      "type": "object",
+      "required": [
+        "tokenUrl"
+      ],
+      "properties": {
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_HTTPSecurityScheme": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "type"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "bearerFormat": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "description": "Bearer",
+          "properties": {
+            "scheme": {
+              "enum": [
+                "bearer"
+              ]
+            }
+          }
+        },
+        {
+          "description": "Non Bearer",
+          "not": {
+            "required": [
+              "bearerFormat"
+            ]
+          },
+          "properties": {
+            "scheme": {
+              "not": {
+                "enum": [
+                  "bearer"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Schema_ImplicitOAuthFlow": {
+      "type": "object",
+      "required": [
+        "authorizationUrl",
+        "scopes"
+      ],
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OAuth2SecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "flows"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "$ref": "#/definitions/Schema_OAuthFlows"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OAuthFlows": {
+      "type": "object",
+      "properties": {
+        "implicit": {
+          "$ref": "#/definitions/Schema_ImplicitOAuthFlow"
+        },
+        "password": {
+          "$ref": "#/definitions/Schema_PasswordOAuthFlow"
+        },
+        "clientCredentials": {
+          "$ref": "#/definitions/Schema_ClientCredentialsFlow"
+        },
+        "authorizationCode": {
+          "$ref": "#/definitions/Schema_AuthorizationCodeOAuthFlow"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OpenIdConnectSecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "openIdConnectUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "openIdConnect"
+          ]
+        },
+        "openIdConnectUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_PasswordOAuthFlow": {
+      "type": "object",
+      "required": [
+        "tokenUrl"
+      ],
+      "properties": {
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_Reference": {
+      "type": "object",
+      "required": [
+        "$ref"
+      ],
+      "patternProperties": {
+        "^\\$ref$": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "Schema_SecurityScheme": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Schema_APIKeySecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_HTTPSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_OAuth2SecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_OpenIdConnectSecurityScheme"
+        }
+      ]
+    }
+  }
+}

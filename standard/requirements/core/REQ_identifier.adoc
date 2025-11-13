@@ -1,0 +1,8 @@
+[[req_core_identifier]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/identifier*
+^|A |A WMDR SHALL provide an identifier via the `+id+` property.
+^|B |The `+id+` property SHALL be a WIGOS Station Identifier (WSI).
+|===
+//req2

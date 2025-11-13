@@ -1,0 +1,35 @@
+[[ats_core]]
+====
+[%metadata]
+label:: http://wis.wmo.int/spec/wmdr/2/conf/core
+subject:: Requirements Class "core"
+classification:: Target Type:Station Metadata
+====
+
+==== Validation
+
+include::./core/ATS_test_validation.adoc[]
+
+==== Identifier
+
+include::./core/ATS_test_identifier.adoc[]
+
+==== Conformance
+
+include::./core/ATS_test_conformance.adoc[]
+
+==== Geospatial Extent
+
+include::./core/ATS_test_extent_geospatial.adoc[]
+
+==== Contacts
+
+include::./core/ATS_test_contacts.adoc[]
+
+==== Record Creation Date
+
+include::./core/ATS_test_record_creation_date.adoc[]
+
+==== WMO Data Policy
+
+include::./core/ATS_test_data_policy.adoc[]
