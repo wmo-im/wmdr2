@@ -1,0 +1,37 @@
+[[ats_core_contacts]]
+====
+[%metadata]
+label:: /conf/core/contacts
+subject:: /req/core/contacts
+test-purpose:: Validate that a WMDR provides contact information for the metadata point of contact and originator of the data.
+
+[.component,class=test method]
+=====
+[.component,class=step]
+--
+Check for the existence of a `+properties.contacts+` property in the WMDR.
+--
+
+[.component,class=step]
+--
+Check that the `+contact+` property provides a minimum of one contact object.
+--
+
+[.component,class=step]
+--
+Check for the existence of a `+roles+` property in the contact object.
+--
+
+[.component,class=step]
+--
+Check for the existence of an `+organization+` property in the contact object.
+--
+
+[.component,class=step]
+--
+If `+roles+` exists, check that the value is part of the WMDR contact role codelist.
+--
+
+
+=====
+====

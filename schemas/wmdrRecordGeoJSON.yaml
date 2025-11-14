@@ -1,0 +1,59 @@
+$schema: 'https://json-schema.org/draft/2020-12/schema'
+$id: 'https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml'
+title: WMDR station metadata record definition
+description: WMDR station metadata record definition
+
+required:
+  - id
+  - conformsTo
+  - type
+  - geometry
+  - properties
+  - links
+properties:
+  id:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
+  conformsTo:
+    type: array
+    contains:
+      const: http://wis.wmo.int/spec/wmdr/2/conf/core
+  type:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/type'
+  geometry:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/geometry'
+  properties:
+    type: object
+    required:
+      - contacts
+      - created
+    properties:
+      contacts:
+        type: array
+        minItems: 1
+        items:
+          allOf:
+            - $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/contact.yaml'
+              required:
+                - organization
+              additionalProperties: false
+      externalIds:
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/externalIds'
+      created:
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/created'
+      updated:
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/updated'
+      wmo:dataPolicy:
+        type: string
+        description: The data policy definition as per the WMO Unified Data Policy Resolution (Res.1) [23].
+        enum:
+          - core
+          - recommended
+  links:
+    type: array
+    minItems: 1
+    items:
+      $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/link.yaml'
+  linkTemplates:
+    type: array
+    items:
+      $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/linkTemplate.yaml'

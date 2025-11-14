@@ -1,0 +1,8 @@
+[[req_core_contacts]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/contacts*
+^|A |A WMDR SHALL provide at least one contact via the `+properties.contacts+` property.
+^|B |The `+properties.contacts+` SHALL provide an `+organization+` property.
+^|C |The `+roles+` property, when specified, SHALL provide a role type from the WCMP role type code list.
+|===

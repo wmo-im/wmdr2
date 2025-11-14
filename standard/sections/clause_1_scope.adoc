@@ -1,0 +1,16 @@
+== Scope
+
+This document defines the content, structure, and encoding of discovery metadata published
+as part of the WIGOS Global Station Catalogue (GSC).
+
+The WIGOS Metadata Representation (WMDR) standard defined herein is an extension of the International Standard _OGC API - Records - Part 1: Core_.
+
+WMDR station metadata records shall be encoded as GeoJSON as defined in _OGC API - Records - Part 1: Core_.
+
+The primary purpose of WMDR is to describe **stations**, or observing facilities.
+Services and APIs operating on resources may be represented as part of their own metadata or associated through WCMP links.
+
+WMDR station metadata record provides descriptions at the granularity level of a station, or observing facilty.  Dataset discovery metadata are supported by the 
+_Manual on the WMO Information System, Volume II - WMO Information System 2.0_ footnote:[https://library.wmo.int/idurl/4/68731].
+
+This specification defines the conformance requirements for the WIGOS Metadata Representation.  Annex A defines the abstract test suite. Annex B provides normative information on schemas.  Annex C provides informative examples.  Annex D provides informative codelists.

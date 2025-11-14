@@ -1,0 +1,8 @@
+[[req_core_validation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/validation*
+^|A |Each WMDR SHALL validate without error against the WMDR schema.
+^|B |Each WMDR SHALL provide id (see TODO), type (see TODO), geometry  (see TODO) and properties (see, for example, TODO) for GeoJSON compliance.
+^|C |The `+type+` property SHALL be set to a fixed value of `+Feature+` for GeoJSON compliance.
+|===

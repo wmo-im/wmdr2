@@ -1,0 +1,21 @@
+== Conformance
+
+Conformance with this standard shall be checked using the tests specified in Annex A (normative) of this document.
+
+_OGC API - Records_ (OARec) provides a record metadata model in support of resource discovery.  This standard is an extension of _OGC API - Records - Part 1: Core_.  Conformance to this standard requires demonstrated conformance to the applicable Conformance Classes of _OGC API - Records - Part 1: Core_.
+
+Authors of station metadata records published within the WIGOS Global Station Catalogue (GSC) are required to comply with the
+WIGOS Metadata Representation (WMDR).  WMDR station metadata shall therefore be compliant with OGC API - Records - Part 1:
+Core: Requirements Class: Record Core.
+
+WMO shall publish guidance material to assist authors of WMDR station metadata for maintaining
+consistency across multiple metadata records and perform quality assessment and reporting.
+
+This standard identifies one Requirements Class which defines the functional requirements.
+
+The mandatory Requirements Class for WMDR is:
+
+* "WIGOS Metadata Representation Core": This Requirements Class inherits from _OGC API — Records — Part 1: Core:
+Requirements Class: Record Core_ which defines the requirements for a catalogue record.  The requirements
+specified in the Requirements Class “Record Core" are mandatory for all implementations of WMDR.
+The requirements are specified in Chapter 7 and in Annex A in more detail.

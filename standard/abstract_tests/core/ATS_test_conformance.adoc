@@ -1,0 +1,20 @@
+[[ats_core_conformance]]
+====
+[%metadata]
+label:: /conf/core/conformance
+subject:: /req/core/conformance
+test-purpose:: Validate that a WMDR provides valid conformance information.
+
+[.component,class=test method]
+=====
+[.component,class=step]
+--
+Check for the existence of a `+conformsTo+` property in the WMDR.
+--
+
+[.component,class=step]
+--
+In the WMDR's `+conformsTo+` array property, check that ONE of the values is equal to `+http://wis.wmo.int/spec/wmdr/2/conf/core+`.
+--
+=====
+====

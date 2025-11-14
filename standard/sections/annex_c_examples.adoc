@@ -1,0 +1,11 @@
+[[examples]]
+[appendix]
+:appendix-caption: Annex
+== Examples (Informative)
+
+=== WIGOS Metadata Representation Examples
+
+.Example: Canadian Hourly Surface Weather Observations (dataset)
+----
+include::../../examples/20250504_0-20008-0-NRB.json[]
+----

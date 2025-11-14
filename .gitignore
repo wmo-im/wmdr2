@@ -1,0 +1,6 @@
+*.docx
+*.html
+*.pdf
+*.pyc
+.DS_Store
+.stoplight

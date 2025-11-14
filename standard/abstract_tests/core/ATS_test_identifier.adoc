@@ -1,0 +1,36 @@
+[[ats_core_identifier]]
+====
+[%metadata]
+label:: /conf/core/identifier
+subject:: /req/core/identifier
+test-purpose:: Validate that a WMDR has a valid identifier.
+
+[.component,class=test method]
+=====
+[.component,class=step]
+--
+Check for the existence of an `+id+` property in the WMDR.
+--
+
+[.component,class=step]
+--
+In the WMDR's `+id+` property, check that there are at least **five** tokens, delimited by `+:+`.
+--
+
+[.component,class=step]
+--
+In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the first three tokens are equal to `+['urn', 'wmo', 'md']+`.
+--
+
+[.component,class=step]
+--
+In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the fourth token is a centre id based on the WIS2 Topic Hierarchy and controlled vocabulary.
+--
+
+[.component,class=step]
+--
+In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the fifth token (the local identifier) has no spaces or accented characters.
+--
+=====
+====
+

@@ -1,0 +1,57 @@
+== Introduction
+
+=== Overview
+
+TODO
+
+==== WIGOS
+
+TODO
+
+==== Station metadata design considerations
+
+The following describes envisioned workflows of WMDR in the context of station metadata publication and search.
+
+* Flexible metadata publishing mechanisms so providers can publish station metadata in the easiest and most efficient way possible.
+* Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing station metadata as
+JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.
+* The browser as the catalogue. Browsers utilize mass market search engines as the gateway to low barrier
+discovery.  This pattern may work by way of the WIGOS Global Station Catalogue, with the idea that search engines can index from the authoritative source.
+
+==== Granularity
+
+TODO
+
+=== User stories
+
+TODO
+
+=== OGC API - Records - Part 1: Core
+
+The OGC Records - API - Part 1: Core specification:
+
+* lowers the discovery barrier to finding the existence of geospatial resources on the Web
+* provides the ability for discovery metadata to be published via API machinery (searchable catalogue) or static records (crawlable catalogue)
+* provides a core record model for information communities to extend
+* provides a subset of core queryables (e.g. by resource type, by external identifier) which enables
+  federation and cross catalogue discovery functionality
+
+=== The WIGOS Global Station Catalogue (GSC)
+
+The GSC will provide a central search endpoint, enabling users to traverse, browse and search
+station metadata holdings in OSCAR.  Key search predicate capabilities include:
+
+* geospatial (`+bbox=+`)
+* temporal (time instant or time period) (`+datetime=+`)
+* equality predicates (i.e. `+property=value+`) for any defined discovery metadata property
+* full-text (`+q=+`)
+
+Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Station Catalogue,
+WMDR provides a standards-based, clear and well-defined information model to facilitate the
+management and discovery of data within WIGOS.
+
+=== Mass market considerations
+
+Given WIS2 principle 10 (publishing metadata in a way that commercial search engines can index),
+WMDR station metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
+structured data discovery, search, and relevant results.

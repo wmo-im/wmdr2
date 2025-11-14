@@ -1,0 +1,15 @@
+[[ats_core_validation]]
+====
+[%metadata]
+label:: /conf/core/validation
+subject:: /req/core/validation
+test-purpose:: Validate that a WMDR is valid to the authoritative WMDR schema.
+
+[.component,class=test method]
+=====
+[.component,class=step]
+--
+Run JSON Schema validation on the WMDR against the WMDR authoritative schema.
+--
+=====
+====

@@ -1,0 +1,69 @@
+:title: WIGOS Metadata Representation (WMDR) Version 2
+:titletext: {title}
+:version: 2.0.dev0
+:date: {docdate}
+:copyright: Copyright © 2025 World Meteorological Organization (WMO)
+:doctype: book
+:encoding: utf-8
+:lang: en
+:toc:
+:toc-placement!:
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 4
+:sectanchors:
+
+
+= {title}
+
+<<<
+[cols = "<",frame = "none",grid = "none"]
+|===
+|{set:cellbgcolor:#FFFFFF}
+|[big]*World Meteorological Organization*
+|Date: {docdate}
+|Version: {version}
+|Document status: DRAFT
+|Document location: https://wmo-im.github.io/wmdr/standard/wmdr2-STABLE.html
+|WMO publication location: TODO
+|Task Team on WIGOS Metadata (TT-WIGOSMD)footnote:[https://community.wmo.int/en/governance/commission-membership/commission-observation-infrastructure-and-information-systems-infcom/standing-committee-information-management-and-technology-sc-imt/expert-team-metadata-standards-et-metadata/task-team-wigos-metadata-tt-wigosmd]
+|Expert Team on Metadata Standards (ET-Metadata)footnote:[https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-national-representatives/infcom-management-group/standing-committee-information-management-and-technology-sc-imt/et-metadata]
+|Standing Committee on Information Management and Technology (SC-IMT)footnote:[https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-officers/infcom-management-group/standing-committee-information-management-and-technology-sc-imt]
+|Commission for Observation, Infrastructure and Information Systems (INFCOM)footnote:[https://community.wmo.int/governance/commission-membership/infcom]
+|{copyright}
+|===
+
+<<<
+toc::[]
+<<<
+
+
+include::sections/clause_0_front_material.adoc[]
+
+include::sections/clause_1_scope.adoc[]
+
+include::sections/clause_2_conformance.adoc[]
+
+include::sections/clause_3_references.adoc[]
+
+include::sections/clause_4_terms_and_definitions.adoc[]
+
+include::sections/clause_5_conventions.adoc[]
+
+include::sections/clause_6_informative_text.adoc[]
+
+include::sections/clause_7_normative_text.adoc[]
+
+include::sections/clause_8_gsc.adoc[]
+
+include::sections/annex_a_ats.adoc[]
+
+include::sections/annex_b_schemas.adoc[]
+
+include::sections/annex_c_examples.adoc[]
+
+include::sections/annex_d_codelists.adoc[]
+
+include::sections/annex_e_bibliography.adoc[]
+
+include::sections/annex_f_revision_history.adoc[]

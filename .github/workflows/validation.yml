@@ -1,0 +1,37 @@
+name: validate schema and examples
+
+on:
+  push:
+    paths:
+      - '**.json'   
+      - '**.yaml'   
+  pull_request:
+    paths:
+      - '**.json'   
+      - '**.yaml'   
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-python@v5
+      name: Setup Python ${{ matrix.python-version }}
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install requirements 📦
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install check-jsonschema
+#        pip3 install pywmdr
+#        pywmdr bundle sync
+    - name: Run JSON Schema validation
+      run: |
+        check-jsonschema --check-metaschema schemas/wmdr2-bundled.json
+        for e in examples/*.json; do check-jsonschema --schemafile schemas/wmdr2-bundled.json $e; done
+#    - name: Run pywmdr ETS validation
+#      run: |
+#        for e in examples/*.json; do pywmdr ets validate $e; done
