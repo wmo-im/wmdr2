@@ -6,11 +6,9 @@ on:
     - main
     paths:
     - 'standard/**'
-    - 'kpi/**'
 
 env:
-  SPEC_FILE_BASENAME: wmdr2-STABLE
-  KPI_FILE_BASENAME: wmdr2-kpi-DRAFT
+  SPEC_FILE_BASENAME: wmdr2-DRAFT
 
 jobs:
   build-wmdr2:

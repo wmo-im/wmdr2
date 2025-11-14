@@ -24,7 +24,7 @@
 |Date: {docdate}
 |Version: {version}
 |Document status: DRAFT
-|Document location: https://wmo-im.github.io/wmdr/standard/wmdr2-STABLE.html
+|Document location: https://wmo-im.github.io/wmdr2/standard/wmdr2-DRAFT.html
 |WMO publication location: TODO
 |Task Team on WIGOS Metadata (TT-WIGOSMD)footnote:[https://community.wmo.int/en/governance/commission-membership/commission-observation-infrastructure-and-information-systems-infcom/standing-committee-information-management-and-technology-sc-imt/expert-team-metadata-standards-et-metadata/task-team-wigos-metadata-tt-wigosmd]
 |Expert Team on Metadata Standards (ET-Metadata)footnote:[https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-national-representatives/infcom-management-group/standing-committee-information-management-and-technology-sc-imt/et-metadata]
