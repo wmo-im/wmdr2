@@ -1,4 +1,4 @@
-name: build specifications and KPIs
+name: build specification
 
 on:
   push:
@@ -30,14 +30,6 @@ jobs:
           && asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.docx \
           && asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.pdf index.adoc \
           && cd ..
-      - name: build KPIs
-        run: |
-          mkdir -p /tmp/wmdr2/standard/images \
-          && cd kpi \
-          && asciidoctor --trace -o /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.html index.adoc \
-          && asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.docx \
-          && asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wmdr2/kpi/${KPI_FILE_BASENAME}.pdf index.adoc \
-          && cd ..
       - name: checkout gh-pages branch
         uses: actions/checkout@master
         with:
@@ -47,7 +39,7 @@ jobs:
           git checkout gh-pages
           git config --global user.email "tomkralidis@gmail.com"
           git config --global user.name "Tom Kralidis"
-          rm -rf standard kpi
+          rm -rf standard
           mv -f /tmp/wmdr2/* .
           git add .
           git commit -am "update WMDR 2 build"
