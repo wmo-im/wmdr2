@@ -29,7 +29,6 @@ jobs:
           && asciidoctor --trace -o /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.html index.adoc \
           && asciidoctor --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.docx \
           && asciidoctor --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wmdr2/standard/${SPEC_FILE_BASENAME}.pdf index.adoc \
-          && cp images/*.png /tmp/wmdr2/standard/images \
           && cd ..
       - name: build KPIs
         run: |
