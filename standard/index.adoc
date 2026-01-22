@@ -37,7 +37,6 @@
 toc::[]
 <<<
 
-
 include::sections/clause_0_front_material.adoc[]
 
 include::sections/clause_1_scope.adoc[]
