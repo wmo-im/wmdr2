@@ -1,0 +1,3377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="copyright" content="Copyright © 2025 World Meteorological Organization (WMO)">
+<title>WIGOS Metadata Representation (WMDR) Version 2</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+h1, h2, h3, h4, h5, h6,
+.sidebarblock > .content > .title {
+  color: #005398;
+  font-weight: bold;
+}
+
+#toctitle {
+  color: #005398;
+  font-weight: bold;
+}
+
+#content #toc {
+    border: 1px solid #005398;
+    margin-bottom: 1.25em;
+    padding: 1.25em;
+    background: #ffffff;
+    border-radius: 4px;
+}
+
+#header {
+  border-bottom: 4px solid #005398;
+  margin-top: 10px;
+
+}
+
+#header>h1:first-child {
+    color: #005398;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+#header::before {
+  content: "";
+  display: block;
+  height: 72px;
+  background: url("images/wmo-logo-en.png") no-repeat left center;
+  background-size: contain;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.subheader, .admonitionblock td.content>.title, .audioblock>.title, .exampleblock>.title, .imageblock>.title, .listingblock>.title, .literalblock>.title, .stemblock>.title, .openblock>.title, .paragraph>.title, .quoteblock>.title, table.tableblock>.title, .verseblock>.title, .videoblock>.title, .dlist>.title, .olist>.title, .ulist>.title, .qlist>.title, .hdlist>.title {
+    line-height: 1.45;
+    color: #005398;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: .25em;
+}
+
+#footer {
+    max-width: none;
+    background: #005398;
+    padding: 1.25em;
+}
+
+#footer-text {
+    color: #ffffff;
+    line-height: 1.44;
+    font-weight: bold;
+}
+
+</style>
+</head>
+<body class="book">
+<div id="header">
+<h1>WIGOS Metadata Representation (WMDR) Version 2</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-01-22</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2.0.dev0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document status: DRAFT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document location: <a href="https://wmo-im.github.io/wmdr2/standard/wmdr2-DRAFT.html" class="bare">https://wmo-im.github.io/wmdr2/standard/wmdr2-DRAFT.html</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMO publication location: TODO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Task Team on WIGOS Metadata (TT-WIGOSMD)<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Expert Team on Metadata Standards (ET-Metadata)<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Standing Committee on Information Management and Technology (SC-IMT)<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Commission for Observation, Infrastructure and Information Systems (INFCOM)<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright © 2025 World Meteorological Organization (WMO)</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_scope">1. Scope</a></li>
+<li><a href="#_conformance">2. Conformance</a></li>
+<li><a href="#_references">3. References</a></li>
+<li><a href="#_terms_and_definitions">4. Terms and definitions</a>
+<ul class="sectlevel2">
+<li><a href="#_abbreviated_terms">4.1. Abbreviated terms</a></li>
+</ul>
+</li>
+<li><a href="#_conventions">5. Conventions</a>
+<ul class="sectlevel2">
+<li><a href="#_identifiers">5.1. Identifiers</a></li>
+<li><a href="#_examples">5.2. Examples</a></li>
+<li><a href="#_schemas">5.3. Schemas</a></li>
+<li><a href="#_schema_representation">5.4. Schema representation</a>
+<ul class="sectlevel3">
+<li><a href="#_properties">5.4.1. Properties</a></li>
+</ul>
+</li>
+<li><a href="#_use_of_https">5.5. Use of HTTPS</a></li>
+</ul>
+</li>
+<li><a href="#_introduction">6. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_overview">6.1. Overview</a>
+<ul class="sectlevel3">
+<li><a href="#_wigos">6.1.1. WIGOS</a></li>
+<li><a href="#_station_metadata_design_considerations">6.1.2. Station metadata design considerations</a></li>
+<li><a href="#_granularity">6.1.3. Granularity</a></li>
+</ul>
+</li>
+<li><a href="#_user_stories">6.2. User stories</a></li>
+<li><a href="#_ogc_api_records_part_1_core">6.3. OGC API - Records - Part 1: Core</a></li>
+<li><a href="#_the_wigos_global_station_catalogue_gsc">6.4. The WIGOS Global Station Catalogue (GSC)</a></li>
+<li><a href="#_mass_market_considerations">6.5. Mass market considerations</a></li>
+</ul>
+</li>
+<li><a href="#_wigos_metadata_representation_version_2">7. WIGOS Metadata Representation (Version 2)</a>
+<ul class="sectlevel2">
+<li><a href="#_requirements_class_core">7.1. Requirements Class "Core"</a>
+<ul class="sectlevel3">
+<li><a href="#_overview_2">7.1.1. Overview</a></li>
+<li><a href="#_wigos_metadata_representation_representation">7.1.2. WIGOS Metadata Representation representation</a></li>
+<li><a href="#_validation">7.1.3. Validation</a></li>
+<li><a href="#_identifier">7.1.4. Identifier</a></li>
+<li><a href="#_conformance_2">7.1.5. Conformance</a></li>
+<li><a href="#_geospatial_extent">7.1.6. Geospatial extent</a></li>
+<li><a href="#_properties_contacts">7.1.7. Properties / Contacts</a></li>
+<li><a href="#_properties_persistent_identifiers">7.1.8. Properties / Persistent identifiers</a></li>
+<li><a href="#_properties_record_creation_date">7.1.9. Properties / Record creation date</a></li>
+<li><a href="#_properties_record_update_date">7.1.10. Properties / Record update date</a></li>
+<li><a href="#_properties_wmo_data_policy">7.1.11. Properties / WMO data policy</a></li>
+<li><a href="#_links_and_distribution_information">7.1.12. Links and distribution information</a></li>
+<li><a href="#_additional_properties">7.1.13. Additional properties</a></li>
+</ul>
+</li>
+<li><a href="#_wmo_core_metadata_profile_resources">7.2. WMO Core Metadata Profile resources</a>
+<ul class="sectlevel3">
+<li><a href="#_wmo_codes_registry">7.2.1. WMO Codes Registry</a></li>
+<li><a href="#_wmo_schemas_server">7.2.2. WMO schemas server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_cataloguing_considerations">8. Cataloguing considerations</a>
+<ul class="sectlevel2">
+<li><a href="#_faceting">8.1. Faceting</a></li>
+</ul>
+</li>
+<li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_conformance_class_core">A.1. Conformance Class: Core</a>
+<ul class="sectlevel3">
+<li><a href="#_validation_2">A.1.1. Validation</a></li>
+<li><a href="#_identifier_2">A.1.2. Identifier</a></li>
+<li><a href="#_conformance_3">A.1.3. Conformance</a></li>
+<li><a href="#_geospatial_extent_2">A.1.4. Geospatial Extent</a></li>
+<li><a href="#_contacts">A.1.5. Contacts</a></li>
+<li><a href="#_record_creation_date">A.1.6. Record Creation Date</a></li>
+<li><a href="#_wmo_data_policy">A.1.7. WMO Data Policy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#schemas">Annex B: Schemas (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_wigos_metadata_representation_schema">B.1. WIGOS Metadata Representation Schema</a></li>
+</ul>
+</li>
+<li><a href="#examples">Annex C: Examples (Informative)</a>
+<ul class="sectlevel2">
+<li><a href="#_wigos_metadata_representation_examples">C.1. WIGOS Metadata Representation Examples</a></li>
+</ul>
+</li>
+<li><a href="#Codelists">Annex D: Codelists (Informative)</a>
+<ul class="sectlevel2">
+<li><a href="#_dataset_status">D.1. Dataset status</a></li>
+</ul>
+</li>
+<li><a href="#Bibliography">Annex E: Bibliography</a></li>
+<li><a href="#_revision_history">Annex F: Revision History</a></li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong class="big">i.     Abstract</strong></p>
+</div>
+<div class="paragraph">
+<p>TODO opening overview.</p>
+</div>
+<div class="paragraph">
+<p>This document defines the content, structure, and encoding for the WIGOS Metadata Representation (WMDR).  This standard is a profile and extension of the OGC API - Records standard <sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup>.</p>
+</div>
+<div class="paragraph">
+<p>TODO high level scope, 1 sentence.</p>
+</div>
+<div class="paragraph">
+<p>WMDR documents shall be encoded in GeoJSON (RFC 7946 <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>) as
+defined in this specification and shall be made available as HTTP crawlable files or via API provisioning as defined
+by OGC API - Records.</p>
+</div>
+<div class="paragraph">
+<p>Weather/climate/water data is by nature geospatial and temporal.  The W3C Data on the Web Best
+Practices <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup> and Spatial Data on the Web Best Practices <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup> publications
+provide guidelines on how to best enable spatiotemporal data to lower the barrier for users, search engine optimization, and linked data.  This also aligns with the FAIR data principles (Findable, Accessible, Interoperable, Reusable) <sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup>.</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">ii.    Keywords</strong></p>
+</div>
+<div class="paragraph">
+<p>The following are keywords to be used by search engines and document catalogues.</p>
+</div>
+<div class="paragraph">
+<p>wmo, wigos, station, instrument, weather, climate, water, metadata, discovery, search</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">iii.    Security Considerations</strong></p>
+</div>
+<div class="paragraph">
+<p>Based on the WMO Unified Data Policy for the International Exchange of Earth System Data (Resolution 1 (Cg-Ext(2021) <sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup>, exchanged data are classified as <code>core</code> or <code>recommended</code>.  Core data is considered fully open and unrestricted with no security considerations.  Recommended data may have access control defined.</p>
+</div>
+<div class="paragraph">
+<p>No additional security considerations have been made for this standard.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document defines the content, structure, and encoding of discovery metadata published
+as part of the WIGOS Global Station Catalogue (GSC).</p>
+</div>
+<div class="paragraph">
+<p>The WIGOS Metadata Representation (WMDR) standard defined herein is an extension of the International Standard <em>OGC API - Records - Part 1: Core</em>.</p>
+</div>
+<div class="paragraph">
+<p>WMDR station metadata records shall be encoded as GeoJSON as defined in <em>OGC API - Records - Part 1: Core</em>.</p>
+</div>
+<div class="paragraph">
+<p>The primary purpose of WMDR is to describe <strong>stations</strong>, or observing facilities.
+Services and APIs operating on resources may be represented as part of their own metadata or associated through WCMP links.</p>
+</div>
+<div class="paragraph">
+<p>WMDR station metadata record provides descriptions at the granularity level of a station, or observing facilty.  Dataset discovery metadata are supported by the
+<em>Manual on the WMO Information System, Volume II - WMO Information System 2.0</em> <sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>.</p>
+</div>
+<div class="paragraph">
+<p>This specification defines the conformance requirements for the WIGOS Metadata Representation.  Annex A defines the abstract test suite. Annex B provides normative information on schemas.  Annex C provides informative examples.  Annex D provides informative codelists.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Conformance with this standard shall be checked using the tests specified in Annex A (normative) of this document.</p>
+</div>
+<div class="paragraph">
+<p><em>OGC API - Records</em> (OARec) provides a record metadata model in support of resource discovery.  This standard is an extension of <em>OGC API - Records - Part 1: Core</em>.  Conformance to this standard requires demonstrated conformance to the applicable Conformance Classes of <em>OGC API - Records - Part 1: Core</em>.</p>
+</div>
+<div class="paragraph">
+<p>Authors of station metadata records published within the WIGOS Global Station Catalogue (GSC) are required to comply with the
+WIGOS Metadata Representation (WMDR).  WMDR station metadata shall therefore be compliant with OGC API - Records - Part 1:
+Core: Requirements Class: Record Core.</p>
+</div>
+<div class="paragraph">
+<p>WMO shall publish guidance material to assist authors of WMDR station metadata for maintaining
+consistency across multiple metadata records and perform quality assessment and reporting.</p>
+</div>
+<div class="paragraph">
+<p>This standard identifies one Requirements Class which defines the functional requirements.</p>
+</div>
+<div class="paragraph">
+<p>The mandatory Requirements Class for WMDR is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"WIGOS Metadata Representation Core": This Requirements Class inherits from <em>OGC API — Records — Part 1: Core:
+Requirements Class: Record Core</em> which defines the requirements for a catalogue record.  The requirements
+specified in the Requirements Class “Record Core" are mandatory for all implementations of WMDR.
+The requirements are specified in Chapter 7 and in Annex A in more detail.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>3. References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a id="ogcapi-records"></a> OGC: OGC 20-004, OGC API - Records - Part 1: Core 1.0 (2023) <sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup></p>
+</li>
+<li>
+<p><a id="ogcapi-features"></a> OGC: OGC 17-069r, OGC API - Features - Part 1: Core 1.0 (2022) <sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup></p>
+</li>
+<li>
+<p><a id="rfc7946"></a> IETF: RFC-7946 The GeoJSON Format (2016) <sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup></p>
+</li>
+<li>
+<p><a id="rfc8259"></a> IETF: RFC-8259 The JavaScript Object Notation (JSON) Data Interchange Format (2017) <sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup></p>
+</li>
+<li>
+<p>W3C/OGC: Spatial Data on the Web Best Practices, W3C Working Group Note (2017) <sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup></p>
+</li>
+<li>
+<p>W3C: Data on the Web Best Practices, W3C Recommendation (2017) <sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup></p>
+</li>
+<li>
+<p>W3C: Data Catalog Vocabulary, W3C Recommendation (2014) <sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup></p>
+</li>
+<li>
+<p>IANA: Link Relation Types (2020) <sup class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnotedef_19" title="View footnote.">19</a>]</sup></p>
+</li>
+<li>
+<p>IANA: Media Types (2023) <sup class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnotedef_20" title="View footnote.">20</a>]</sup></p>
+</li>
+<li>
+<p>Linux Foundation: SPDX License List (2021) <sup class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnotedef_21" title="View footnote.">21</a>]</sup></p>
+</li>
+<li>
+<p><a id="json-schema"></a> IETF: JSON Schema (2022) <sup class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnotedef_22" title="View footnote.">22</a>]</sup></p>
+</li>
+<li>
+<p><a id="wis2-manual"></a> Manual on the WMO Information System, Volume II - WMO Information System 2.0 (2025) <sup class="footnote">[<a id="_footnoteref_23" class="footnote" href="#_footnotedef_23" title="View footnote.">23</a>]</sup></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and definitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document uses the terms defined in <a href="https://portal.ogc.org/public_ogc/directives/directives.php">OGC Policy Directive 49</a>, which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “SHALL” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this Standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.</p>
+</div>
+<div class="paragraph">
+<p>This document also uses terms defined in the OGC Standard for Modular specifications (<a href="https://portal.opengeospatial.org/files/?artifact_id=34762">OGC 08-131r3</a>), also known as the 'ModSpec'. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.</p>
+</div>
+<div class="paragraph">
+<p>The following additional terms and definitions also apply.</p>
+</div>
+<div class="sect2">
+<h3 id="_abbreviated_terms"><a class="anchor" href="#_abbreviated_terms"></a>4.1. Abbreviated terms</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Symbols and abbreviated terms</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Abbreviation</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Application Programming Interface</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">ARK</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Archival Resource Key</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DCAT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Data Catalog Vocabulary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DCPC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Data Collection and Production Centres</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">DOI</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Digital Object Identifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GDC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Discovery Catalogue</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GIS</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Geographic Information System</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GISC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Information System Centre</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GSC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Station Catalogue</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HTML</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Hypertext Markup Language</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HTTP</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Hypertext Transfer Protocol</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HTTPS</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Hypertext Transfer Protocol Secure</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">IANA</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internet Assigned Numbers Authority</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">IETF</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internet Engineering Task Force</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">ISO</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">International Organization for Standardization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JavaScript Object Notation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MIME</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Multipurpose Internet Mail Extensions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MQTT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Message Queuing Telemetry Transport</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">National Centre</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">NWP</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Numerical Weather Prediction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OARec</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OGC API - Records</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OGC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OSCAR</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Observing Systems Capability Analysis and Review Tool</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REST</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Representational State Transfer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">ROA</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Resource-oriented architecture</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">S3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Simple Storage Service</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SEO</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Search engine optimization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SOA</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Service-oriented architecture</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Uniform Resource Identifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">URL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Uniform Resource Locator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">W3C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">World Wide Web Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WCMP</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMO Core Metadata Profile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WIGOS</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMO Integrated Global Observing System</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WIS</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMO Information System</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMDR</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WIGOS Metadata Representation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WMO</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">World Meteorological Organization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WSI</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WIGOS Station Identifier</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">XML</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">eXtensible Markup Language</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of JSON schema, or special notes regarding how to read the document.</p>
+</div>
+<div class="sect2">
+<h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
+<div class="paragraph">
+<p>The normative provisions in this Standard are denoted by the URI:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://wis.wmo.int/spec/wmdr/2" class="bare">http://wis.wmo.int/spec/wmdr/2</a></p>
+</div>
+<div class="paragraph">
+<p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>5.2. Examples</h3>
+<div class="paragraph">
+<p>Examples provided in this specification are encoded as GeoJSON.</p>
+</div>
+<div class="paragraph">
+<p>Complete examples can be found at <a href="https://schemas.wmo.int/wmdr/2.0.0/examples" class="bare">https://schemas.wmo.int/wmdr/2.0.0/examples</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_schemas"><a class="anchor" href="#_schemas"></a>5.3. Schemas</h3>
+<div class="paragraph">
+<p>The WMDR schema can be found at <a href="https://schemas.wmo.int/wmdr/2.0.0/schemas/wmdr2-bundled.json" class="bare">https://schemas.wmo.int/wmdr/2.0.0/schemas/wmdr2-bundled.json</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_schema_representation"><a class="anchor" href="#_schema_representation"></a>5.4. Schema representation</h3>
+<div class="paragraph">
+<p>JSON Schema <sup class="footnote">[<a id="_footnoteref_24" class="footnote" href="#_footnotedef_24" title="View footnote.">24</a>]</sup> objects are used throughout this standard to define the structure
+of metadata records. These schema objects are also typically represented using YAML <sup class="footnote">[<a id="_footnoteref_25" class="footnote" href="#_footnotedef_25" title="View footnote.">25</a>]</sup>.
+YAML is a superset of JSON, and in this standard are regarded as equivalent.</p>
+</div>
+<div class="paragraph">
+<p>Metadata record instances are always represented as JSON.</p>
+</div>
+<div class="sect3">
+<h4 id="_properties"><a class="anchor" href="#_properties"></a>5.4.1. Properties</h4>
+<div class="paragraph">
+<p>A JSON <strong>property</strong> represents a key-value pair, where the key is the name of the property and the value is a standard JSON data type.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"myPropertyName": "test123"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_of_https"><a class="anchor" href="#_use_of_https"></a>5.5. Use of HTTPS</h3>
+<div class="paragraph">
+<p>For simplicity, this document only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use HTTPS, not HTTP.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>6. Introduction</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>6.1. Overview</h3>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+<div class="sect3">
+<h4 id="_wigos"><a class="anchor" href="#_wigos"></a>6.1.1. WIGOS</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_station_metadata_design_considerations"><a class="anchor" href="#_station_metadata_design_considerations"></a>6.1.2. Station metadata design considerations</h4>
+<div class="paragraph">
+<p>The following describes envisioned workflows of WMDR in the context of station metadata publication and search.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Flexible metadata publishing mechanisms so providers can publish station metadata in the easiest and most efficient way possible.</p>
+</li>
+<li>
+<p>Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing station metadata as
+JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.</p>
+</li>
+<li>
+<p>The browser as the catalogue. Browsers utilize mass market search engines as the gateway to low barrier
+discovery.  This pattern may work by way of the WIGOS Global Station Catalogue, with the idea that search engines can index from the authoritative source.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_granularity"><a class="anchor" href="#_granularity"></a>6.1.3. Granularity</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_stories"><a class="anchor" href="#_user_stories"></a>6.2. User stories</h3>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ogc_api_records_part_1_core"><a class="anchor" href="#_ogc_api_records_part_1_core"></a>6.3. OGC API - Records - Part 1: Core</h3>
+<div class="paragraph">
+<p>The OGC Records - API - Part 1: Core specification:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>lowers the discovery barrier to finding the existence of geospatial resources on the Web</p>
+</li>
+<li>
+<p>provides the ability for discovery metadata to be published via API machinery (searchable catalogue) or static records (crawlable catalogue)</p>
+</li>
+<li>
+<p>provides a core record model for information communities to extend</p>
+</li>
+<li>
+<p>provides a subset of core queryables (e.g. by resource type, by external identifier) which enables
+federation and cross catalogue discovery functionality</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_wigos_global_station_catalogue_gsc"><a class="anchor" href="#_the_wigos_global_station_catalogue_gsc"></a>6.4. The WIGOS Global Station Catalogue (GSC)</h3>
+<div class="paragraph">
+<p>The GSC will provide a central search endpoint, enabling users to traverse, browse and search
+station metadata holdings in OSCAR.  Key search predicate capabilities include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>geospatial (<code>bbox=</code>)</p>
+</li>
+<li>
+<p>temporal (time instant or time period) (<code>datetime=</code>)</p>
+</li>
+<li>
+<p>equality predicates (i.e. <code>property=value</code>) for any defined discovery metadata property</p>
+</li>
+<li>
+<p>full-text (<code>q=</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Station Catalogue,
+WMDR provides a standards-based, clear and well-defined information model to facilitate the
+management and discovery of data within WIGOS.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mass_market_considerations"><a class="anchor" href="#_mass_market_considerations"></a>6.5. Mass market considerations</h3>
+<div class="paragraph">
+<p>Given WIS2 principle 10 (publishing metadata in a way that commercial search engines can index),
+WMDR station metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
+structured data discovery, search, and relevant results.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_wigos_metadata_representation_version_2"><a class="anchor" href="#_wigos_metadata_representation_version_2"></a>7. WIGOS Metadata Representation (Version 2)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>WIGOS Metadata Representation (WMDR) is an extension of the OGC API – Records standard and shall be encoded in GeoJSON. The normative provisions in WMDR (version 2) are denoted by the base URI (<code><a href="http://wis.wmo.int/spec/wmdr/2" class="bare">http://wis.wmo.int/spec/wmdr/2</a></code>) and requirements are denoted by partial URIs relative to this base. Property names, values and examples are represented with <code>shaded text</code> in this document.</p>
+</div>
+<div class="sect2">
+<h3 id="_requirements_class_core"><a class="anchor" href="#_requirements_class_core"></a>7.1. Requirements Class "Core"</h3>
+<table id="rc_core" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://wis.wmo.int/spec/wmdr/2/req/core" class="bare">http://wis.wmo.int/spec/wmdr/2/req/core</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Station metadata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The JavaScript Object Notation (JSON) Data Interchange Format <a href="https://datatracker.ietf.org/doc/html/rfc8259">(IETF RFC8259 (2017))</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="https://json-schema.org">JSON Schema</a> (2022)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The GeoJSON Format <a href="https://datatracker.ietf.org/doc/html/rfc7946">(IETF: RFC-7946 (2016))</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">OGC API - Features - Part 1: Core corrigendum <a href="https://docs.opengeospatial.org/is/17-069r4/17-069r4.html">(OGC: OGC 17-069r)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Preconditions</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The record conforms to the Requirements Class “Record Core” of <a href="https://docs.ogc.org/DRAFTS/20-004.html">OGC API - Records - Part 1: Core</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_overview_2"><a class="anchor" href="#_overview_2"></a>7.1.1. Overview</h4>
+<div class="paragraph">
+<p>The table below provides an overview of the set of properties that may be included in a WMDR.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Table. WMDR core properties</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Property</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Requirement</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A unique identifier of the station/platform (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A fixed value denoting the WMDR as a GeoJSON <code>Feature</code> (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>conformsTo</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The version of WMDR associated to which the record conforms (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>geometry</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Geospatial location associated with the dataset, in a geographic coordinate reference system (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.externalIds</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Persistent identifiers or handles for the dataset (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.created</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The date that the WMDR was created (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.updated</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Optional</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The date that the WMDR was updated (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.contacts</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Contact information for the dataset (see TODO)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_wigos_metadata_representation_representation"><a class="anchor" href="#_wigos_metadata_representation_representation"></a>7.1.2. WIGOS Metadata Representation representation</h4>
+<div class="paragraph">
+<p>A WMDR can be represented in various ways internally, in WIGOS systems and software tools, but its external representation is GeoJSON.</p>
+</div>
+<table id="rec_core_media_type" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/media_type</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The media type assigned to a WMDR, when transported through a protocol that supports it, SHOULD be <code>application/geo+json</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_validation"><a class="anchor" href="#_validation"></a>7.1.3. Validation</h4>
+<div class="paragraph">
+<p>The WMDR schema is based on the Requirements Class "Record Core" of OGC API – Records – Part 1: Core schema and the associated information model. WMDRs compliant with the WMDR schema are therefore compliant with the OGC API – Records record schema.</p>
+</div>
+<table id="req_core_validation" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/validation</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Each WMDR SHALL validate without error against the WMDR schema.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Each WMDR SHALL provide id (see TODO), type (see TODO), geometry  (see TODO) and properties (see, for example, TODO) for GeoJSON compliance.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>type</code> property SHALL be set to a fixed value of <code>Feature</code> for GeoJSON compliance.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_identifier"><a class="anchor" href="#_identifier"></a>7.1.4. Identifier</h4>
+<div class="paragraph">
+<p>The <code>id</code> property is a unique identifier
+of the dataset.  A record identifier is essential for querying and identifying records within the Global Discovery Catalogue (GDC).</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"id": "urn:wmo:md:ca-eccc-msc:observations.swob"</code></pre>
+</div>
+</div>
+<table id="req_core_identifier" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/identifier</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHALL provide an identifier via the <code>id</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>id</code> property SHALL be a WIGOS Station Identifier (WSI).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_conformance_2"><a class="anchor" href="#_conformance_2"></a>7.1.5. Conformance</h4>
+<div class="paragraph">
+<p>The <code>conformsTo</code> property identifies the version of the WMDR standard to which the metadata record conforms. Conformance identification is valuable for version
+detection and handling of content.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"conformsTo": [
+  "http://wis.wmo.int/spec/wmdr/2/conf/core"
+]</code></pre>
+</div>
+</div>
+<table id="req_core_conformance" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/conformance</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHALL provide information on conformance via the OGC API – Records (OARec) record <code>conformsTo</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>conformsTo</code> property SHALL advertise conformance to WMDR.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_geospatial_extent"><a class="anchor" href="#_geospatial_extent"></a>7.1.6. Geospatial extent</h4>
+<div class="paragraph">
+<p>The <code>geometry</code> property is the location of the station/platform in the geographic coordinate system. , and provides a useful indicator of the location of the station/platform to facilitate search and map displays in the GSC.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"geometry": {
+  "type": "Polygon",
+  "coordinates": [[
+    [-142.23, 28.03],
+    [-142.23, 82.56],
+    [-52.16, 82.56],
+    [-52.16, 28.03],
+    [-142.23, 28.03]
+  ]]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"geometry": {
+  "type": "Point",
+  "coordinates": [-79.38, 43.65]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"geometry": null</code></pre>
+</div>
+</div>
+<table id="req_core_extent_geospatial" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/extent_geospatial</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHALL provide one <code>geometry</code> property to convey the geospatial properties of a dataset using a geographic coordinate reference system (World Geodetic System 1984 [WGS 84]) and longitude and latitude decimal degree units.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>geometry</code> coordinates SHALL be integer or float data types.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>geometry</code> property SHALL provide the value of <code>null</code> when geometry cannot be derived.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="rec_core_extent_geospatial_point" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/extent_geospatial_point</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For datasets based on a geometry without a calculated area (for example, a single station point), a WMDR SHOULD provide the GeoJSON geometry as a <code>Point</code> type.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="rec_core_extent_geospatial_precision" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/extent_geospatial_precision</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Geometry coordinates SHOULD have a level of precision of at least two or more decimal places.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="per_core_extent_geospatial" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/per/core/extent_geospatial</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>geometry</code> property MAY provide a third element (height) as per clause 4 of the GeoJSON specification.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_properties_contacts"><a class="anchor" href="#_properties_contacts"></a>7.1.7. Properties / Contacts</h4>
+<div class="paragraph">
+<p>The <code>contacts</code> property is the information associated with one or more parties responsible for the resource.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Contacts object with all contact details</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "contacts": [{
+    "identifier": "ECCC",
+    "organization": "Government of Canada; Environment and Climate Change Canada; Meteorological Service of Canada",
+    "name": "National Inquiry Response Team",
+    "phones": [{
+      "value": "+18199972800"
+    }],
+    "emails": [{
+      "value":"enviroinfo@ec.gc.ca"
+    }],
+    "addresses": [{
+      "deliveryPoint": [ "77 Westmorland Street, suite 260" ],
+      "city": "Fredericton",
+      "administrativeArea": "NB",
+      "postalCode": "E3B 6Z4",
+      "country": "Canada"
+    }],
+    "links": [{
+      "href": "https://example.org/about",
+      "rel": "about",
+      "type": "text/html"
+    }],
+    "contactInstructions": "email",
+    "roles": ["producer", "host"]
+  }]
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: Contacts object with URL to the relevant homepage</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "contacts": [{
+    "organization": "Government of Canada; Environment and Climate Change Canada; Meteorological Service of Canada",
+    "links": [{
+      "href": "https://example.org/about",
+      "rel": "about",
+      "type": "text/html"
+    }],
+    "roles": ["producer"]
+  }]
+}</code></pre>
+</div>
+</div>
+<table id="req_core_contacts" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/contacts</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHALL provide at least one contact via the <code>properties.contacts</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>properties.contacts</code> SHALL provide an <code>organization</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>roles</code> property, when specified, SHALL provide a role type from the WCMP role type code list.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="per_core_contacts" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 2</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/per/core/contacts</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>properties.contacts</code> property MAY provide more than one contact via multiple objects, or a single contact object with multiple roles.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_properties_persistent_identifiers"><a class="anchor" href="#_properties_persistent_identifiers"></a>7.1.8. Properties / Persistent identifiers</h4>
+<div class="paragraph">
+<p>The <code>externalIds</code> property is a persistent (or handle) identifier used to provide a long lasting reference to a digital resource.  Persistent identifiers are commonly used for scientific publications and datasets.</p>
+</div>
+<div class="paragraph">
+<p>Examples of persistent identifiers include, but are not limited to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Digital Object Identifier (<a href="https://doi.org">DOI</a>)</p>
+</li>
+<li>
+<p>Archival Resource Key (<a href="https://arks.org">ARK</a>)</p>
+</li>
+<li>
+<p><a href="https://handle.net">Handle</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example: Persistent identifiers</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "externalIds": [{
+    "scheme": "https://doi.org",
+    "value": "10.14287/10000001"
+  }, {
+    "scheme": "https://handle.net",
+    "value": "2381/12775"
+  }, {
+    "scheme": "https://arks.org",
+    "value": "ark:/13030/tf5p30086k"
+  }]
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: Online citation</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"links": [
+  {
+    "rel": "cite-as",
+    "title": "Cite as: WMO/GAW Ozone Monitoring Community, World Meteorological Organization-Global Atmosphere Watch Programme (WMO-GAW)/World Ozone and Ultraviolet Radiation Data Centre (WOUDC) [Data]. Retrieved [YYYY-MM-DD], from https://woudc.org. A list of all contributors is available on the website. doi:10.14287/10000004",
+    "type": "text/html",
+    "href": "https://dx.doi.org/10.14287/10000004"
+  }
+]</code></pre>
+</div>
+</div>
+<table id="rec_core_pids" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/pids</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHOULD provide persistent identifier references via items in the <code>properties.externalIds</code> array property, where the value of <code>scheme</code> is based on an established persistent identifier scheme (such as <code>https://doi.org</code>, <code>https://arks.org</code> or <code>https://handle.net</code>), and the <code>value</code> property is the persistent identifier (for example, <code><a href="https://dx.doi.org/10.14287/10000001" class="bare">https://dx.doi.org/10.14287/10000001</a></code>).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="per_core_pids" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 3</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/per/core/pids</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR MAY provide a persistent identifier to cite research or for resource identification, using a persistent identifier scheme/framework.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR MAY provide a persistent identifier as a link object with <code>rel=cite-as</code> if there is an online citation or reference.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_properties_record_creation_date"><a class="anchor" href="#_properties_record_creation_date"></a>7.1.9. Properties / Record creation date</h4>
+<div class="paragraph">
+<p>The <code>created</code> property is a single date, being the date that the WMDR was created. Note that this date is not related to any aspect of the station/platform.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "created": "2021-06-12T23:45:24Z"
+  ...
+}</code></pre>
+</div>
+</div>
+<table id="req_core_record_creation_date" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/record_creation_date</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHALL provide a single <code>properties.created</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>properties.created</code> property SHALL NOT be repeated or used to document change history.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_properties_record_update_date"><a class="anchor" href="#_properties_record_update_date"></a>7.1.10. Properties / Record update date</h4>
+<div class="paragraph">
+<p>The <code>created</code> property is a single date, being the date that the WMDR was created. Note that this date not related to any aspect of the station/platform.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "updated": "2022-06-12T18:52:39Z"
+  ...
+}</code></pre>
+</div>
+</div>
+<table id="rec_core_record_update_date" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/record_update_date</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR SHOULD provide a <code>properties.updated</code> property when a record has been updated since its initial creation.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_properties_wmo_data_policy"><a class="anchor" href="#_properties_wmo_data_policy"></a>7.1.11. Properties / WMO data policy</h4>
+<div class="paragraph">
+<p>The <code>wmo:dataPolicy</code> property is a codelist that identifies the classification of the dataset exchange as described by the WMO Unified Data Policy (Resolution 1 (Cg-Ext(2021)))<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> for the international exchange of Earth system data. The code list values are <code>core</code> or <code>recommended</code>.  The <code>wmo:dataPolicy</code> property is required if the metadata record describes a dataset.</p>
+</div>
+<div class="paragraph">
+<p>Licensing and copyright are expressed via the <code>links</code> property (see TODO), providing access, license and attribution details as required. Conditions on use of the data should be indicated for transparency and clarification.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Core data</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "wmo:dataPolicy": "core"
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: Recommended data</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "wmo:dataPolicy": "recommended"
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is useful to add provider-specific details to have the most detailed information about data policy and additional conditions.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Recommended data with additional conditions and provider-specific details</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "wmo:dataPolicy": "recommended"
+  ...
+},
+"links": [{
+  "rel": "license",
+  "href": "https://example.org/license",
+  "type": "text/html",
+  "title": "EUMETSAT DATA LICENSING"
+}]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: License for recommended data in the public domain</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "wmo:dataPolicy": "recommended"
+  ...
+},
+"links": [{
+  "rel": "license",
+  "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "type": "text/html",
+  "title": "CC0 1.0 Deed | CC0 1.0 Universal | Creative Commons"
+}]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To express rights not addressed by a license, the <code>rights</code> property can be used as follows:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: Rights</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+ ...
+ "rights": "Users are granted free and unrestricted access to this data, without charge and with no conditions on use. Users are requested to attribute the producer of this data. WMO Unified Data Policy (Resolution 1 (Cg-Ext 2021))."
+ ...
+}</code></pre>
+</div>
+</div>
+<table id="req_core_data_policy" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/data_policy</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>properties.wmo:dataPolicy</code> property SHALL be <code>core</code> or <code>recommended</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>When the <code>properties.wmo:dataPolicy</code> property is <code>recommended</code>, data licensing SHALL be provided by at least one <code>links</code> item with link relations (<code>rel</code>) of <code>license</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="rec_core_data_policy_conditions" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 6</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/data_policy_conditions</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>Additional conditions represented by a <code>links</code> item SHOULD also provide a <code>title</code> property to include human-readable information about the link.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>To express any conditions on use of a given dataset, the <code>properties.rights</code> property SHOULD be used.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core data or recommended data compatible with free and unrestricted principles, <code>properties.rights</code> SHOULD be declared with exactly the following statement:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Users are granted free and unrestricted access to this data, without charge and with no conditions on use. Users are requested to attribute the producer of this data. WMO Unified Data Policy (Resolution 1 (Cg-Ext 2021)).</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core or recommended data not in the public domain, a copyright statement SHOULD be expressed as either a <code>properties.rights</code> statement or a link object with <code>rel=copyright</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="per_core_data_policy" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/per/core/data_policy</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core data (when <code>properties.wmo:dataPolicy</code> property is <code>core</code>), attribution licensing MAY be provided as needed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>, and the data is compatible with free and unrestricted principles), a license or public domain statement that is compatible with free and unrestricted principles (such as <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0</a>) MAY be expressed as a link object with the <code>license</code> link relation.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>), a copyright statement MAY be expressed in <code>properties.rights</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>), a link object MAY be expressed with <code>rel=copyright</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_links_and_distribution_information"><a class="anchor" href="#_links_and_distribution_information"></a>7.1.12. Links and distribution information</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+<div class="sect4">
+<h5 id="_overview_3"><a class="anchor" href="#_overview_3"></a>7.1.12.1. Overview</h5>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_additional_properties"><a class="anchor" href="#_additional_properties"></a>7.1.13. Additional properties</h4>
+<div class="paragraph">
+<p>A WMDR can be extended as required for organizational purposes by adding properties (of any type) in the
+record.  Additional properties do not render a record non-compliant with WMDR.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
+  ...
+  "approvalStatus": "approved"
+  "_comment": {
+    "validationErrors": [
+      "error 1",
+      "error 2"
+    ]
+  }
+  ...
+}</code></pre>
+</div>
+</div>
+<table id="per_core_additional_properties" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/per/core/additional_properties</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR MAY provide additional properties of any type in any part of the document as needed.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wmo_core_metadata_profile_resources"><a class="anchor" href="#_wmo_core_metadata_profile_resources"></a>7.2. WMO Core Metadata Profile resources</h3>
+<div class="sect3">
+<h4 id="_wmo_codes_registry"><a class="anchor" href="#_wmo_codes_registry"></a>7.2.1. WMO Codes Registry</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://codes.wmo.int/wmdr" class="bare">http://codes.wmo.int/wmdr</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wmo_schemas_server"><a class="anchor" href="#_wmo_schemas_server"></a>7.2.2. WMO schemas server</h4>
+<div class="paragraph">
+<p>Validation schemas, examples and other resources are published at <a href="https://schemas.wmo.int/wmdr" class="bare">https://schemas.wmo.int/wmdr</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cataloguing_considerations"><a class="anchor" href="#_cataloguing_considerations"></a>8. Cataloguing considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to documenting and describing WIGOS metadata holdings, WMDR station metadata will be
+searchable via the WIGOS Global Station Catalogue (GSC).  As part of discovery and search
+workflow, a GSC may choose to apply filters to help narrow search results.  This is realized by
+the API of the GSC, as well as applying facets in the catalogue.</p>
+</div>
+<div class="sect2">
+<h3 id="_faceting"><a class="anchor" href="#_faceting"></a>8.1. Faceting</h3>
+<div class="paragraph">
+<p>The API of the GSC, in addition to allowing for spatial/temporal/attribute queries and filters,
+may choose to apply facets to WMDRs.  Facets are effective when applied against controlled
+vocabularies and classifications.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance_class_abstract_test_suite_normative"><a class="anchor" href="#_conformance_class_abstract_test_suite_normative"></a>Annex A: Conformance Class Abstract Test Suite (Normative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_conformance_class_core"><a class="anchor" href="#_conformance_class_core"></a>A.1. Conformance Class: Core</h3>
+<div id="ats_core" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p><a href="http://wis.wmo.int/spec/wmdr/2/conf/core" class="bare">http://wis.wmo.int/spec/wmdr/2/conf/core</a></p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>Requirements Class "core"</p>
+</dd>
+<dt class="hdlist1">classification</dt>
+<dd>
+<p>Target Type:Station Metadata</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_validation_2"><a class="anchor" href="#_validation_2"></a>A.1.1. Validation</h4>
+<div id="ats_core_validation" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/validation</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/validation</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR is valid to the authoritative WMDR schema.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Run JSON Schema validation on the WMDR against the WMDR authoritative schema.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_identifier_2"><a class="anchor" href="#_identifier_2"></a>A.1.2. Identifier</h4>
+<div id="ats_core_identifier" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/identifier</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/identifier</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR has a valid identifier.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of an <code>id</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>In the WMDR&#8217;s <code>id</code> property, check that there are at least <strong>five</strong> tokens, delimited by <code>:</code>.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>In the WMDR&#8217;s <code>id</code> property, delimiting the value on <code>:</code>, check that the first three tokens are equal to <code>['urn', 'wmo', 'md']</code>.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>In the WMDR&#8217;s <code>id</code> property, delimiting the value on <code>:</code>, check that the fourth token is a centre id based on the WIS2 Topic Hierarchy and controlled vocabulary.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>In the WMDR&#8217;s <code>id</code> property, delimiting the value on <code>:</code>, check that the fifth token (the local identifier) has no spaces or accented characters.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_conformance_3"><a class="anchor" href="#_conformance_3"></a>A.1.3. Conformance</h4>
+<div id="ats_core_conformance" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/conformance</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/conformance</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR provides valid conformance information.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of a <code>conformsTo</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>In the WMDR&#8217;s <code>conformsTo</code> array property, check that ONE of the values is equal to <code>http://wis.wmo.int/spec/wmdr/2/conf/core</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_geospatial_extent_2"><a class="anchor" href="#_geospatial_extent_2"></a>A.1.4. Geospatial Extent</h4>
+<div id="ats_core_extent_geospatial" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/extent_geospatial</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/extent_geospatial</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR provides a valid geometry property.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of one <code>geometry</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check that all <code>geometry</code> coordinate value data types are integers or floats.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check that <code>geometry</code> coordinate longitudinal values are between -180 and 180.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check that <code>geometry</code> coordinate latitudinal values are between -90 and 90.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check that <code>geometry</code> property is a valid GeoJSON geometry.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_contacts"><a class="anchor" href="#_contacts"></a>A.1.5. Contacts</h4>
+<div id="ats_core_contacts" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/contacts</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/contacts</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR provides contact information for the metadata point of contact and originator of the data.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of a <code>properties.contacts</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check that the <code>contact</code> property provides a minimum of one contact object.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of a <code>roles</code> property in the contact object.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of an <code>organization</code> property in the contact object.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>If <code>roles</code> exists, check that the value is part of the WMDR contact role codelist.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_record_creation_date"><a class="anchor" href="#_record_creation_date"></a>A.1.6. Record Creation Date</h4>
+<div id="ats_core_record_creation_date" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/record_creation_date</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/record_creation_date</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR provides a record creation date.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of one and only one <code>properties.created</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wmo_data_policy"><a class="anchor" href="#_wmo_data_policy"></a>A.1.7. WMO Data Policy</h4>
+<div id="ats_core_data_policy" class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">label</dt>
+<dd>
+<p>/conf/core/data_policy</p>
+</dd>
+<dt class="hdlist1">subject</dt>
+<dd>
+<p>/req/core/data_policy</p>
+</dd>
+<dt class="hdlist1">test-purpose</dt>
+<dd>
+<p>Validate that a WMDR provides information about data policy and, if applicable additional information about licensing and/or copyright.</p>
+</dd>
+</dl>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the type of WMDR (<code>properties.type</code>).</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>If <code>properties.type</code> is found, and <code>properties.type</code> is equal to <code>dataset</code> check that <code>properties.wmo:dataPolicy</code> exists.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock component">
+<div class="content">
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>Check for the existence of a <code>properties.wmo:dataPolicy</code> property in the WMDR.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>If <code>properties.wmo:dataPolicy</code> is found, check that <code>properties.wmo:dataPolicy</code> has a value equal to <code>core</code> or <code>recommended</code>.</p>
+</div>
+</div>
+</div>
+<div class="openblock component">
+<div class="content">
+<div class="paragraph">
+<p>If <code>properties.wmo:dataPolicy</code> is equal to <code>recommended</code>, check for the existence of at least one <code>links</code> item containing a <code>license</code> link relation (<code>rel</code>).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="schemas"><a class="anchor" href="#schemas"></a>Annex B: Schemas (Normative)</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2.0.0" class="bare">https://schemas.wmo.int/wmdr/2.0.0</a> once the standard has been approved.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_wigos_metadata_representation_schema"><a class="anchor" href="#_wigos_metadata_representation_schema"></a>B.1. WIGOS Metadata Representation Schema</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml",
+  "title": "WMDR station metadata record definition",
+  "description": "WMDR station metadata record definition",
+  "required": [
+    "id",
+    "conformsTo",
+    "type",
+    "geometry",
+    "properties",
+    "links"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "description": "A unique identifier of the catalog record."
+    },
+    "conformsTo": {
+      "type": "array",
+      "contains": {
+        "const": "http://wis.wmo.int/spec/wmdr/2/conf/core"
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Feature"
+      ]
+    },
+    "geometry": {
+      "oneOf": [
+        {
+          "enum": [
+            null
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Point"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiPoint"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "LineString"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiLineString"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Polygon"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "minItems": 4,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MultiPolygon"
+                  ]
+                },
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "minItems": 4,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "geometries"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "GeometryCollection"
+                  ]
+                },
+                "geometries": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/properties/geometry/oneOf/1"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "contacts",
+        "created"
+      ],
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "allOf": [
+              {
+                "required": [
+                  "organization"
+                ],
+                "additionalProperties": false,
+                "type": "object",
+                "description": "Identification of, and means of communication with, person responsible\nfor the resource.",
+                "anyOf": [
+                  {
+                    "required": [
+                      "name"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "organization"
+                    ]
+                  }
+                ],
+                "properties": {
+                  "identifier": {
+                    "type": "string",
+                    "description": "A value uniquely identifying a contact."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the responsible person."
+                  },
+                  "position": {
+                    "type": "string",
+                    "description": "The name of the role or position of the responsible person taken\nfrom the organization's formal organizational hierarchy or chart."
+                  },
+                  "organization": {
+                    "type": "string",
+                    "description": "Organization/affiliation of the contact."
+                  },
+                  "logo": {
+                    "description": "Graphic identifying a contact. The link relation should be `icon`\nand the media type should be an image media type.",
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "$ref": "#/properties/linkTemplates/items/allOf/0"
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "href"
+                            ],
+                            "properties": {
+                              "href": {
+                                "type": "string",
+                                "format": "uri"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "rel",
+                          "type"
+                        ],
+                        "properties": {
+                          "rel": {
+                            "enum": [
+                              "icon"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "phones": {
+                    "type": "array",
+                    "description": "Telephone numbers at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "value"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "The value is the phone number itself.",
+                          "pattern": "^\\+[1-9]{1}[0-9]{3,14}$"
+                        },
+                        "roles": {
+                          "description": "The type of phone number (e.g. home, work, fax, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "emails": {
+                    "type": "array",
+                    "description": "Email addresses at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "value"
+                      ],
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "description": "The value is the email number itself.",
+                          "format": "email"
+                        },
+                        "roles": {
+                          "description": "The type of email (e.g. home, work, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "addresses": {
+                    "type": "array",
+                    "description": "Physical location at which contact can be made.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "deliveryPoint": {
+                          "type": "array",
+                          "description": "Address lines for the location.",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "description": "City for the location."
+                        },
+                        "administrativeArea": {
+                          "type": "string",
+                          "description": "State or province of the location."
+                        },
+                        "postalCode": {
+                          "type": "string",
+                          "description": "ZIP or other postal code."
+                        },
+                        "country": {
+                          "type": "string",
+                          "description": "Country of the physical address.  ISO 3166-1 is recommended."
+                        },
+                        "roles": {
+                          "description": "The type of address (e.g. office, home, etc.).",
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "description": "On-line information about the contact.",
+                    "items": {
+                      "allOf": [
+                        {
+                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/logo/allOf/0"
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "hoursOfService": {
+                    "type": "string",
+                    "description": "Time period when the contact can be contacted."
+                  },
+                  "contactInstructions": {
+                    "type": "string",
+                    "description": "Supplemental instructions on how or when to contact the\nresponsible party."
+                  },
+                  "roles": {
+                    "description": "The set of named duties, job functions and/or permissions\nassociated with this contact.\n(e.g. developer, administrator, etc.).",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "externalIds": {
+          "type": "array",
+          "description": "An identifier for the resource assigned by an\nexternal (to the catalog) entity.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scheme": {
+                "type": "string",
+                "description": "A reference to an authority or identifier\nfor a knowledge organization system from\nwhich the external identifier was obtained.\nIt is recommended that the identifier be a\nresolvable URI."
+              },
+              "value": {
+                "type": "string",
+                "description": "The value of the identifier."
+              }
+            },
+            "required": [
+              "value"
+            ]
+          }
+        },
+        "created": {
+          "type": "string",
+          "description": "The date this record was created in the server.",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "description": "The most recent date on which the record was changed.",
+          "format": "date-time"
+        },
+        "wmo:dataPolicy": {
+          "type": "string",
+          "description": "The data policy definition as per the WMO Unified Data Policy Resolution (Res.1) [23].",
+          "enum": [
+            "core",
+            "recommended"
+          ]
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://raw.githubusercontent.com/wmo-im/wcmp2/main/schema/link.yaml",
+        "title": "WCMP link object definition",
+        "description": "WCMP link object definition",
+        "type": "object",
+        "required": [
+          "href"
+        ],
+        "properties": {
+          "rel": {
+            "type": "string",
+            "description": "The type or semantics of the relation.",
+            "example": "alternate"
+          },
+          "type": {
+            "type": "string",
+            "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+            "example": "application/geo+json"
+          },
+          "hreflang": {
+            "type": "string",
+            "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+            "example": "en"
+          },
+          "title": {
+            "type": "string",
+            "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+            "example": "Trierer Strasse 70, 53115 Bonn"
+          },
+          "length": {
+            "type": "integer"
+          },
+          "channel": {
+            "type": "string",
+            "description": "topic to subscribe to for broker workflow"
+          },
+          "security": {
+            "type": "object",
+            "patternProperties": {
+              "^[a-zA-Z0-9\\.\\-_]+$": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/Schema_Reference"
+                  },
+                  {
+                    "$ref": "#/definitions/Schema_SecurityScheme"
+                  }
+                ]
+              }
+            }
+          },
+          "distribution": {
+            "type": "object",
+            "description": "the additional information qualifying the service and allowing to build and display the \"access\" information in a portal",
+            "properties": {
+              "availableFormats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "available format short name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "the individual format description to allow building the portal information"
+                    },
+                    "numberOFiles": {
+                      "type": "string",
+                      "description": "typical number of files disseminated by the distribution mechanism over a period of time"
+                    },
+                    "typicalFilesize": {
+                      "type": "string",
+                      "description": "size of a typical individual file (e.g. KB, MB, GB)"
+                    },
+                    "typicalFilename": {
+                      "type": "string",
+                      "description": "example filename"
+                    },
+                    "samples": {
+                      "description": "links of samples that can be openly accessed by users to provide a better understanding of the data",
+                      "items": {
+                        "type": "object",
+                        "$ref": "#/properties/links/items/properties/distribution/properties/availableFormats/items/properties/documentation/items"
+                      }
+                    },
+                    "documentation": {
+                      "type": "array",
+                      "description": "links to the associated documentation available for this format when applicable",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "rel"
+                            ],
+                            "properties": {
+                              "rel": {
+                                "type": "string",
+                                "description": "The type or semantics of the relation.",
+                                "example": "alternate"
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+                                "example": "application/geo+json"
+                              },
+                              "hreflang": {
+                                "type": "string",
+                                "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+                                "example": "en"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+                                "example": "Trierer Strasse 70, 53115 Bonn"
+                              },
+                              "length": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "href"
+                            ],
+                            "properties": {
+                              "href": {
+                                "type": "string",
+                                "description": "The URI of the link target.",
+                                "example": "https://data.example.com/buildings/123"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "linkTemplates": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "type": "string",
+                "description": "The type or semantics of the relation."
+              },
+              "type": {
+                "type": "string",
+                "description": "A hint indicating what the media type of the\nresult of dereferencing the link should be."
+              },
+              "hreflang": {
+                "type": "string",
+                "description": "A hint indicating what the language of the\nresult of dereferencing the link should be."
+              },
+              "title": {
+                "type": "string",
+                "description": "Used to label the destination of a link\nsuch that it can be used as a human-readable\nidentifier."
+              },
+              "length": {
+                "type": "integer"
+              },
+              "profile": {
+                "type": "array",
+                "description": "One or more identifiers that provide information about additional\nsemantics (constraints, conventions, extensions), in addition to \nthose defined by the media type, that are associated with the\ntarget resource.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created": {
+                "type": "string",
+                "description": "Date of creation of the resource pointed to\nby the link.",
+                "format": "date-time"
+              },
+              "updated": {
+                "type": "string",
+                "description": "Most recent date on which the resource pointed\nto by the link was changed.",
+                "format": "date-time"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "uriTemplate"
+            ],
+            "properties": {
+              "uriTemplate": {
+                "type": "string",
+                "description": "Supplies a resolvable URI to a remote resource\n(or resource fragment)."
+              },
+              "varBase": {
+                "type": "string",
+                "description": "The base URI to which the variable name can be\nappended to retrieve the definition of the\nvariable as a JSON Schema fragment.",
+                "format": "uri-reference"
+              },
+              "variables": {
+                "type": "object",
+                "description": "This object contains one key per substitution\nvariable in the templated URL.  Each key defines\nthe schema of one substitution variable using a\nJSON Schema fragment and can thus include things\nlike the data type of the variable, enumerations,\nminimum values, maximum values, etc."
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Schema_APIKeySecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "in"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "header",
+            "query",
+            "cookie"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_AuthorizationCodeOAuthFlow": {
+      "type": "object",
+      "required": [
+        "authorizationUrl",
+        "tokenUrl"
+      ],
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_ClientCredentialsFlow": {
+      "type": "object",
+      "required": [
+        "tokenUrl"
+      ],
+      "properties": {
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_HTTPSecurityScheme": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "type"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "bearerFormat": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "description": "Bearer",
+          "properties": {
+            "scheme": {
+              "enum": [
+                "bearer"
+              ]
+            }
+          }
+        },
+        {
+          "description": "Non Bearer",
+          "not": {
+            "required": [
+              "bearerFormat"
+            ]
+          },
+          "properties": {
+            "scheme": {
+              "not": {
+                "enum": [
+                  "bearer"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Schema_ImplicitOAuthFlow": {
+      "type": "object",
+      "required": [
+        "authorizationUrl",
+        "scopes"
+      ],
+      "properties": {
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OAuth2SecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "flows"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "$ref": "#/definitions/Schema_OAuthFlows"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OAuthFlows": {
+      "type": "object",
+      "properties": {
+        "implicit": {
+          "$ref": "#/definitions/Schema_ImplicitOAuthFlow"
+        },
+        "password": {
+          "$ref": "#/definitions/Schema_PasswordOAuthFlow"
+        },
+        "clientCredentials": {
+          "$ref": "#/definitions/Schema_ClientCredentialsFlow"
+        },
+        "authorizationCode": {
+          "$ref": "#/definitions/Schema_AuthorizationCodeOAuthFlow"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_OpenIdConnectSecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "openIdConnectUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "openIdConnect"
+          ]
+        },
+        "openIdConnectUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_PasswordOAuthFlow": {
+      "type": "object",
+      "required": [
+        "tokenUrl"
+      ],
+      "properties": {
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "scopes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "Schema_Reference": {
+      "type": "object",
+      "required": [
+        "$ref"
+      ],
+      "patternProperties": {
+        "^\\$ref$": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "Schema_SecurityScheme": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Schema_APIKeySecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_HTTPSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_OAuth2SecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/Schema_OpenIdConnectSecurityScheme"
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="examples"><a class="anchor" href="#examples"></a>Annex C: Examples (Informative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_wigos_metadata_representation_examples"><a class="anchor" href="#_wigos_metadata_representation_examples"></a>C.1. WIGOS Metadata Representation Examples</h3>
+<div class="listingblock">
+<div class="title">Example: Canadian Hourly Surface Weather Observations (dataset)</div>
+<div class="content">
+<pre>{
+    "id": "urn:wmo:md:ke-meteo:0-20008-0-NRB",
+    "type": "Feature",
+    "conformsTo": [
+        "http://wis.wmo.int/spec/wmdr/2/conf/core"
+    ],
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            36.75919,
+            -1.30169,
+            1795.0
+        ]
+    },
+    "properties": {
+        "created": "1996-01-01T00:00:00Z",
+        "wmo:dataPolicy": "core",
+        "contacts": [
+            {
+                "name": "World Meteorological Organization WMO and Federal Office for Meteorology and Climatology MeteoSwiss",
+                "organization": "World Meteorological Organization WMO and Federal Office for Meteorology and Climatology MeteoSwiss",
+                "emails": [
+                    {
+                        "value": "oscar@wmo.int"
+                    }
+                ],
+                "addresses": [
+                    {
+                        "deliveryPoint": [
+                            "7bis, avenue de la Paix"
+                        ],
+                        "city": "Geneva",
+                        "postalCode": "CH-1211",
+                        "country": "Switzerland"
+                    }
+                ],
+                "contactInstructions": "email",
+                "links": [
+                    {
+                        "rel": "canonical",
+                        "type": "text/html",
+                        "href": "https://oscar.wmo.int/surface"
+                    }
+                ],
+                "roles": [
+                    "host"
+                ]
+            },
+            {
+                "name": "Waweru,Amos,Mr",
+                "organization": "Kenyan Meteorological Department",
+                "phones": [
+                    {
+                        "value": "+254723521586"
+                    }
+                ],
+                "emails": [
+                    {
+                        "value": "waweru_k@yahoo.com"
+                    },
+                    {
+                        "value": "amoskamau1969@gmail.com"
+                    }
+                ],
+                "addresses": [
+                    {
+                        "deliveryPoint": [
+                            "Kenya Meteorological Department 30259\nNairobi \nKenya"
+                        ],
+                        "city": "Nairobi",
+                        "administrativeArea": "NB",
+                        "postalCode": "00100",
+                        "country": "Kenya"
+                    }
+                ],
+                "contactInstructions": "africa",
+                "roles": [
+                    "processor",
+                    "producer"
+                ]
+            }
+        ]
+    },
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://creativecommons.org/licenses/by/4.0/"
+        },
+        {
+            "rel": "stations",
+            "href": "http://www.meteo.go.ke/obsv/ozone.html"
+        }
+    ]
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Codelists"><a class="anchor" href="#Codelists"></a>Annex D: Codelists (Informative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dataset_status"><a class="anchor" href="#_dataset_status"></a>D.1. Dataset status</h3>
+<div class="paragraph">
+<p>The links below provide some controlled vocabularies in support of dataset status, and may be
+of use when encoding the <code>properties.status</code> property..</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.w3.org/TR/vocab-dcat-3/#life-cycle" class="bare">https://www.w3.org/TR/vocab-dcat-3/#life-cycle</a></p>
+</li>
+<li>
+<p><a href="https://vocab.met.no/mmd/en/page/?uri=https%3A%2F%2Fvocab.met.no%2Fmmd%2FOperational_Status" class="bare">https://vocab.met.no/mmd/en/page/?uri=https%3A%2F%2Fvocab.met.no%2Fmmd%2FOperational_Status</a></p>
+</li>
+<li>
+<p><a href="https://wiki.esipfed.org/ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ProgressCode" class="bare">https://wiki.esipfed.org/ISO_19115_and_19115-2_CodeList_Dictionaries#MD_ProgressCode</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a id="SDWBP"></a> W3C/OGC: Spatial Data on the Web Best Practices, W3C Working Group Note 28 September 2017, <a href="https://www.w3.org/TR/sdw-bp" class="bare">https://www.w3.org/TR/sdw-bp</a></p>
+</li>
+<li>
+<p><a id="DWBP"></a> W3C: Data on the Web Best Practices, W3C Recommendation 31 January 2017, <a href="https://www.w3.org/TR/dwbp" class="bare">https://www.w3.org/TR/dwbp</a></p>
+</li>
+<li>
+<p><a id="DCAT"></a> W3C: Data Catalog Vocabulary, W3C Recommendation 16 January 2014, <a href="https://www.w3.org/TR/vocab-dcat" class="bare">https://www.w3.org/TR/vocab-dcat</a></p>
+</li>
+<li>
+<p><a id="link-relations"></a> IANA: Link Relation Types, <a href="https://www.iana.org/assignments/link-relations/link-relations.xml" class="bare">https://www.iana.org/assignments/link-relations/link-relations.xml</a></p>
+</li>
+<li>
+<p><a id="SPDX"></a> Linux Foundation: SPDX License List, <a href="https://spdx.org/licenses" class="bare">https://spdx.org/licenses</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex F: Revision History</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12%;">
+<col style="width: 18%;">
+<col style="width: 12%;">
+<col style="width: 12%;">
+<col style="width: 46%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Date</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Release</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Editor</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Primary clauses modified</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2025-11-12</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Template</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Tom Kralidis</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial template</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. <a href="https://community.wmo.int/en/governance/commission-membership/commission-observation-infrastructure-and-information-systems-infcom/standing-committee-information-management-and-technology-sc-imt/expert-team-metadata-standards-et-metadata/task-team-wigos-metadata-tt-wigosmd" class="bare">https://community.wmo.int/en/governance/commission-membership/commission-observation-infrastructure-and-information-systems-infcom/standing-committee-information-management-and-technology-sc-imt/expert-team-metadata-standards-et-metadata/task-team-wigos-metadata-tt-wigosmd</a>
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. <a href="https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-national-representatives/infcom-management-group/standing-committee-information-management-and-technology-sc-imt/et-metadata" class="bare">https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-national-representatives/infcom-management-group/standing-committee-information-management-and-technology-sc-imt/et-metadata</a>
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. <a href="https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-officers/infcom-management-group/standing-committee-information-management-and-technology-sc-imt" class="bare">https://community.wmo.int/governance/commission-membership/commission-observation-infrastructures-and-information-systems-infcom/commission-infrastructure-officers/infcom-management-group/standing-committee-information-management-and-technology-sc-imt</a>
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. <a href="https://community.wmo.int/governance/commission-membership/infcom" class="bare">https://community.wmo.int/governance/commission-membership/infcom</a>
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="https://ogcapi.ogc.org/records" class="bare">https://ogcapi.ogc.org/records</a>
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. <a href="https://datatracker.ietf.org/doc/html/rfc7946" class="bare">https://datatracker.ietf.org/doc/html/rfc7946</a>
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. <a href="https://www.w3.org/TR/dwbp" class="bare">https://www.w3.org/TR/dwbp</a>
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. <a href="https://www.w3.org/TR/sdw-bp" class="bare">https://www.w3.org/TR/sdw-bp</a>
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. <a href="https://en.wikipedia.org/wiki/FAIR_data" class="bare">https://en.wikipedia.org/wiki/FAIR_data</a>
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. <a href="https://library.wmo.int/doc_num.php?explnum_id=11113#page=9" class="bare">https://library.wmo.int/doc_num.php?explnum_id=11113#page=9</a>
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. <a href="https://library.wmo.int/idurl/4/68731" class="bare">https://library.wmo.int/idurl/4/68731</a>
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. <a href="https://docs.ogc.org/is/20-004r1/20-004r1.html" class="bare">https://docs.ogc.org/is/20-004r1/20-004r1.html</a>
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. <a href="https://docs.opengeospatial.org/is/17-069r4/17-069r4.html" class="bare">https://docs.opengeospatial.org/is/17-069r4/17-069r4.html</a>
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. <a href="https://datatracker.ietf.org/doc/html/rfc7946" class="bare">https://datatracker.ietf.org/doc/html/rfc7946</a>
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. <a href="https://datatracker.ietf.org/doc/html/rfc8259" class="bare">https://datatracker.ietf.org/doc/html/rfc8259</a>
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. <a href="https://www.w3.org/TR/sdw-bp" class="bare">https://www.w3.org/TR/sdw-bp</a>
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. <a href="https://www.w3.org/TR/dwbp" class="bare">https://www.w3.org/TR/dwbp</a>
+</div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. <a href="https://www.w3.org/TR/vocab-dcat" class="bare">https://www.w3.org/TR/vocab-dcat</a>
+</div>
+<div class="footnote" id="_footnotedef_19">
+<a href="#_footnoteref_19">19</a>. <a href="https://www.iana.org/assignments/link-relations/link-relations.xml" class="bare">https://www.iana.org/assignments/link-relations/link-relations.xml</a>
+</div>
+<div class="footnote" id="_footnotedef_20">
+<a href="#_footnoteref_20">20</a>. <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" class="bare">https://www.iana.org/assignments/media-types/media-types.xhtml</a>
+</div>
+<div class="footnote" id="_footnotedef_21">
+<a href="#_footnoteref_21">21</a>. <a href="https://spdx.org/licenses" class="bare">https://spdx.org/licenses</a>
+</div>
+<div class="footnote" id="_footnotedef_22">
+<a href="#_footnoteref_22">22</a>. <a href="https://json-schema.org" class="bare">https://json-schema.org</a>
+</div>
+<div class="footnote" id="_footnotedef_23">
+<a href="#_footnoteref_23">23</a>. <a href="https://library.wmo.int/records/item/68731-manual-on-the-wmo-information-system-volume-ii-wmo-information-system-2-0" class="bare">https://library.wmo.int/records/item/68731-manual-on-the-wmo-information-system-volume-ii-wmo-information-system-2-0</a>
+</div>
+<div class="footnote" id="_footnotedef_24">
+<a href="#_footnoteref_24">24</a>. <a href="https://json-schema.org" class="bare">https://json-schema.org</a>
+</div>
+<div class="footnote" id="_footnotedef_25">
+<a href="#_footnoteref_25">25</a>. <a href="https://en.wikipedia.org/wiki/YAML" class="bare">https://en.wikipedia.org/wiki/YAML</a>
+</div>
+<div class="footnote" id="_footnotedef_26">
+<a href="#_footnoteref_26">26</a>. Resolution 1 (Cg-Ext(2021)) – WMO Unified Policy for the International Exchange of Earth System Data (World Meteorological Congress: Abridged Final Report of the Extraordinary Session (WMO-No. 1281))
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-01-22 16:32:17 UTC
+</div>
+</div>
+</body>
+</html>
