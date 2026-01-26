@@ -4,3 +4,6 @@
 
 WIGOS Metadata Representation 2
 * View drafts: https://wmo-im.github.io/wmdr2
+
+## Extract relevant information from WMO 1192
+Execute wmdr2/extract_wmd_elements_from_wmo_1192.py to extract relevant information from WMO 1192. The script generates wmdr2_elements.csv: CSV file with relevant WMO 1192 elements.
