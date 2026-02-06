@@ -3,5 +3,5 @@
 # wmdr2
 
 WIGOS Metadata Representation 2
-* View draft UML model based on OMS mappings: https://wmo-im.github.io/wmdr2
+* View draft UML model based on OMS mappings: https://wmo-im.github.io/wmdr2/oms/html/
 * Follow work-in-progress: https://github.com/wmo-im/wmdr2-devt
