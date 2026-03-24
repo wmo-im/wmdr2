@@ -3,16 +3,9 @@
   "$id": "https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml",
   "title": "WMDR station metadata record definition",
   "description": "WMDR station metadata record definition",
-  "required": [
-    "id",
-    "conformsTo",
-    "type",
-    "geometry",
-    "properties",
-    "links"
-  ],
   "properties": {
     "id": {
+      "description": "WIGOS station identifier",
       "oneOf": [
         {
           "type": "string"
@@ -20,8 +13,7 @@
         {
           "type": "integer"
         }
-      ],
-      "description": "A unique identifier of the catalog record."
+      ]
     },
     "conformsTo": {
       "type": "array",
@@ -36,6 +28,28 @@
       ]
     },
     "geometry": {
+      "type": "object",
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Point"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "time": {
       "oneOf": [
         {
           "enum": [
@@ -43,202 +57,134 @@
           ]
         },
         {
-          "oneOf": [
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "Point"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "minItems": 2,
-                  "items": {
-                    "type": "number"
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "timestamp": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+            },
+            "interval": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}$"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\d{4}$"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^T\\d{2}(:\\d{2})?(:\\d{2})?(?:\\.\\d+)?Z$"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      ".."
+                    ]
                   }
-                }
+                ]
               }
             },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "MultiPoint"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "minItems": 2,
-                    "items": {
-                      "type": "number"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "LineString"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "minItems": 2,
-                  "items": {
-                    "type": "array",
-                    "minItems": 2,
-                    "items": {
-                      "type": "number"
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "MultiLineString"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "minItems": 2,
-                    "items": {
-                      "type": "array",
-                      "minItems": 2,
-                      "items": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "Polygon"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "minItems": 4,
-                    "items": {
-                      "type": "array",
-                      "minItems": 2,
-                      "items": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "coordinates"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "MultiPolygon"
-                  ]
-                },
-                "coordinates": {
-                  "type": "array",
-                  "items": {
-                    "type": "array",
-                    "items": {
-                      "type": "array",
-                      "minItems": 4,
-                      "items": {
-                        "type": "array",
-                        "minItems": 2,
-                        "items": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            {
-              "type": "object",
-              "required": [
-                "type",
-                "geometries"
-              ],
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "GeometryCollection"
-                  ]
-                },
-                "geometries": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/properties/geometry/oneOf/1"
-                  }
-                }
-              }
+            "resolution": {
+              "type": "string",
+              "description": "Minimum time period resolvable in the dataset, as an ISO 8601 duration",
+              "pattern": "^(-?)P(?=\\\\d|T\\\\d)(?:(\\\\d+)Y)?(?:(\\\\d+)M)?(?:(\\\\d+)([DW]))?(?:T(?:(\\\\d+)H)?(?:(\\\\d+)M)?(?:(\\\\d+(?:\\\\.\\\\d+)?)S)?)?$",
+              "example": [
+                "P1D"
+              ]
             }
-          ]
+          }
         }
       ]
     },
+    "temporalGeometry": {
+      "type": "object",
+      "description": "temporal geometry",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "temporal geometry type",
+          "const": "MovingPoint"
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "coordinates",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/properties/geometry/properties/coordinates"
+          }
+        },
+        "dates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "methods": {
+          "type": "array",
+          "description": "methods",
+          "items": {
+            "type": "string",
+            "$comment": "- https://codes.wmo.int/wmdr/GeopositioningMethod"
+          }
+        }
+      }
+    },
     "properties": {
       "type": "object",
-      "required": [
-        "contacts",
-        "created"
-      ],
       "properties": {
+        "title": {
+          "type": "string",
+          "description": "facility name (primary)"
+        },
+        "additionalTitles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "additional facility names"
+          }
+        },
+        "additionalIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "additional WIGOS Station Identifiers (WSI)"
+          }
+        },
+        "facilityType": {
+          "type": "string",
+          "description": "Station/platform type",
+          "$comment": "https://codes.wmo.int/wmdr/FacilityType"
+        },
+        "facilitySets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "Facility set identifier"
+          }
+        },
         "contacts": {
           "type": "array",
           "minItems": 1,
@@ -287,7 +233,45 @@
                         "type": "object",
                         "allOf": [
                           {
-                            "$ref": "#/properties/linkTemplates/items/allOf/0"
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string",
+                                "description": "The type or semantics of the relation."
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "A hint indicating what the media type of the\nresult of dereferencing the link should be."
+                              },
+                              "hreflang": {
+                                "type": "string",
+                                "description": "A hint indicating what the language of the\nresult of dereferencing the link should be."
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "Used to label the destination of a link\nsuch that it can be used as a human-readable\nidentifier."
+                              },
+                              "length": {
+                                "type": "integer"
+                              },
+                              "profile": {
+                                "type": "array",
+                                "description": "One or more identifiers that provide information about additional\nsemantics (constraints, conventions, extensions), in addition to \nthose defined by the media type, that are associated with the\ntarget resource.",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "created": {
+                                "type": "string",
+                                "description": "Date of creation of the resource pointed to\nby the link.",
+                                "format": "date-time"
+                              },
+                              "updated": {
+                                "type": "string",
+                                "description": "Most recent date on which the resource pointed\nto by the link was changed.",
+                                "format": "date-time"
+                              }
+                            }
                           },
                           {
                             "type": "object",
@@ -465,22 +449,141 @@
           "description": "The most recent date on which the record was changed.",
           "format": "date-time"
         },
-        "wmo:dataPolicy": {
-          "type": "string",
-          "description": "The data policy definition as per the WMO Unified Data Policy Resolution (Res.1) [23].",
-          "enum": [
-            "core",
-            "recommended"
-          ]
+        "keywords": {
+          "type": "array",
+          "description": "The topic or topics of the resource. Typically\nrepresented using free-form keywords, tags, key\nphrases, or classification codes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "themes": {
+          "type": "array",
+          "description": "A knowledge organization system used to classify\nthe resource.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "concepts",
+              "scheme"
+            ],
+            "properties": {
+              "concepts": {
+                "type": "array",
+                "description": "One or more entity/concept identifiers from this knowledge\nsystem. it is recommended that a resolvable URI be used for\neach entity/concept identifier.",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "An identifier for the concept."
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "A human readable title for the concept."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "A human readable description for the concept."
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A URI providing further description of the concept."
+                    }
+                  }
+                }
+              },
+              "scheme": {
+                "type": "string",
+                "description": "An identifier for the knowledge organization system used\nto classify the resource.  It is recommended that the\nidentifier be a resolvable URI.  The list of schemes used\nin a searchable catalog can be determined by inspecting\nthe server's OpenAPI document or, if the server implements\nCQL2, by exposing a queryable (e.g. named `scheme`) and\nenumerating the list of schemes in the queryable's schema\ndefinition."
+              }
+            }
+          }
+        },
+        "temporalTerritories": {
+          "type": "array",
+          "description": "time series of territories",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "territory": {
+                "type": "string",
+                "description": "Territory of origin of data",
+                "$comment": "https://codes.wmo.int/wmdr/TerritoryName"
+              },
+              "date": {
+                "$ref": "#/properties/temporalGeometry/properties/dates/items"
+              }
+            }
+          }
+        },
+        "temporalProgramAffiliations": {
+          "type": "array",
+          "description": "time series of program affiliations",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "facilityId": {
+                "type": "string",
+                "description": "Programme specific facility identifier"
+              },
+              "facilityTitle": {
+                "type": "string",
+                "description": "Programme specific facility name"
+              },
+              "programAffiliation": {
+                "type": "string",
+                "description": "Programme/network affiliation",
+                "$comment": "https://codes.wmo.int/wmdr/ProgramAffiliation"
+              },
+              "reportingStatus": {
+                "type": "string",
+                "description": "Station/Platform operating status",
+                "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
+              },
+              "date": {
+                "$ref": "#/properties/temporalGeometry/properties/dates/items"
+              }
+            }
+          }
+        },
+        "deployments": {
+          "type": "array",
+          "description": "facility deployments",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          }
+        },
+        "instruments": {
+          "type": "array",
+          "description": "facility instruments",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Instrument"
+          }
         }
-      }
+      },
+      "required": [
+        "contacts",
+        "created",
+        "title",
+        "deployments",
+        "instruments"
+      ]
     },
     "links": {
       "type": "array",
       "minItems": 1,
       "items": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/wmo-im/wcmp2/main/schema/link.yaml",
+        "$id": "https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/link.yaml",
         "title": "WCMP link object definition",
         "description": "WCMP link object definition",
         "type": "object",
@@ -570,52 +673,41 @@
                       "type": "array",
                       "description": "links to the associated documentation available for this format when applicable",
                       "items": {
-                        "allOf": [
-                          {
-                            "type": "object",
-                            "required": [
-                              "rel"
-                            ],
-                            "properties": {
-                              "rel": {
-                                "type": "string",
-                                "description": "The type or semantics of the relation.",
-                                "example": "alternate"
-                              },
-                              "type": {
-                                "type": "string",
-                                "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
-                                "example": "application/geo+json"
-                              },
-                              "hreflang": {
-                                "type": "string",
-                                "description": "A hint indicating what the language of the result of dereferencing the link should be.",
-                                "example": "en"
-                              },
-                              "title": {
-                                "type": "string",
-                                "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
-                                "example": "Trierer Strasse 70, 53115 Bonn"
-                              },
-                              "length": {
-                                "type": "integer"
-                              }
-                            }
+                        "type": "object",
+                        "required": [
+                          "href",
+                          "rel"
+                        ],
+                        "properties": {
+                          "href": {
+                            "type": "string",
+                            "description": "Supplies the URI to a remote resource (or resource fragment).",
+                            "example": "http://data.example.com/buildings/123"
                           },
-                          {
-                            "type": "object",
-                            "required": [
-                              "href"
-                            ],
-                            "properties": {
-                              "href": {
-                                "type": "string",
-                                "description": "The URI of the link target.",
-                                "example": "https://data.example.com/buildings/123"
-                              }
-                            }
+                          "rel": {
+                            "type": "string",
+                            "description": "The type or semantics of the relation.",
+                            "example": "alternate"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+                            "example": "application/geo+json"
+                          },
+                          "hreflang": {
+                            "type": "string",
+                            "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+                            "example": "en"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+                            "example": "Trierer Strasse 70, 53115 Bonn"
+                          },
+                          "length": {
+                            "type": "integer"
                           }
-                        ]
+                        }
                       }
                     }
                   }
@@ -625,78 +717,91 @@
           }
         }
       }
-    },
-    "linkTemplates": {
-      "type": "array",
-      "items": {
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-              "rel": {
-                "type": "string",
-                "description": "The type or semantics of the relation."
-              },
-              "type": {
-                "type": "string",
-                "description": "A hint indicating what the media type of the\nresult of dereferencing the link should be."
-              },
-              "hreflang": {
-                "type": "string",
-                "description": "A hint indicating what the language of the\nresult of dereferencing the link should be."
-              },
-              "title": {
-                "type": "string",
-                "description": "Used to label the destination of a link\nsuch that it can be used as a human-readable\nidentifier."
-              },
-              "length": {
-                "type": "integer"
-              },
-              "profile": {
-                "type": "array",
-                "description": "One or more identifiers that provide information about additional\nsemantics (constraints, conventions, extensions), in addition to \nthose defined by the media type, that are associated with the\ntarget resource.",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created": {
-                "type": "string",
-                "description": "Date of creation of the resource pointed to\nby the link.",
-                "format": "date-time"
-              },
-              "updated": {
-                "type": "string",
-                "description": "Most recent date on which the resource pointed\nto by the link was changed.",
-                "format": "date-time"
-              }
-            }
-          },
-          {
-            "type": "object",
-            "required": [
-              "uriTemplate"
-            ],
-            "properties": {
-              "uriTemplate": {
-                "type": "string",
-                "description": "Supplies a resolvable URI to a remote resource\n(or resource fragment)."
-              },
-              "varBase": {
-                "type": "string",
-                "description": "The base URI to which the variable name can be\nappended to retrieve the definition of the\nvariable as a JSON Schema fragment.",
-                "format": "uri-reference"
-              },
-              "variables": {
-                "type": "object",
-                "description": "This object contains one key per substitution\nvariable in the templated URL.  Each key defines\nthe schema of one substitution variable using a\nJSON Schema fragment and can thus include things\nlike the data type of the variable, enumerations,\nminimum values, maximum values, etc."
-              }
-            }
-          }
-        ]
-      }
     }
   },
+  "required": [
+    "id",
+    "conformsTo",
+    "type",
+    "geometry",
+    "properties",
+    "links"
+  ],
   "definitions": {
+    "Deployment": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/properties/id",
+          "description": "deployment identifier"
+        },
+        "geometry": {
+          "$ref": "#/properties/geometry"
+        },
+        "time": {
+          "$ref": "#/properties/time"
+        },
+        "instrument": {
+          "type": "string",
+          "description": "instrument identifier"
+        },
+        "sourceOfObservation": {
+          "type": "string",
+          "description": "Source of observation",
+          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
+        },
+        "observingMethod": {
+          "type": "string",
+          "description": "Observing method",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodOcean\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "referenceSurface": {
+          "type": "string",
+          "description": "Type of reference surface",
+          "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
+        },
+        "keywords": {
+          "$ref": "#/properties/properties/properties/keywords"
+        }
+      }
+    },
+    "Instrument": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/properties/id",
+          "description": "deployment identifier"
+        },
+        "verticalRange": {
+          "type": "object",
+          "description": "vertical range",
+          "properties": {
+            "min": {
+              "type": "number",
+              "description": "minimum vertical range"
+            },
+            "max": {
+              "type": "number",
+              "description": "maximum vertical range"
+            }
+          }
+        },
+        "observingMethod": {
+          "type": "string",
+          "description": "observing method",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
+        }
+      }
+    },
     "Schema_APIKeySecurityScheme": {
       "type": "object",
       "required": [

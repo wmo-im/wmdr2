@@ -2,6 +2,6 @@
     "ignorePatterns": [
         { "pattern": "^http://www.opengis.net/def"},
         { "pattern": "^https://example.org"},
-        { "pattern": "http://wis.wmo.int/spec/wmdr/2"}
+        { "pattern": "http://wigos.wmo.int/spec/wmdr/2"}
     ]
 }

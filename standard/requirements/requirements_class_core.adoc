@@ -1,7 +1,7 @@
 [[rc_core]]
 [cols="1,4",width="90%"]
 |===
-|URI |http://wis.wmo.int/spec/wmdr/2/req/core
+|URI |http://wigos.wmo.int/spec/wmdr/2/req/core
 |Target type|Station metadata
 |Dependency | The JavaScript Object Notation (JSON) Data Interchange Format link:https://datatracker.ietf.org/doc/html/rfc8259[(IETF RFC8259 (2017))]
 |Dependency |link:https://json-schema.org[JSON Schema] (2022)

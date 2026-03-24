@@ -1,0 +1,34 @@
+---
+type: object
+required:
+  - id
+properties:
+  id:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
+    description: deployment identifier
+  geometry:
+    $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
+  time:
+    $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
+  instrument:
+    type: string
+    description: instrument identifier
+  sourceOfObservation:
+    type: string
+    description: Source of observation
+    $comment: https://codes.wmo.int/wmdr/SourceOfObservation
+  observingMethod:
+    type: string
+    description: Observing method
+    $comment: |-
+      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
+      - https://codes.wmo.int/wmdr/ObservingMethodOcean
+      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
+  serialNumber:
+    type: string
+  referenceSurface:
+    type: string
+    description: Type of reference surface
+    $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
+  keywords:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
