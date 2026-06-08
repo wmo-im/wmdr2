@@ -16,7 +16,7 @@ properties:
   conformsTo:
     type: array
     contains:
-      const: http://wis.wmo.int/spec/wmdr/2/conf/core
+      const: http://wigos.wmo.int/spec/wmdr/2/conf/core
   type:
     $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/type'
   geometry:
