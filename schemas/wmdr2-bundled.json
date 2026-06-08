@@ -26,7 +26,7 @@
     "conformsTo": {
       "type": "array",
       "contains": {
-        "const": "http://wis.wmo.int/spec/wmdr/2/conf/core"
+        "const": "http://wigos.wmo.int/spec/wmdr/2/conf/core"
       }
     },
     "type": {
