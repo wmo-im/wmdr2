@@ -582,140 +582,52 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/link.yaml",
-        "title": "WCMP link object definition",
-        "description": "WCMP link object definition",
-        "type": "object",
-        "required": [
-          "href"
-        ],
-        "properties": {
-          "rel": {
-            "type": "string",
-            "description": "The type or semantics of the relation.",
-            "example": "alternate"
-          },
-          "type": {
-            "type": "string",
-            "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
-            "example": "application/geo+json"
-          },
-          "hreflang": {
-            "type": "string",
-            "description": "A hint indicating what the language of the result of dereferencing the link should be.",
-            "example": "en"
-          },
-          "title": {
-            "type": "string",
-            "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
-            "example": "Trierer Strasse 70, 53115 Bonn"
-          },
-          "length": {
-            "type": "integer"
-          },
-          "channel": {
-            "type": "string",
-            "description": "topic to subscribe to for broker workflow"
-          },
-          "security": {
+        "allOf": [
+          {
             "type": "object",
-            "patternProperties": {
-              "^[a-zA-Z0-9\\.\\-_]+$": {
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/Schema_Reference"
-                  },
-                  {
-                    "$ref": "#/definitions/Schema_SecurityScheme"
-                  }
-                ]
+            "required": [
+              "rel"
+            ],
+            "properties": {
+              "rel": {
+                "type": "string",
+                "description": "The type or semantics of the relation.",
+                "example": "alternate"
+              },
+              "type": {
+                "type": "string",
+                "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
+                "example": "application/geo+json"
+              },
+              "hreflang": {
+                "type": "string",
+                "description": "A hint indicating what the language of the result of dereferencing the link should be.",
+                "example": "en"
+              },
+              "title": {
+                "type": "string",
+                "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+                "example": "Trierer Strasse 70, 53115 Bonn"
+              },
+              "length": {
+                "type": "integer"
               }
             }
           },
-          "distribution": {
+          {
             "type": "object",
-            "description": "the additional information qualifying the service and allowing to build and display the \"access\" information in a portal",
+            "required": [
+              "href"
+            ],
             "properties": {
-              "availableFormats": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "available format short name."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "the individual format description to allow building the portal information"
-                    },
-                    "numberOFiles": {
-                      "type": "string",
-                      "description": "typical number of files disseminated by the distribution mechanism over a period of time"
-                    },
-                    "typicalFilesize": {
-                      "type": "string",
-                      "description": "size of a typical individual file (e.g. KB, MB, GB)"
-                    },
-                    "typicalFilename": {
-                      "type": "string",
-                      "description": "example filename"
-                    },
-                    "samples": {
-                      "description": "links of samples that can be openly accessed by users to provide a better understanding of the data",
-                      "items": {
-                        "type": "object",
-                        "$ref": "#/properties/links/items/properties/distribution/properties/availableFormats/items/properties/documentation/items"
-                      }
-                    },
-                    "documentation": {
-                      "type": "array",
-                      "description": "links to the associated documentation available for this format when applicable",
-                      "items": {
-                        "type": "object",
-                        "required": [
-                          "href",
-                          "rel"
-                        ],
-                        "properties": {
-                          "href": {
-                            "type": "string",
-                            "description": "Supplies the URI to a remote resource (or resource fragment).",
-                            "example": "http://data.example.com/buildings/123"
-                          },
-                          "rel": {
-                            "type": "string",
-                            "description": "The type or semantics of the relation.",
-                            "example": "alternate"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
-                            "example": "application/geo+json"
-                          },
-                          "hreflang": {
-                            "type": "string",
-                            "description": "A hint indicating what the language of the result of dereferencing the link should be.",
-                            "example": "en"
-                          },
-                          "title": {
-                            "type": "string",
-                            "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
-                            "example": "Trierer Strasse 70, 53115 Bonn"
-                          },
-                          "length": {
-                            "type": "integer"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+              "href": {
+                "type": "string",
+                "description": "The URI of the link target.",
+                "example": "https://data.example.com/buildings/123"
               }
             }
           }
-        }
+        ]
       }
     }
   },
@@ -801,307 +713,6 @@
           "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
         }
       }
-    },
-    "Schema_APIKeySecurityScheme": {
-      "type": "object",
-      "required": [
-        "type",
-        "name",
-        "in"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": [
-            "header",
-            "query",
-            "cookie"
-          ]
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_AuthorizationCodeOAuthFlow": {
-      "type": "object",
-      "required": [
-        "authorizationUrl",
-        "tokenUrl"
-      ],
-      "properties": {
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "refreshUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "scopes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_ClientCredentialsFlow": {
-      "type": "object",
-      "required": [
-        "tokenUrl"
-      ],
-      "properties": {
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "refreshUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "scopes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_HTTPSecurityScheme": {
-      "type": "object",
-      "required": [
-        "scheme",
-        "type"
-      ],
-      "properties": {
-        "scheme": {
-          "type": "string"
-        },
-        "bearerFormat": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "http"
-          ]
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false,
-      "oneOf": [
-        {
-          "description": "Bearer",
-          "properties": {
-            "scheme": {
-              "enum": [
-                "bearer"
-              ]
-            }
-          }
-        },
-        {
-          "description": "Non Bearer",
-          "not": {
-            "required": [
-              "bearerFormat"
-            ]
-          },
-          "properties": {
-            "scheme": {
-              "not": {
-                "enum": [
-                  "bearer"
-                ]
-              }
-            }
-          }
-        }
-      ]
-    },
-    "Schema_ImplicitOAuthFlow": {
-      "type": "object",
-      "required": [
-        "authorizationUrl",
-        "scopes"
-      ],
-      "properties": {
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "refreshUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "scopes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_OAuth2SecurityScheme": {
-      "type": "object",
-      "required": [
-        "type",
-        "flows"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "$ref": "#/definitions/Schema_OAuthFlows"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_OAuthFlows": {
-      "type": "object",
-      "properties": {
-        "implicit": {
-          "$ref": "#/definitions/Schema_ImplicitOAuthFlow"
-        },
-        "password": {
-          "$ref": "#/definitions/Schema_PasswordOAuthFlow"
-        },
-        "clientCredentials": {
-          "$ref": "#/definitions/Schema_ClientCredentialsFlow"
-        },
-        "authorizationCode": {
-          "$ref": "#/definitions/Schema_AuthorizationCodeOAuthFlow"
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_OpenIdConnectSecurityScheme": {
-      "type": "object",
-      "required": [
-        "type",
-        "openIdConnectUrl"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
-        },
-        "openIdConnectUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_PasswordOAuthFlow": {
-      "type": "object",
-      "required": [
-        "tokenUrl"
-      ],
-      "properties": {
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "refreshUrl": {
-          "type": "string",
-          "format": "uri-reference"
-        },
-        "scopes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "Schema_Reference": {
-      "type": "object",
-      "required": [
-        "$ref"
-      ],
-      "patternProperties": {
-        "^\\$ref$": {
-          "type": "string",
-          "format": "uri-reference"
-        }
-      }
-    },
-    "Schema_SecurityScheme": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/Schema_APIKeySecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/Schema_HTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/Schema_OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/Schema_OpenIdConnectSecurityScheme"
-        }
-      ]
     }
   }
 }
