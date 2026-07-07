@@ -17,29 +17,6 @@ properties:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
-  temporalGeometry:
-    type: object
-    description: temporal geometry
-    properties:
-      type:
-        type: string
-        description: temporal geometry type
-        const: MovingPoint
-      coordinates:
-        type: array
-        description: coordinates
-        minItems: 1
-        items:
-          $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml#/properties/coordinates'
-      dates:
-        $ref: 'temporal.yaml#/dates'
-      methods:
-        type: array
-        description: methods
-        items:
-          type: string
-          $comment: |-
-            - https://codes.wmo.int/wmdr/GeopositioningMethod
 
   properties:
     type: object
@@ -88,7 +65,7 @@ properties:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
       themes:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/themes'
-      temporalTerritories:
+      territories:
         type: array
         description: time series of territories
         minItems: 1
@@ -99,11 +76,13 @@ properties:
               type: string
               description: Territory of origin of data
               $comment: https://codes.wmo.int/wmdr/TerritoryName
-            date:
-              $ref: 'temporal.yaml#/dates/items'
-      temporalProgramAffiliations:
+            dates:
+              $ref: 'temporal.yaml#/dates'
+          required:
+            - territory
+      programAffiliations:
         type: array
-        description: time series of program affiliations
+        description: program affiliations
         minItems: 1
         items:
           type: object
@@ -122,11 +101,11 @@ properties:
               type: string
               description: Station/Platform operating status
               $comment: https://codes.wmo.int/wmdr/ReportingStatus
-            date:
-              $ref: 'temporal.yaml#/dates/items'
+            dates:
+              $ref: 'temporal.yaml#/dates'
       deployments:
           type: array
-          description: facility deployments
+          description: facility deployment (placement / location of specific equipment)
           minItems: 1
           items:
               $ref: 'deployment.yaml'

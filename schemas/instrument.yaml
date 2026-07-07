@@ -6,16 +6,6 @@ properties:
   id:
     $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
     description: deployment identifier
-  verticalRange:
-    type: object
-    description: vertical range
-    properties:
-      min:
-        type: number
-        description: minimum vertical range
-      max:
-        type: number
-        description: maximum vertical range
   observingMethod:
     type: string
     description: observing method
@@ -23,3 +13,5 @@ properties:
       - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
       - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
       - https://codes.wmo.int/wmdr/ObservingMethodEarth
+  serialNumber:
+    type: string

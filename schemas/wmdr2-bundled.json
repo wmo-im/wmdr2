@@ -114,41 +114,6 @@
         }
       ]
     },
-    "temporalGeometry": {
-      "type": "object",
-      "description": "temporal geometry",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "temporal geometry type",
-          "const": "MovingPoint"
-        },
-        "coordinates": {
-          "type": "array",
-          "description": "coordinates",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/properties/geometry/properties/coordinates"
-          }
-        },
-        "dates": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "format": "date"
-          }
-        },
-        "methods": {
-          "type": "array",
-          "description": "methods",
-          "items": {
-            "type": "string",
-            "$comment": "- https://codes.wmo.int/wmdr/GeopositioningMethod"
-          }
-        }
-      }
-    },
     "properties": {
       "type": "object",
       "properties": {
@@ -504,7 +469,7 @@
             }
           }
         },
-        "temporalTerritories": {
+        "territories": {
           "type": "array",
           "description": "time series of territories",
           "minItems": 1,
@@ -516,15 +481,23 @@
                 "description": "Territory of origin of data",
                 "$comment": "https://codes.wmo.int/wmdr/TerritoryName"
               },
-              "date": {
-                "$ref": "#/properties/temporalGeometry/properties/dates/items"
+              "dates": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "format": "date"
+                }
               }
-            }
+            },
+            "required": [
+              "territory"
+            ]
           }
         },
-        "temporalProgramAffiliations": {
+        "programAffiliations": {
           "type": "array",
-          "description": "time series of program affiliations",
+          "description": "program affiliations",
           "minItems": 1,
           "items": {
             "type": "object",
@@ -547,15 +520,15 @@
                 "description": "Station/Platform operating status",
                 "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
               },
-              "date": {
-                "$ref": "#/properties/temporalGeometry/properties/dates/items"
+              "dates": {
+                "$ref": "#/properties/properties/properties/territories/items/properties/dates"
               }
             }
           }
         },
         "deployments": {
           "type": "array",
-          "description": "facility deployments",
+          "description": "facility deployment (placement / location of specific equipment)",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/Deployment"
@@ -665,14 +638,6 @@
           "description": "Source of observation",
           "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
         },
-        "observingMethod": {
-          "type": "string",
-          "description": "Observing method",
-          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodOcean\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial"
-        },
-        "serialNumber": {
-          "type": "string"
-        },
         "referenceSurface": {
           "type": "string",
           "description": "Type of reference surface",
@@ -693,24 +658,13 @@
           "$ref": "#/properties/id",
           "description": "deployment identifier"
         },
-        "verticalRange": {
-          "type": "object",
-          "description": "vertical range",
-          "properties": {
-            "min": {
-              "type": "number",
-              "description": "minimum vertical range"
-            },
-            "max": {
-              "type": "number",
-              "description": "maximum vertical range"
-            }
-          }
-        },
         "observingMethod": {
           "type": "string",
           "description": "observing method",
           "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
+        },
+        "serialNumber": {
+          "type": "string"
         }
       }
     }

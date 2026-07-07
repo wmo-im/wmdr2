@@ -17,15 +17,6 @@ properties:
     type: string
     description: Source of observation
     $comment: https://codes.wmo.int/wmdr/SourceOfObservation
-  observingMethod:
-    type: string
-    description: Observing method
-    $comment: |-
-      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
-      - https://codes.wmo.int/wmdr/ObservingMethodOcean
-      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
-  serialNumber:
-    type: string
   referenceSurface:
     type: string
     description: Type of reference surface
