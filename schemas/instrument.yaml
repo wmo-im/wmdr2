@@ -4,8 +4,10 @@ required:
   - id
 properties:
   id:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
-    description: deployment identifier
+    oneOf:
+      - type: string
+      - type: integer
+    description: instrument identifier
   observingMethod:
     type: string
     description: observing method

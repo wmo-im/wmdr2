@@ -4,7 +4,9 @@ required:
   - id
 properties:
   id:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
+    oneOf:
+      - type: string
+      - type: integer
     description: deployment identifier
   geometry:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
