@@ -1,19 +1,45 @@
 ---
 type: object
-required:
-  - id
 properties:
   id:
     oneOf:
       - type: string
       - type: integer
     description: instrument identifier
-  observingMethod:
+  observingCapabilities:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      properties:
+        observingMethod:
+          type: string
+          description: observing method
+          $comment: |-
+            - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
+            - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
+            - https://codes.wmo.int/wmdr/ObservingMethodEarth
+        observedProperty:
+          type: string
+          description: observed property
+          $comment: |-
+            - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
+            - https://codes.wmo.int/wmdr/ObservedVariableEarth
+            - https://codes.wmo.int/wmdr/ObservedVariableOcean
+            - https://codes.wmo.int/wmdr/ObservedVariableOuterSpace
+            - https://codes.wmo.int/wmdr/ObservedVariableTerrestrial
+      required:
+        - observingMethod
+        - observedProperty
+  manufacturer:
     type: string
-    description: observing method
-    $comment: |-
-      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
-      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
-      - https://codes.wmo.int/wmdr/ObservingMethodEarth
+    description: instrument manufacturer
+  model:
+    type: string
+    description: instrument model
   serialNumber:
     type: string
+    description: instrument serial number
+required:
+  - id
+  - observingCapabilities

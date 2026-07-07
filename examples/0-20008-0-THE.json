@@ -160,8 +160,11 @@
         ],
         "instruments": [
             {
-                "id": "instrument:78",
-                "observingMethod": "78"
+                "id": "instrument:123",
+                "observingCapabilities": [{
+                     "observingMethod": "78",
+                     "observedProperty": "12164"
+                }]
             }
         ]
     },

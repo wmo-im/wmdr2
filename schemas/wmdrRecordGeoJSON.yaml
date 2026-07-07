@@ -37,6 +37,7 @@ properties:
         items:
           type: string
           description: additional WIGOS Station Identifiers (WSI)
+          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
       facilityType:
         type: string
         description: Station/platform type
@@ -106,7 +107,7 @@ properties:
               $ref: 'temporal.yaml#/dates'
       deployments:
           type: array
-          description: facility deployment (placement / location of specific equipment)
+          description: facility deployments (placement / location of specific equipment)
           minItems: 1
           items:
               $ref: 'deployment.yaml'
