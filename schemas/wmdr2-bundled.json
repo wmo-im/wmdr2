@@ -137,13 +137,10 @@
           "description": "Station/platform type",
           "$comment": "https://codes.wmo.int/wmdr/FacilityType"
         },
-        "facilitySets": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "description": "Facility set identifier"
-          }
+        "wmoRegion": {
+          "type": "string",
+          "description": "WMO Region",
+          "$comment": "https://codes.wmo.int/wmdr/WMORegion"
         },
         "contacts": {
           "type": "array",

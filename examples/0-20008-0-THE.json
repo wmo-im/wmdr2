@@ -9,29 +9,6 @@
             60
         ]
     },
-    "temporalGeometry": {
-        "type": "MovingPoint",
-        "coordinates": [
-            [
-                22.967,
-                40.517,
-                60
-            ],
-            [
-                22.956,
-                40.634,
-                60
-            ]
-        ],
-        "dates": [
-            "1982-03-13",
-            "2001-05-05"
-        ],
-        "methods": [
-            "map",
-            "gps"
-        ]
-    },
     "time": {
         "interval": [
             "1982-03-13",
@@ -148,7 +125,7 @@
         "deployments": [
             {
                 "id": "deployment:123",
-                "instrument": "instrument:78",
+                "instrument": "instrument:456",
                 "sourceOfObservation": "automaticReading",
                 "time": {
                     "interval": [
@@ -160,7 +137,7 @@
         ],
         "instruments": [
             {
-                "id": "instrument:123",
+                "id": "instrument:456",
                 "observingCapabilities": [{
                      "observingMethod": "78",
                      "observedProperty": "12164"

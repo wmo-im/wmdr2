@@ -1,6 +1,6 @@
 :title: WIGOS Metadata Representation (WMDR) Version 2
 :titletext: {title}
-:version: 2.0.dev0
+:version: 1.99.dev0
 :date: {docdate}
 :copyright: Copyright © 2026 World Meteorological Organization (WMO)
 :doctype: book

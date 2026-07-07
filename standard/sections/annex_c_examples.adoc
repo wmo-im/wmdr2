@@ -7,5 +7,5 @@
 
 .Example: Canadian Hourly Surface Weather Observations (dataset)
 ----
-include::../../examples/20250504_0-20008-0-NRB.json[]
+include::../../examples/0-20008-0-THE.json[]
 ----
