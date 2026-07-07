@@ -14,7 +14,7 @@ Check for the existence of a `+conformsTo+` property in the WMDR.
 
 [.component,class=step]
 --
-In the WMDR's `+conformsTo+` array property, check that ONE of the values is equal to `+http://wis.wmo.int/spec/wmdr/2/conf/core+`.
+In the WMDR's `+conformsTo+` array property, check that ONE of the values is equal to `+http://wigos.wmo.int/spec/wmdr/2/conf/core+`.
 --
 =====
 ====

@@ -3,16 +3,11 @@ $id: 'https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJ
 title: WMDR station metadata record definition
 description: WMDR station metadata record definition
 
-required:
-  - id
-  - conformsTo
-  - type
-  - geometry
-  - properties
-  - links
 properties:
   id:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/id'
+    type: string
+    description: WIGOS station identifier
+    pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
   conformsTo:
     type: array
     contains:
@@ -20,13 +15,39 @@ properties:
   type:
     $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/type'
   geometry:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordGeoJSON.yaml#/properties/geometry'
+    $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
+  time:
+    $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
+
   properties:
     type: object
-    required:
-      - contacts
-      - created
     properties:
+      title:
+        type: string
+        description: facility name (primary)
+      additionalTitles:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional facility names
+      additionalIds:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional WIGOS Station Identifiers (WSI)
+          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+      facilityType:
+        type: string
+        description: Station/platform type
+        $comment: https://codes.wmo.int/wmdr/FacilityType
+      facilitySets:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: Facility set identifier
       contacts:
         type: array
         minItems: 1
@@ -42,18 +63,77 @@ properties:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/created'
       updated:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/updated'
-      wmo:dataPolicy:
-        type: string
-        description: The data policy definition as per the WMO Unified Data Policy Resolution (Res.1) [23].
-        enum:
-          - core
-          - recommended
+      keywords:
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
+      themes:
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/themes'
+      territories:
+        type: array
+        description: time series of territories
+        minItems: 1
+        items:
+          type: object
+          properties:
+            territory:
+              type: string
+              description: Territory of origin of data
+              $comment: https://codes.wmo.int/wmdr/TerritoryName
+            dates:
+              $ref: 'temporal.yaml#/dates'
+          required:
+            - territory
+      programAffiliations:
+        type: array
+        description: program affiliations
+        minItems: 1
+        items:
+          type: object
+          properties:
+            facilityId:
+              type: string
+              description: Programme specific facility identifier
+            facilityTitle:
+              type: string
+              description: Programme specific facility name
+            programAffiliation:
+              type: string
+              description: Programme/network affiliation
+              $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
+            reportingStatus:
+              type: string
+              description: Station/Platform operating status
+              $comment: https://codes.wmo.int/wmdr/ReportingStatus
+            dates:
+              $ref: 'temporal.yaml#/dates'
+      deployments:
+          type: array
+          description: facility deployments (placement / location of specific equipment)
+          minItems: 1
+          items:
+              $ref: 'deployment.yaml'
+      instruments:
+          type: array
+          description: facility instruments
+          minItems: 1
+          items:
+              $ref: 'instrument.yaml'
+    required:
+      - contacts
+      - created
+      - title
+      - deployments
+      - instruments
+
   links:
     type: array
     minItems: 1
     items:
-      $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/link.yaml'
-  linkTemplates:
-    type: array
-    items:
-      $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/linkTemplate.yaml'
+      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml'
+
+required:
+  - id
+  - conformsTo
+  - type
+  - geometry
+  - properties
+  - links

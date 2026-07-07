@@ -1,6 +1,6 @@
 == WIGOS Metadata Representation (Version 2)
 
-WIGOS Metadata Representation (WMDR) is an extension of the OGC API – Records standard and shall be encoded in GeoJSON. The normative provisions in WMDR (version 2) are denoted by the base URI (``http://wis.wmo.int/spec/wmdr/2``) and requirements are denoted by partial URIs relative to this base. Property names, values and examples are represented with ``shaded text`` in this document.
+WIGOS Metadata Representation (WMDR) is an extension of the OGC API – Records standard and shall be encoded in GeoJSON. The normative provisions in WMDR (version 2) are denoted by the base URI (``http://wigos.wmo.int/spec/wmdr/2``) and requirements are denoted by partial URIs relative to this base. Property names, values and examples are represented with ``shaded text`` in this document.
 
 //:sectnums!:
 === Requirements Class "Core"
@@ -85,7 +85,7 @@ detection and handling of content.
 [source,json]
 ----
 "conformsTo": [
-  "http://wis.wmo.int/spec/wmdr/2/conf/core"
+  "http://wigos.wmo.int/spec/wmdr/2/conf/core"
 ]
 ----
 
