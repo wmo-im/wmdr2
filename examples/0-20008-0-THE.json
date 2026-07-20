@@ -122,26 +122,24 @@
                 "territory": "GRC"
             }
         ],
-        "deployments": [
+        "observingCapabilities": [
             {
-                "id": "deployment:123",
-                "instrument": "instrument:456",
+                "id": "observingCapability:123",
+                "observingMethod": "78",
+                "observedProperty": "12164",
                 "sourceOfObservation": "automaticReading",
-                "time": {
-                    "interval": [
-                        "1982-03-13",
-                        ".."
-                    ]
+                "deployment": {
+                    "id": "deployment:456",
+                    "time": {
+                        "interval": [
+                            "1982-03-13",
+                            ".."
+                        ]
+                    },
+                    "instrument": {
+                        "id": "instrument:789"
+                    }
                 }
-            }
-        ],
-        "instruments": [
-            {
-                "id": "instrument:456",
-                "observingCapabilities": [{
-                     "observingMethod": "78",
-                     "observedProperty": "12164"
-                }]
             }
         ]
     },

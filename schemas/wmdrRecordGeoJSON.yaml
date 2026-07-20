@@ -25,6 +25,9 @@ properties:
       title:
         type: string
         description: facility name (primary)
+      description:
+        type: string
+        description: facility description
       additionalTitles:
         type: array
         minItems: 1
@@ -103,24 +106,17 @@ properties:
               $comment: https://codes.wmo.int/wmdr/ReportingStatus
             dates:
               $ref: 'temporal.yaml#/dates'
-      deployments:
+      observingCapabilities:
           type: array
-          description: facility deployments (placement / location of specific equipment)
+          description: observing configurations (placement / location of specific equipment)
           minItems: 1
           items:
-              $ref: 'deployment.yaml'
-      instruments:
-          type: array
-          description: facility instruments
-          minItems: 1
-          items:
-              $ref: 'instrument.yaml'
+              $ref: 'observingCapability.yaml'
     required:
       - contacts
       - created
       - title
-      - deployments
-      - instruments
+      - observingCapabilities
 
   links:
     type: array

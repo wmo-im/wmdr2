@@ -1,0 +1,36 @@
+---
+type: object
+properties:
+  observedProperty:
+    type: string
+    description: observed property
+    $comment: |-
+      - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
+      - https://codes.wmo.int/wmdr/ObservedVariableEarth
+      - https://codes.wmo.int/wmdr/ObservedVariableOcean
+      - https://codes.wmo.int/wmdr/ObservedVariableOuterSpace
+      - https://codes.wmo.int/wmdr/ObservedVariableTerrestrial
+  observingMethod:
+    type: string
+    description: observing method
+    $comment: |-
+      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
+      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
+      - https://codes.wmo.int/wmdr/ObservingMethodEarth
+  operatingStatus:
+    type: string
+    description: operating status
+    $comment: |-
+      - https://codes.wmo.int/wmdr/InstrumentOperatingStatus
+  sourceOfObservation:
+    type: string
+    description: Source of observation
+    $comment: https://codes.wmo.int/wmdr/SourceOfObservation
+  deployments:
+    type: array
+    description: deployments
+    maxItems: 1
+    items:
+      $ref: 'deployment.yaml'
+required:
+  - observedProperty
