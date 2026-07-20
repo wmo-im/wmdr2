@@ -1,6 +1,8 @@
 ---
 type: object
 properties:
+  time:
+    $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
   observedProperty:
     type: string
     description: observed property

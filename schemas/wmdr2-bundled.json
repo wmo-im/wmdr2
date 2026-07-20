@@ -708,6 +708,9 @@
     "ObservingCapability": {
       "type": "object",
       "properties": {
+        "time": {
+          "$ref": "#/properties/time"
+        },
         "observedProperty": {
           "type": "string",
           "description": "observed property",
