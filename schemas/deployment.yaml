@@ -2,26 +2,32 @@
 type: object
 properties:
   id:
-    oneOf:
-      - type: string
-      - type: integer
-    description: deployment identifier
+    type:
+      - string
+      - integer
+    description: instrument identifier
   geometry:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
+  keywords:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
   instrument:
-    type: string
-    description: instrument identifier
-  sourceOfObservation:
-    type: string
-    description: Source of observation
-    $comment: https://codes.wmo.int/wmdr/SourceOfObservation
+    oneOf:
+      - type: object
+        properties:
+          id:
+            type:
+              - string
+              - integer
+        required:
+          - id
+      - $ref: 'instrument.yaml'
   referenceSurfaces:
     type: array
     minItems: 1
     items:
-      tye: object
+      type: object
       properties:
         referenceSurface:
           type: string
@@ -33,7 +39,6 @@ properties:
       required:
         - referenceSurface
         - verticalDistance
-  keywords:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
 required:
   - id
+  - instrument

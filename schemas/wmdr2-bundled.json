@@ -115,6 +115,10 @@
           "type": "string",
           "description": "facility name (primary)"
         },
+        "description": {
+          "type": "string",
+          "description": "facility description"
+        },
         "additionalTitles": {
           "type": "array",
           "minItems": 1,
@@ -528,20 +532,12 @@
             }
           }
         },
-        "deployments": {
+        "observingCapabilities": {
           "type": "array",
-          "description": "facility deployments (placement / location of specific equipment)",
+          "description": "observing configurations (placement / location of specific equipment)",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/Deployment"
-          }
-        },
-        "instruments": {
-          "type": "array",
-          "description": "facility instruments",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/Instrument"
+            "$ref": "#/definitions/ObservingCapability"
           }
         }
       },
@@ -549,8 +545,7 @@
         "contacts",
         "created",
         "title",
-        "deployments",
-        "instruments"
+        "observingCapabilities"
       ]
     },
     "links": {
@@ -619,15 +614,11 @@
       "type": "object",
       "properties": {
         "id": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
+          "type": [
+            "string",
+            "integer"
           ],
-          "description": "deployment identifier"
+          "description": "instrument identifier"
         },
         "geometry": {
           "$ref": "#/properties/geometry"
@@ -635,20 +626,35 @@
         "time": {
           "$ref": "#/properties/time"
         },
-        "instrument": {
-          "type": "string",
-          "description": "instrument identifier"
+        "keywords": {
+          "$ref": "#/properties/properties/properties/keywords"
         },
-        "sourceOfObservation": {
-          "type": "string",
-          "description": "Source of observation",
-          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
+        "instrument": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            {
+              "$ref": "#/definitions/Instrument"
+            }
+          ]
         },
         "referenceSurfaces": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "tye": "object",
+            "type": "object",
             "properties": {
               "referenceSurface": {
                 "type": "string",
@@ -665,51 +671,22 @@
               "verticalDistance"
             ]
           }
-        },
-        "keywords": {
-          "$ref": "#/properties/properties/properties/keywords"
         }
       },
       "required": [
-        "id"
+        "id",
+        "instrument"
       ]
     },
     "Instrument": {
       "type": "object",
       "properties": {
         "id": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
+          "type": [
+            "string",
+            "integer"
           ],
           "description": "instrument identifier"
-        },
-        "observingCapabilities": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "observingMethod": {
-                "type": "string",
-                "description": "observing method",
-                "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
-              },
-              "observedProperty": {
-                "type": "string",
-                "description": "observed property",
-                "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
-              }
-            },
-            "required": [
-              "observingMethod",
-              "observedProperty"
-            ]
-          }
         },
         "manufacturer": {
           "type": "string",
@@ -725,8 +702,46 @@
         }
       },
       "required": [
-        "id",
-        "observingCapabilities"
+        "id"
+      ]
+    },
+    "ObservingCapability": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "$ref": "#/properties/time"
+        },
+        "observedProperty": {
+          "type": "string",
+          "description": "observed property",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
+        },
+        "observingMethod": {
+          "type": "string",
+          "description": "observing method",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
+        },
+        "operatingStatus": {
+          "type": "string",
+          "description": "operating status",
+          "$comment": "- https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
+        },
+        "sourceOfObservation": {
+          "type": "string",
+          "description": "Source of observation",
+          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
+        },
+        "deployments": {
+          "type": "array",
+          "description": "deployments",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          }
+        }
+      },
+      "required": [
+        "observedProperty"
       ]
     }
   }
