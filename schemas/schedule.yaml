@@ -1,0 +1,28 @@
+---
+type: object
+description: Reusable observing/reporting schedule, compatible with a compact JSCalendar event representation and WMDR schedule extensions.
+properties:
+  uid:
+    type: string
+  '@type':
+    type: string
+  start:
+    type: string
+  duration:
+    type: string
+  recurrenceRules:
+    type: array
+    items:
+      type: object
+  recurrenceOverrides:
+    type: object
+  timeZone:
+    type: string
+  wmo.int:samplingFrequency:
+    type: string
+  wmo.int:aggregationInterval:
+    type: string
+  wmo.int:diurnalBaseTime:
+    type: string
+required:
+  - uid

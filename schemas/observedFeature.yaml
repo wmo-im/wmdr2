@@ -1,0 +1,16 @@
+---
+type: object
+properties:
+  domain:
+    type: string
+    description: observed feature domain
+  domainFeature:
+    type: string
+    description: feature within the observed feature domain
+  featureName:
+    type:
+      - string
+      - 'null'
+    description: free-text observed feature name
+required:
+  - domain

@@ -1,0 +1,41 @@
+---
+type: object
+description: Time-bound configuration used to make observations in an observation series. This replaces the earlier deployment concept.
+properties:
+  time:
+    $ref: 'temporal.yaml#/timePeriod'
+  observingMethod:
+    type: string
+    description: observing method
+    $comment: |-
+      The domain-specific code lists ObservingMethod[domain] from WMDR1 should eventually be replaced by a consolidated vocabulary of ObservingMethod for WMDR2, following the WMO amendment process.
+
+      Current WMDR1 domain-specific source vocabularies:
+      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
+      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
+      - https://codes.wmo.int/wmdr/ObservingMethodEarth
+  operatingStatus:
+    type: string
+    description: optional operating status for this observing configuration
+    $comment: https://codes.wmo.int/wmdr/InstrumentOperatingStatus
+  sourceOfObservation:
+    type: string
+    description: source of observation
+    $comment: https://codes.wmo.int/wmdr/SourceOfObservation
+  instrument:
+    type: string
+    description: reference to a reusable facility-level instrument catalogue entry
+  serialNumber:
+    type: string
+    description: optional serial number of the instrument instance used in this observing configuration
+  geometry:
+    $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
+  referenceSurface:
+    type: string
+    description: Type of reference surface
+    $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
+  verticalDistanceFromReferenceSurface:
+    $ref: 'quantity.yaml'
+required:
+  - time
+  - observingMethod

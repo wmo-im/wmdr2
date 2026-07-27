@@ -1,0 +1,12 @@
+---
+type: object
+properties:
+  value:
+    type:
+      - number
+      - integer
+      - string
+  uom:
+    type: string
+required:
+  - value

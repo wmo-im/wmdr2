@@ -1,0 +1,71 @@
+---
+type: object
+description: Observation-series level metadata. The name observingCapability is retained for this PR, but the structure represents the observed property/feature/geometry and its time-bound observing configurations. A future PR may propose the name observationSeries, which is semantically stronger in describing actual observations.
+properties:
+  id:
+    type: string
+    description: observation series identifier
+  title:
+    type: string
+  time:
+    $ref: 'temporal.yaml#/time'
+  observedProperty:
+    type: string
+    description: observed property
+    $comment: |-
+      The domain-specific code lists ObservedVariable[domain] from WMDR1 should eventually be replaced by a consolidated vocabulary of ObservedProperty for WMDR2, following the WMO amendment process.
+
+      Current WMDR1 domain-specific source vocabularies:
+      - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
+      - https://codes.wmo.int/wmdr/ObservedVariableEarth
+      - https://codes.wmo.int/wmdr/ObservedVariableOcean
+      - https://codes.wmo.int/wmdr/ObservedVariableOuterSpace
+      - https://codes.wmo.int/wmdr/ObservedVariableTerrestrial
+  observedFeature:
+    $ref: 'observedFeature.yaml'
+  observedGeometry:
+    type: string
+    description: geometry of the observed property
+    $comment: https://codes.wmo.int/wmdr/ObservedGeometry
+  applicationArea:
+    type: string
+    $comment: https://codes.wmo.int/wmdr/ApplicationArea
+  representativeness:
+    type: string
+    $comment: https://codes.wmo.int/wmdr/Representativeness
+  programAffiliations:
+    type: array
+    items:
+      type: string
+  contacts:
+    type: array
+    items:
+      $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/contact.yaml'
+  contactAssignments:
+    type: array
+    items:
+      $ref: 'contactAssignment.yaml'
+  observingConfigurations:
+    type: array
+    description: time-bound observing configurations for this observation series
+    minItems: 1
+    items:
+      $ref: 'observingConfiguration.yaml'
+  observingProcedures:
+    type: array
+    description: time-bound observing procedures for this observation series
+    items:
+      $ref: 'observingProcedure.yaml'
+  reportingProcedures:
+    type: array
+    description: reporting procedures for this observation series
+    items:
+      $ref: 'reportingProcedure.yaml'
+  keywords:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
+  links:
+    type: array
+    items:
+      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml'
+required:
+  - observedProperty
