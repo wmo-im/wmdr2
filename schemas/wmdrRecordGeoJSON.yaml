@@ -2,12 +2,12 @@ $schema: 'https://json-schema.org/draft/2020-12/schema'
 $id: 'https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml'
 title: WMDR station metadata record definition
 description: WMDR station metadata record definition
-
+type: object
 properties:
   id:
     type: string
     description: WIGOS station identifier
-    pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+    pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9._-]+)$"
   conformsTo:
     type: array
     contains:
@@ -17,8 +17,7 @@ properties:
   geometry:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:
-    $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
-
+    $ref: 'temporal.yaml#/time'
   properties:
     type: object
     properties:
@@ -40,7 +39,7 @@ properties:
         items:
           type: string
           description: additional WIGOS Station Identifiers (WSI)
-          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9._-]+)$"
       facilityType:
         type: string
         description: Station/platform type
@@ -51,13 +50,14 @@ properties:
         $comment: https://codes.wmo.int/wmdr/WMORegion
       contacts:
         type: array
-        minItems: 1
+        description: reusable OGC contact registry for this WMDR record
         items:
-          allOf:
-            - $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/contact.yaml'
-              required:
-                - organization
-              additionalProperties: false
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/contact.yaml'
+      contactAssignments:
+        type: array
+        description: facility-level associations to reusable contacts
+        items:
+          $ref: 'contactAssignment.yaml'
       externalIds:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/externalIds'
       created:
@@ -68,7 +68,7 @@ properties:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
       themes:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/themes'
-      territories:
+      territory:
         type: array
         description: time series of territories
         minItems: 1
@@ -79,8 +79,25 @@ properties:
               type: string
               description: Territory of origin of data
               $comment: https://codes.wmo.int/wmdr/TerritoryName
+            time:
+              $ref: 'temporal.yaml#/timePeriod'
+          required:
+            - territory
+      territories:
+        type: array
+        description: alias for territory; retained for compatibility with earlier draft records
+        minItems: 1
+        items:
+          type: object
+          properties:
+            territory:
+              type: string
+              description: Territory of origin of data
+              $comment: https://codes.wmo.int/wmdr/TerritoryName
             dates:
               $ref: 'temporal.yaml#/dates'
+            time:
+              $ref: 'temporal.yaml#/timePeriod'
           required:
             - territory
       programAffiliations:
@@ -96,38 +113,50 @@ properties:
             facilityTitle:
               type: string
               description: Programme specific facility name
+            programSpecificFacilityId:
+              type: string
+              description: Programme specific facility identifier
+            programSpecificFacilityTitle:
+              type: string
+              description: Programme specific facility name
             programAffiliation:
               type: string
               description: Programme/network affiliation
               $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
             reportingStatus:
               type: string
-              description: Station/Platform operating status
+              description: Station/Platform reporting status in this programme
               $comment: https://codes.wmo.int/wmdr/ReportingStatus
             dates:
               $ref: 'temporal.yaml#/dates'
+            time:
+              $ref: 'temporal.yaml#/timePeriod'
       observingCapabilities:
-          type: array
-          description: observing configurations (placement / location of specific equipment)
-          minItems: 1
-          items:
-              $ref: 'observingCapability.yaml'
+        type: array
+        description: observation series / observing capability descriptions
+        minItems: 1
+        items:
+          $ref: 'observingCapability.yaml'
+      instruments:
+        type: array
+        description: reusable instrument catalogue entries; serial numbers are recorded on observing configurations
+        items:
+          $ref: 'instrument.yaml'
+      schedules:
+        type: array
+        description: reusable observing/reporting schedules
+        items:
+          $ref: 'schedule.yaml'
     required:
-      - contacts
-      - created
       - title
       - observingCapabilities
-
   links:
     type: array
-    minItems: 1
     items:
       $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml'
-
 required:
   - id
   - conformsTo
   - type
   - geometry
   - properties
-  - links

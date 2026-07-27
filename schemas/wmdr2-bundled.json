@@ -3,11 +3,12 @@
   "$id": "https://raw.githubusercontent.com/wmo-im/wmdr2/main/schemas/wmdrRecordGeoJSON.yaml",
   "title": "WMDR station metadata record definition",
   "description": "WMDR station metadata record definition",
+  "type": "object",
   "properties": {
     "id": {
       "type": "string",
       "description": "WIGOS station identifier",
-      "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+      "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9._-]+)$"
     },
     "conformsTo": {
       "type": "array",
@@ -44,67 +45,63 @@
       }
     },
     "time": {
-      "oneOf": [
-        {
-          "enum": [
-            null
-          ]
-        },
+      "anyOf": [
         {
           "type": "object",
           "properties": {
             "date": {
               "type": "string",
-              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              "anyOf": [
+                {
+                  "const": ".."
+                },
+                {
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                {
+                  "pattern": "^\\d{4}-\\d{2}$"
+                },
+                {
+                  "pattern": "^\\d{4}$"
+                }
+              ]
             },
             "timestamp": {
               "type": "string",
-              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z?$"
             },
             "interval": {
               "type": "array",
               "minItems": 2,
               "maxItems": 2,
               "items": {
-                "oneOf": [
+                "type": "string",
+                "anyOf": [
                   {
-                    "type": "string",
+                    "const": ".."
+                  },
+                  {
                     "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                   },
                   {
-                    "type": "string",
                     "pattern": "^\\d{4}-\\d{2}$"
                   },
                   {
-                    "type": "string",
                     "pattern": "^\\d{4}$"
-                  },
-                  {
-                    "type": "string",
-                    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
-                  },
-                  {
-                    "type": "string",
-                    "pattern": "^T\\d{2}(:\\d{2})?(:\\d{2})?(?:\\.\\d+)?Z$"
-                  },
-                  {
-                    "type": "string",
-                    "enum": [
-                      ".."
-                    ]
                   }
                 ]
               }
             },
             "resolution": {
               "type": "string",
-              "description": "Minimum time period resolvable in the dataset, as an ISO 8601 duration",
-              "pattern": "^(-?)P(?=\\\\d|T\\\\d)(?:(\\\\d+)Y)?(?:(\\\\d+)M)?(?:(\\\\d+)([DW]))?(?:T(?:(\\\\d+)H)?(?:(\\\\d+)M)?(?:(\\\\d+(?:\\\\.\\\\d+)?)S)?)?$",
-              "example": [
-                "P1D"
-              ]
+              "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+              "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
             }
-          }
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
         }
       ]
     },
@@ -133,7 +130,7 @@
           "items": {
             "type": "string",
             "description": "additional WIGOS Station Identifiers (WSI)",
-            "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+            "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9._-]+)$"
           }
         },
         "facilityType": {
@@ -148,247 +145,285 @@
         },
         "contacts": {
           "type": "array",
-          "minItems": 1,
+          "description": "reusable OGC contact registry for this WMDR record",
           "items": {
-            "allOf": [
+            "type": "object",
+            "description": "Identification of, and means of communication with, person responsible for the resource.",
+            "anyOf": [
+              {
+                "required": [
+                  "name"
+                ]
+              },
               {
                 "required": [
                   "organization"
-                ],
-                "additionalProperties": false,
-                "type": "object",
-                "description": "Identification of, and means of communication with, person responsible\nfor the resource.",
-                "anyOf": [
+                ]
+              }
+            ],
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "description": "A value uniquely identifying a contact."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the responsible person."
+              },
+              "position": {
+                "type": "string",
+                "description": "The role or position of the responsible person."
+              },
+              "organization": {
+                "type": "string",
+                "description": "Organization/affiliation of the contact."
+              },
+              "logo": {
+                "description": "Graphic identifying a contact. The link relation should be icon and the media type should be an image media type.",
+                "allOf": [
                   {
-                    "required": [
-                      "name"
-                    ]
-                  },
-                  {
-                    "required": [
-                      "organization"
-                    ]
-                  }
-                ],
-                "properties": {
-                  "identifier": {
-                    "type": "string",
-                    "description": "A value uniquely identifying a contact."
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "The name of the responsible person."
-                  },
-                  "position": {
-                    "type": "string",
-                    "description": "The name of the role or position of the responsible person taken\nfrom the organization's formal organizational hierarchy or chart."
-                  },
-                  "organization": {
-                    "type": "string",
-                    "description": "Organization/affiliation of the contact."
-                  },
-                  "logo": {
-                    "description": "Graphic identifying a contact. The link relation should be `icon`\nand the media type should be an image media type.",
+                    "type": "object",
                     "allOf": [
                       {
                         "type": "object",
-                        "allOf": [
-                          {
-                            "type": "object",
-                            "properties": {
-                              "rel": {
-                                "type": "string",
-                                "description": "The type or semantics of the relation."
-                              },
-                              "type": {
-                                "type": "string",
-                                "description": "A hint indicating what the media type of the\nresult of dereferencing the link should be."
-                              },
-                              "hreflang": {
-                                "type": "string",
-                                "description": "A hint indicating what the language of the\nresult of dereferencing the link should be."
-                              },
-                              "title": {
-                                "type": "string",
-                                "description": "Used to label the destination of a link\nsuch that it can be used as a human-readable\nidentifier."
-                              },
-                              "length": {
-                                "type": "integer"
-                              },
-                              "profile": {
-                                "type": "array",
-                                "description": "One or more identifiers that provide information about additional\nsemantics (constraints, conventions, extensions), in addition to \nthose defined by the media type, that are associated with the\ntarget resource.",
-                                "items": {
-                                  "type": "string"
-                                }
-                              },
-                              "created": {
-                                "type": "string",
-                                "description": "Date of creation of the resource pointed to\nby the link.",
-                                "format": "date-time"
-                              },
-                              "updated": {
-                                "type": "string",
-                                "description": "Most recent date on which the resource pointed\nto by the link was changed.",
-                                "format": "date-time"
-                              }
-                            }
+                        "properties": {
+                          "rel": {
+                            "type": "string",
+                            "description": "The type or semantics of the relation."
                           },
-                          {
-                            "type": "object",
-                            "required": [
-                              "href"
-                            ],
-                            "properties": {
-                              "href": {
-                                "type": "string",
-                                "format": "uri"
-                              }
-                            }
+                          "type": {
+                            "type": "string",
+                            "description": "A hint indicating the media type."
+                          },
+                          "hreflang": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "length": {
+                            "type": "integer"
                           }
-                        ]
+                        }
                       },
                       {
                         "type": "object",
                         "required": [
-                          "rel",
-                          "type"
+                          "href"
                         ],
                         "properties": {
-                          "rel": {
-                            "enum": [
-                              "icon"
-                            ]
+                          "href": {
+                            "type": "string",
+                            "format": "uri"
                           }
                         }
                       }
                     ]
                   },
-                  "phones": {
-                    "type": "array",
-                    "description": "Telephone numbers at which contact can be made.",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "string",
-                          "description": "The value is the phone number itself.",
-                          "pattern": "^\\+[1-9]{1}[0-9]{3,14}$"
-                        },
-                        "roles": {
-                          "description": "The type of phone number (e.g. home, work, fax, etc.).",
-                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
-                        }
+                  {
+                    "type": "object",
+                    "required": [
+                      "rel",
+                      "type"
+                    ],
+                    "properties": {
+                      "rel": {
+                        "enum": [
+                          "icon"
+                        ]
                       }
                     }
-                  },
-                  "emails": {
-                    "type": "array",
-                    "description": "Email addresses at which contact can be made.",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "string",
-                          "description": "The value is the email number itself.",
-                          "format": "email"
-                        },
-                        "roles": {
-                          "description": "The type of email (e.g. home, work, etc.).",
-                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
-                        }
+                  }
+                ]
+              },
+              "phones": {
+                "type": "array",
+                "description": "Telephone numbers at which contact can be made.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string",
+                      "description": "The value is the phone number itself.",
+                      "pattern": "^\\+[1-9]{1}[0-9]{3,14}$"
+                    },
+                    "roles": {
+                      "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
                       }
                     }
-                  },
-                  "addresses": {
-                    "type": "array",
-                    "description": "Physical location at which contact can be made.",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "deliveryPoint": {
-                          "type": "array",
-                          "description": "Address lines for the location.",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "city": {
-                          "type": "string",
-                          "description": "City for the location."
-                        },
-                        "administrativeArea": {
-                          "type": "string",
-                          "description": "State or province of the location."
-                        },
-                        "postalCode": {
-                          "type": "string",
-                          "description": "ZIP or other postal code."
-                        },
-                        "country": {
-                          "type": "string",
-                          "description": "Country of the physical address.  ISO 3166-1 is recommended."
-                        },
-                        "roles": {
-                          "description": "The type of address (e.g. office, home, etc.).",
-                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/roles"
-                        }
+                  }
+                }
+              },
+              "emails": {
+                "type": "array",
+                "description": "Email addresses at which contact can be made.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string",
+                      "description": "The value is the email address itself.",
+                      "format": "email"
+                    },
+                    "roles": {
+                      "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
                       }
                     }
-                  },
-                  "links": {
-                    "type": "array",
-                    "description": "On-line information about the contact.",
-                    "items": {
+                  }
+                }
+              },
+              "addresses": {
+                "type": "array",
+                "description": "Physical locations at which contact can be made.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "deliveryPoint": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "administrativeArea": {
+                      "type": "string"
+                    },
+                    "postalCode": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "roles": {
+                      "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "links": {
+                "type": "array",
+                "description": "On-line information about the contact.",
+                "items": {
+                  "allOf": [
+                    {
+                      "type": "object",
                       "allOf": [
                         {
-                          "$ref": "#/properties/properties/properties/contacts/items/allOf/0/properties/logo/allOf/0"
+                          "type": "object",
+                          "properties": {
+                            "rel": {
+                              "type": "string",
+                              "description": "The type or semantics of the relation."
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "A hint indicating the media type."
+                            },
+                            "hreflang": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "length": {
+                              "type": "integer"
+                            }
+                          }
                         },
                         {
                           "type": "object",
                           "required": [
-                            "type"
-                          ]
+                            "href"
+                          ],
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "format": "uri"
+                            }
+                          }
                         }
                       ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type"
+                      ]
                     }
-                  },
-                  "hoursOfService": {
-                    "type": "string",
-                    "description": "Time period when the contact can be contacted."
-                  },
-                  "contactInstructions": {
-                    "type": "string",
-                    "description": "Supplemental instructions on how or when to contact the\nresponsible party."
-                  },
-                  "roles": {
-                    "description": "The set of named duties, job functions and/or permissions\nassociated with this contact.\n(e.g. developer, administrator, etc.).",
-                    "type": "array",
-                    "minItems": 1,
-                    "items": {
-                      "type": "string"
-                    }
-                  }
+                  ]
+                }
+              },
+              "hoursOfService": {
+                "type": "string"
+              },
+              "contactInstructions": {
+                "type": "string"
+              },
+              "roles": {
+                "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
                 }
               }
+            }
+          }
+        },
+        "contactAssignments": {
+          "type": "array",
+          "description": "facility-level associations to reusable contacts",
+          "items": {
+            "type": "object",
+            "description": "Association between an entity and a reusable OGC contact.",
+            "properties": {
+              "contact": {
+                "type": "string",
+                "description": "reference to a reusable contact identifier"
+              },
+              "roles": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "contact",
+              "roles"
             ]
           }
         },
         "externalIds": {
           "type": "array",
-          "description": "An identifier for the resource assigned by an\nexternal (to the catalog) entity.",
+          "description": "An identifier for the resource assigned by an external entity.",
           "items": {
             "type": "object",
             "properties": {
               "scheme": {
-                "type": "string",
-                "description": "A reference to an authority or identifier\nfor a knowledge organization system from\nwhich the external identifier was obtained.\nIt is recommended that the identifier be a\nresolvable URI."
+                "type": "string"
               },
               "value": {
                 "type": "string",
@@ -412,14 +447,14 @@
         },
         "keywords": {
           "type": "array",
-          "description": "The topic or topics of the resource. Typically\nrepresented using free-form keywords, tags, key\nphrases, or classification codes.",
+          "description": "Free-form keywords, tags, key phrases, or classification codes.",
           "items": {
             "type": "string"
           }
         },
         "themes": {
           "type": "array",
-          "description": "A knowledge organization system used to classify\nthe resource.",
+          "description": "A knowledge organization system used to classify the resource.",
           "minItems": 1,
           "items": {
             "type": "object",
@@ -430,7 +465,6 @@
             "properties": {
               "concepts": {
                 "type": "array",
-                "description": "One or more entity/concept identifiers from this knowledge\nsystem. it is recommended that a resolvable URI be used for\neach entity/concept identifier.",
                 "minItems": 1,
                 "items": {
                   "type": "object",
@@ -439,35 +473,84 @@
                   ],
                   "properties": {
                     "id": {
-                      "type": "string",
-                      "description": "An identifier for the concept."
+                      "type": "string"
                     },
                     "title": {
-                      "type": "string",
-                      "description": "A human readable title for the concept."
+                      "type": "string"
                     },
                     "description": {
-                      "type": "string",
-                      "description": "A human readable description for the concept."
+                      "type": "string"
                     },
                     "url": {
                       "type": "string",
-                      "format": "uri",
-                      "description": "A URI providing further description of the concept."
+                      "format": "uri"
                     }
                   }
                 }
               },
               "scheme": {
-                "type": "string",
-                "description": "An identifier for the knowledge organization system used\nto classify the resource.  It is recommended that the\nidentifier be a resolvable URI.  The list of schemes used\nin a searchable catalog can be determined by inspecting\nthe server's OpenAPI document or, if the server implements\nCQL2, by exposing a queryable (e.g. named `scheme`) and\nenumerating the list of schemes in the queryable's schema\ndefinition."
+                "type": "string"
               }
             }
           }
         },
-        "territories": {
+        "territory": {
           "type": "array",
           "description": "time series of territories",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "territory": {
+                "type": "string",
+                "description": "Territory of origin of data",
+                "$comment": "https://codes.wmo.int/wmdr/TerritoryName"
+              },
+              "time": {
+                "type": "object",
+                "required": [
+                  "interval"
+                ],
+                "properties": {
+                  "interval": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string",
+                      "anyOf": [
+                        {
+                          "const": ".."
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}$"
+                        }
+                      ]
+                    }
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                  }
+                },
+                "additionalProperties": true
+              }
+            },
+            "required": [
+              "territory"
+            ]
+          }
+        },
+        "territories": {
+          "type": "array",
+          "description": "alias for territory; retained for compatibility with earlier draft records",
           "minItems": 1,
           "items": {
             "type": "object",
@@ -481,19 +564,58 @@
                 "type": "array",
                 "minItems": 1,
                 "items": {
-                  "oneOf": [
+                  "type": "string",
+                  "anyOf": [
                     {
-                      "type": "string",
-                      "format": "date"
+                      "const": ".."
                     },
                     {
-                      "type": "string",
-                      "enum": [
-                        ".."
-                      ]
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                    },
+                    {
+                      "pattern": "^\\d{4}-\\d{2}$"
+                    },
+                    {
+                      "pattern": "^\\d{4}$"
                     }
                   ]
                 }
+              },
+              "time": {
+                "type": "object",
+                "required": [
+                  "interval"
+                ],
+                "properties": {
+                  "interval": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string",
+                      "anyOf": [
+                        {
+                          "const": ".."
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}$"
+                        }
+                      ]
+                    }
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                  }
+                },
+                "additionalProperties": true
               }
             },
             "required": [
@@ -516,6 +638,14 @@
                 "type": "string",
                 "description": "Programme specific facility name"
               },
+              "programSpecificFacilityId": {
+                "type": "string",
+                "description": "Programme specific facility identifier"
+              },
+              "programSpecificFacilityTitle": {
+                "type": "string",
+                "description": "Programme specific facility name"
+              },
               "programAffiliation": {
                 "type": "string",
                 "description": "Programme/network affiliation",
@@ -523,61 +653,940 @@
               },
               "reportingStatus": {
                 "type": "string",
-                "description": "Station/Platform operating status",
+                "description": "Station/Platform reporting status in this programme",
                 "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
               },
               "dates": {
-                "$ref": "#/properties/properties/properties/territories/items/properties/dates"
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "anyOf": [
+                    {
+                      "const": ".."
+                    },
+                    {
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                    },
+                    {
+                      "pattern": "^\\d{4}-\\d{2}$"
+                    },
+                    {
+                      "pattern": "^\\d{4}$"
+                    }
+                  ]
+                }
+              },
+              "time": {
+                "type": "object",
+                "required": [
+                  "interval"
+                ],
+                "properties": {
+                  "interval": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": {
+                      "type": "string",
+                      "anyOf": [
+                        {
+                          "const": ".."
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}-\\d{2}$"
+                        },
+                        {
+                          "pattern": "^\\d{4}$"
+                        }
+                      ]
+                    }
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                    "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                  }
+                },
+                "additionalProperties": true
               }
             }
           }
         },
         "observingCapabilities": {
           "type": "array",
-          "description": "observing configurations (placement / location of specific equipment)",
+          "description": "observation series / observing capability descriptions",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/ObservingCapability"
+            "type": "object",
+            "description": "Observation-series level metadata. The name observingCapability is retained for this PR, but the structure represents the observed property/feature/geometry and its time-bound observing configurations.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "observation series identifier"
+              },
+              "title": {
+                "type": "string"
+              },
+              "time": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "date": {
+                        "type": "string",
+                        "anyOf": [
+                          {
+                            "const": ".."
+                          },
+                          {
+                            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                          },
+                          {
+                            "pattern": "^\\d{4}-\\d{2}$"
+                          },
+                          {
+                            "pattern": "^\\d{4}$"
+                          }
+                        ]
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z?$"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "string",
+                          "anyOf": [
+                            {
+                              "const": ".."
+                            },
+                            {
+                              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                            },
+                            {
+                              "pattern": "^\\d{4}-\\d{2}$"
+                            },
+                            {
+                              "pattern": "^\\d{4}$"
+                            }
+                          ]
+                        }
+                      },
+                      "resolution": {
+                        "type": "string",
+                        "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                        "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "observedProperty": {
+                "type": "string",
+                "description": "observed property",
+                "$comment": "The domain-specific code lists ObservedVariable[domain] from WMDR1 will be replaced by a consolidated vocabulary of ObservedProperty for WMDR2, following the WMO amendment process.\n\nCurrent WMDR1 domain-specific source vocabularies:\n- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
+              },
+              "observedFeature": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "description": "observed feature domain"
+                  },
+                  "domainFeature": {
+                    "type": "string",
+                    "description": "feature within the observed feature domain"
+                  },
+                  "featureName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "free-text observed feature name"
+                  }
+                },
+                "required": [
+                  "domain"
+                ]
+              },
+              "observedGeometry": {
+                "type": "string",
+                "description": "geometry of the observed property",
+                "$comment": "https://codes.wmo.int/wmdr/ObservedGeometry"
+              },
+              "applicationArea": {
+                "type": "string",
+                "$comment": "https://codes.wmo.int/wmdr/ApplicationArea"
+              },
+              "representativeness": {
+                "type": "string",
+                "$comment": "https://codes.wmo.int/wmdr/Representativeness"
+              },
+              "programAffiliations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "contacts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Identification of, and means of communication with, person responsible for the resource.",
+                  "anyOf": [
+                    {
+                      "required": [
+                        "name"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "organization"
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "identifier": {
+                      "type": "string",
+                      "description": "A value uniquely identifying a contact."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the responsible person."
+                    },
+                    "position": {
+                      "type": "string",
+                      "description": "The role or position of the responsible person."
+                    },
+                    "organization": {
+                      "type": "string",
+                      "description": "Organization/affiliation of the contact."
+                    },
+                    "logo": {
+                      "description": "Graphic identifying a contact. The link relation should be icon and the media type should be an image media type.",
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "rel": {
+                                  "type": "string",
+                                  "description": "The type or semantics of the relation."
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "A hint indicating the media type."
+                                },
+                                "hreflang": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "length": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "href"
+                              ],
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "uri"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "rel",
+                            "type"
+                          ],
+                          "properties": {
+                            "rel": {
+                              "enum": [
+                                "icon"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "phones": {
+                      "type": "array",
+                      "description": "Telephone numbers at which contact can be made.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "value"
+                        ],
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "description": "The value is the phone number itself.",
+                            "pattern": "^\\+[1-9]{1}[0-9]{3,14}$"
+                          },
+                          "roles": {
+                            "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "emails": {
+                      "type": "array",
+                      "description": "Email addresses at which contact can be made.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "value"
+                        ],
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "description": "The value is the email address itself.",
+                            "format": "email"
+                          },
+                          "roles": {
+                            "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "addresses": {
+                      "type": "array",
+                      "description": "Physical locations at which contact can be made.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "deliveryPoint": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "administrativeArea": {
+                            "type": "string"
+                          },
+                          "postalCode": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "roles": {
+                            "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "links": {
+                      "type": "array",
+                      "description": "On-line information about the contact.",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "allOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "rel": {
+                                    "type": "string",
+                                    "description": "The type or semantics of the relation."
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "A hint indicating the media type."
+                                  },
+                                  "hreflang": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "length": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "required": [
+                                  "href"
+                                ],
+                                "properties": {
+                                  "href": {
+                                    "type": "string",
+                                    "format": "uri"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "type"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "hoursOfService": {
+                      "type": "string"
+                    },
+                    "contactInstructions": {
+                      "type": "string"
+                    },
+                    "roles": {
+                      "description": "The set of named duties, job functions and/or permissions associated with this contact.",
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "contactAssignments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Association between an entity and a reusable OGC contact.",
+                  "properties": {
+                    "contact": {
+                      "type": "string",
+                      "description": "reference to a reusable contact identifier"
+                    },
+                    "roles": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "contact",
+                    "roles"
+                  ]
+                }
+              },
+              "observingConfigurations": {
+                "type": "array",
+                "description": "time-bound observing configurations for this observation series",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "description": "Time-bound configuration used to make observations in an observation series. This replaces the earlier deployment concept.",
+                  "properties": {
+                    "time": {
+                      "type": "object",
+                      "required": [
+                        "interval"
+                      ],
+                      "properties": {
+                        "interval": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "string",
+                            "anyOf": [
+                              {
+                                "const": ".."
+                              },
+                              {
+                                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                              },
+                              {
+                                "pattern": "^\\d{4}-\\d{2}$"
+                              },
+                              {
+                                "pattern": "^\\d{4}$"
+                              }
+                            ]
+                          }
+                        },
+                        "resolution": {
+                          "type": "string",
+                          "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                          "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "observingMethod": {
+                      "type": "string",
+                      "description": "observing method",
+                      "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
+                    },
+                    "operatingStatus": {
+                      "type": "string",
+                      "description": "optional operating status for this observing configuration",
+                      "$comment": "https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
+                    },
+                    "sourceOfObservation": {
+                      "type": "string",
+                      "description": "source of observation",
+                      "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
+                    },
+                    "instrument": {
+                      "type": "string",
+                      "description": "reference to a reusable facility-level instrument catalogue entry"
+                    },
+                    "serialNumber": {
+                      "type": "string",
+                      "description": "optional serial number of the instrument instance used in this observing configuration"
+                    },
+                    "geometry": {
+                      "type": "object",
+                      "required": [
+                        "type",
+                        "coordinates"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "Point"
+                          ]
+                        },
+                        "coordinates": {
+                          "type": "array",
+                          "minItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "referenceSurface": {
+                      "type": "string",
+                      "description": "Type of reference surface",
+                      "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
+                    },
+                    "verticalDistanceFromReferenceSurface": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": [
+                            "number",
+                            "integer",
+                            "string"
+                          ]
+                        },
+                        "uom": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "value"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "observingMethod"
+                  ]
+                }
+              },
+              "observingProcedures": {
+                "type": "array",
+                "description": "time-bound observing procedures for this observation series",
+                "items": {
+                  "type": "object",
+                  "description": "Time-bound observing procedure metadata for an observation series.",
+                  "properties": {
+                    "time": {
+                      "type": "object",
+                      "required": [
+                        "interval"
+                      ],
+                      "properties": {
+                        "interval": {
+                          "type": "array",
+                          "minItems": 2,
+                          "maxItems": 2,
+                          "items": {
+                            "type": "string",
+                            "anyOf": [
+                              {
+                                "const": ".."
+                              },
+                              {
+                                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                              },
+                              {
+                                "pattern": "^\\d{4}-\\d{2}$"
+                              },
+                              {
+                                "pattern": "^\\d{4}$"
+                              }
+                            ]
+                          }
+                        },
+                        "resolution": {
+                          "type": "string",
+                          "description": "Temporal resolution as an ISO 8601 duration, for example P1D.",
+                          "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
+                        }
+                      },
+                      "additionalProperties": true
+                    },
+                    "strategy": {
+                      "type": "string",
+                      "$comment": "https://codes.wmo.int/wmdr/ObservingStrategy"
+                    },
+                    "observingSchedules": {
+                      "type": "array",
+                      "description": "references to facility-level schedules",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "time"
+                  ]
+                }
+              },
+              "reportingProcedures": {
+                "type": "array",
+                "description": "reporting procedures for this observation series",
+                "items": {
+                  "type": "object",
+                  "description": "Reporting procedure metadata for an observation series. Reporting procedures are reusable/static and do not carry validity time.",
+                  "properties": {
+                    "reportingSchedules": {
+                      "type": "array",
+                      "description": "references to facility-level schedules",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "dataFormat": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "dataPolicy": {
+                      "type": "string"
+                    },
+                    "internationalExchange": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "levelOfData": {
+                      "type": "string"
+                    },
+                    "numberOfObservationsInReportingInterval": {
+                      "type": [
+                        "number",
+                        "integer",
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "referenceDatum": {
+                      "type": "string"
+                    },
+                    "referenceTimeSource": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "spatialReportingInterval": {
+                      "type": "string"
+                    },
+                    "strategy": {
+                      "type": "string"
+                    },
+                    "timeliness": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "timeStampMeaning": {
+                      "type": "string"
+                    },
+                    "uom": {
+                      "type": "string"
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string",
+                                "description": "The type or semantics of the relation."
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "A hint indicating the media type."
+                              },
+                              "hreflang": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "length": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "href"
+                            ],
+                            "properties": {
+                              "href": {
+                                "type": "string",
+                                "format": "uri"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "contactAssignments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Association between an entity and a reusable OGC contact.",
+                        "properties": {
+                          "contact": {
+                            "type": "string",
+                            "description": "reference to a reusable contact identifier"
+                          },
+                          "roles": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "required": [
+                          "contact",
+                          "roles"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "keywords": {
+                "type": "array",
+                "description": "Free-form keywords, tags, key phrases, or classification codes.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "type": "string",
+                          "description": "The type or semantics of the relation."
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "A hint indicating the media type."
+                        },
+                        "hreflang": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "length": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "href"
+                      ],
+                      "properties": {
+                        "href": {
+                          "type": "string",
+                          "format": "uri"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "observedProperty"
+            ]
+          }
+        },
+        "instruments": {
+          "type": "array",
+          "description": "reusable instrument catalogue entries; serial numbers are recorded on observing configurations",
+          "items": {
+            "type": "object",
+            "description": "Reusable instrument catalogue entry. Serial numbers are not catalogue metadata; they belong to observingConfiguration.",
+            "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "integer"
+                ],
+                "description": "instrument identifier"
+              },
+              "manufacturer": {
+                "type": "string",
+                "description": "instrument manufacturer"
+              },
+              "model": {
+                "type": "string",
+                "description": "instrument model"
+              },
+              "observingMethods": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        },
+        "schedules": {
+          "type": "array",
+          "description": "reusable observing/reporting schedules",
+          "items": {
+            "type": "object",
+            "description": "Reusable observing/reporting schedule, compatible with a compact JSCalendar event representation and WMDR schedule extensions.",
+            "properties": {
+              "uid": {
+                "type": "string"
+              },
+              "@type": {
+                "type": "string"
+              },
+              "start": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "string"
+              },
+              "recurrenceRules": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "recurrenceOverrides": {
+                "type": "object"
+              },
+              "timeZone": {
+                "type": "string"
+              },
+              "wmo.int:samplingFrequency": {
+                "type": "string"
+              },
+              "wmo.int:aggregationInterval": {
+                "type": "string"
+              },
+              "wmo.int:diurnalBaseTime": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "uid"
+            ]
           }
         }
       },
       "required": [
-        "contacts",
-        "created",
         "title",
         "observingCapabilities"
       ]
     },
     "links": {
       "type": "array",
-      "minItems": 1,
       "items": {
+        "type": "object",
         "allOf": [
           {
             "type": "object",
-            "required": [
-              "rel"
-            ],
             "properties": {
               "rel": {
                 "type": "string",
-                "description": "The type or semantics of the relation.",
-                "example": "alternate"
+                "description": "The type or semantics of the relation."
               },
               "type": {
                 "type": "string",
-                "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
-                "example": "application/geo+json"
+                "description": "A hint indicating the media type."
               },
               "hreflang": {
-                "type": "string",
-                "description": "A hint indicating what the language of the result of dereferencing the link should be.",
-                "example": "en"
+                "type": "string"
               },
               "title": {
-                "type": "string",
-                "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
-                "example": "Trierer Strasse 70, 53115 Bonn"
+                "type": "string"
               },
               "length": {
                 "type": "integer"
@@ -592,8 +1601,7 @@
             "properties": {
               "href": {
                 "type": "string",
-                "description": "The URI of the link target.",
-                "example": "https://data.example.com/buildings/123"
+                "format": "uri"
               }
             }
           }
@@ -606,143 +1614,6 @@
     "conformsTo",
     "type",
     "geometry",
-    "properties",
-    "links"
-  ],
-  "definitions": {
-    "Deployment": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": [
-            "string",
-            "integer"
-          ],
-          "description": "instrument identifier"
-        },
-        "geometry": {
-          "$ref": "#/properties/geometry"
-        },
-        "time": {
-          "$ref": "#/properties/time"
-        },
-        "keywords": {
-          "$ref": "#/properties/properties/properties/keywords"
-        },
-        "instrument": {
-          "oneOf": [
-            {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": [
-                    "string",
-                    "integer"
-                  ]
-                }
-              },
-              "required": [
-                "id"
-              ]
-            },
-            {
-              "$ref": "#/definitions/Instrument"
-            }
-          ]
-        },
-        "referenceSurfaces": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "referenceSurface": {
-                "type": "string",
-                "description": "Type of reference surface",
-                "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
-              },
-              "verticalDistance": {
-                "type": "number",
-                "description": "Height above reference surface"
-              }
-            },
-            "required": [
-              "referenceSurface",
-              "verticalDistance"
-            ]
-          }
-        }
-      },
-      "required": [
-        "id",
-        "instrument"
-      ]
-    },
-    "Instrument": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": [
-            "string",
-            "integer"
-          ],
-          "description": "instrument identifier"
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "instrument manufacturer"
-        },
-        "model": {
-          "type": "string",
-          "description": "instrument model"
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "instrument serial number"
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "ObservingCapability": {
-      "type": "object",
-      "properties": {
-        "time": {
-          "$ref": "#/properties/time"
-        },
-        "observedProperty": {
-          "type": "string",
-          "description": "observed property",
-          "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
-        },
-        "observingMethod": {
-          "type": "string",
-          "description": "observing method",
-          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
-        },
-        "operatingStatus": {
-          "type": "string",
-          "description": "operating status",
-          "$comment": "- https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
-        },
-        "sourceOfObservation": {
-          "type": "string",
-          "description": "Source of observation",
-          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
-        },
-        "deployments": {
-          "type": "array",
-          "description": "deployments",
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/Deployment"
-          }
-        }
-      },
-      "required": [
-        "observedProperty"
-      ]
-    }
-  }
+    "properties"
+  ]
 }

@@ -1,0 +1,15 @@
+---
+type: object
+description: Association between an entity and a reusable OGC contact.
+properties:
+  contact:
+    type: string
+    description: reference to a reusable contact identifier
+  roles:
+    type: array
+    minItems: 1
+    items:
+      type: string
+required:
+  - contact
+  - roles

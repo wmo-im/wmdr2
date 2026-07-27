@@ -1,0 +1,53 @@
+---
+type: object
+description: Reporting procedure metadata for an observation series. Reporting procedures are reusable/static and do not carry validity time.
+properties:
+  reportingSchedules:
+    type: array
+    description: references to facility-level schedules
+    items:
+      type: string
+  dataFormat:
+    type: array
+    items:
+      type: string
+  dataPolicy:
+    type: string
+  internationalExchange:
+    type:
+      - boolean
+      - 'null'
+  levelOfData:
+    type: string
+  numberOfObservationsInReportingInterval:
+    type:
+      - number
+      - integer
+      - string
+      - 'null'
+  referenceDatum:
+    type: string
+  referenceTimeSource:
+    type: array
+    items:
+      type: string
+  spatialReportingInterval:
+    type: string
+  strategy:
+    type: string
+  timeliness:
+    type:
+      - string
+      - 'null'
+  timeStampMeaning:
+    type: string
+  uom:
+    type: string
+  links:
+    type: array
+    items:
+      $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/link.yaml'
+  contactAssignments:
+    type: array
+    items:
+      $ref: 'contactAssignment.yaml'

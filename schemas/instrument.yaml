@@ -1,5 +1,6 @@
 ---
 type: object
+description: Reusable instrument catalogue entry. Serial numbers are not catalogue metadata; they belong to observingConfiguration.
 properties:
   id:
     type:
@@ -12,8 +13,9 @@ properties:
   model:
     type: string
     description: instrument model
-  serialNumber:
-    type: string
-    description: instrument serial number
+  observingMethods:
+    type: array
+    items:
+      type: string
 required:
   - id

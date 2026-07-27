@@ -1,0 +1,16 @@
+---
+type: object
+description: Time-bound observing procedure metadata for an observation series.
+properties:
+  time:
+    $ref: 'temporal.yaml#/timePeriod'
+  strategy:
+    type: string
+    $comment: https://codes.wmo.int/wmdr/ObservingStrategy
+  observingSchedules:
+    type: array
+    description: references to facility-level schedules
+    items:
+      type: string
+required:
+  - time
