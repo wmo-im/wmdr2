@@ -19,7 +19,9 @@
         "http://wigos.wmo.int/spec/wmdr/2/conf/core"
     ],
     "properties": {
-        "type": "observingFacility",
+        "observingFacilityType": {
+            "id": "landFixed"
+        },
         "title": "Thessaloniki",
         "created": "2024-12-11T00:00:00Z",
         "updated": "2024-12-11T00:00:00Z",
@@ -85,61 +87,84 @@
                 ]
             }
         ],
-        "observingFacilityType": "landFixed",
-        "wmoRegion": "europe",
-        "programAffiliations": [
-            {
-                "dates": [
-                        "1982-03-13",
-                        ".."
-                    ],
-                "programAffiliation": "GAWregional",
-                "observingFacilityId": "THE",
-                "reportingStatus": "operational"
-            },
-            {
-                "dates":[
-                        "2008-01-01",
-                        "2024-12-11"
-                    ],
-                "programAffiliation": "GALION",
-                "observingFacilityId": "THE",
-                "reportingStatus": "operational"
-            },
-            {
-                "dates": [
-                        "2003-06-01",
-                        "2024-12-11"
-                    ],
-                "programAffiliation": "AERONET",
-                "observingFacilityId": "Thessaloniki",
-                "reportingStatus": "operational"
-            }
-        ],
+        "wmoRegion": {
+            "id": "europe"
+        },
         "territories": [
             {
-                "dates": ["2011-02-16", ".."],
+                "dates": [
+                    "2011-02-16",
+                    ".."
+                ],
                 "territory": "GRC"
             }
         ],
-        "observingCapabilities": [
+        "observations": [
             {
-                "id": "observingCapability:123",
-                "observingMethod": "78",
-                "observedProperty": "12164",
-                "sourceOfObservation": "automaticReading",
-                "deployment": {
-                    "id": "deployment:456",
-                    "time": {
-                        "interval": [
+                "observedProperty": {
+                    "id": "12164"
+                },
+                "observingMethod": {
+                    "id": "78"
+                },
+                "sourceOfObservation": {
+                    "id": "automaticReading"
+                },
+                "programAffiliations": [
+                    {
+                        "dates": [
                             "1982-03-13",
                             ".."
-                        ]
+                        ],
+                        "programAffiliation": {
+                            "id": "GAWregional"
+                        },
+                        "observingFacilityId": "THE",
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
                     },
-                    "instrument": {
-                        "id": "instrument:789"
+                    {
+                        "dates": [
+                            "2008-01-01",
+                            "2024-12-11"
+                        ],
+                        "programAffiliation": {
+                            "id": "GALION"
+                        },
+                        "observingFacilityId": "THE",
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
+                    },
+                    {
+                        "dates": [
+                            "2003-06-01",
+                            "2024-12-11"
+                        ],
+                        "programAffiliation": {
+                            "id": "AERONET"
+                        },
+                        "observingFacilityId": "Thessaloniki",
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
                     }
-                }
+                ],
+                "configurations": [
+                    {
+                        "id": "deployment:456",
+                        "time": {
+                            "interval": [
+                                "1982-03-13",
+                                ".."
+                            ]
+                        },
+                        "instrument": {
+                            "id": "instrument:789"
+                        }
+                    }
+                ]
             }
         ]
     },
