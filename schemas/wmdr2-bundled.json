@@ -667,14 +667,6 @@
           "items": {
             "type": "object",
             "properties": {
-              "observingFacilityId": {
-                "type": "string",
-                "description": "Programme specific observing facility identifier"
-              },
-              "observingFacilityTitle": {
-                "type": "string",
-                "description": "Programme specific observing facility name"
-              },
               "programAffiliation": {
                 "$ref": "#/properties/properties/properties/wmoRegion",
                 "description": "Programme/network affiliation",

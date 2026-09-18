@@ -119,7 +119,6 @@
                         "programAffiliation": {
                             "id": "GAWregional"
                         },
-                        "observingFacilityId": "THE",
                         "reportingStatus": {
                             "id": "operational"
                         }
@@ -132,7 +131,6 @@
                         "programAffiliation": {
                             "id": "GALION"
                         },
-                        "observingFacilityId": "THE",
                         "reportingStatus": {
                             "id": "operational"
                         }
@@ -145,7 +143,6 @@
                         "programAffiliation": {
                             "id": "AERONET"
                         },
-                        "observingFacilityId": "Thessaloniki",
                         "reportingStatus": {
                             "id": "operational"
                         }
