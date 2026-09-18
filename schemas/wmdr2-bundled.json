@@ -111,6 +111,11 @@
     "properties": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "record type",
+          "const": "facility"
+        },
         "title": {
           "type": "string",
           "description": "observing facility name (primary)"
@@ -485,9 +490,10 @@
         }
       },
       "required": [
-        "contacts",
-        "created",
+        "type",
         "title",
+        "created",
+        "contacts",
         "observations"
       ]
     },
