@@ -41,7 +41,7 @@ properties:
           type: string
           description: additional WIGOS Station Identifiers (WSI)
           pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
-      observingFacilityType:
+      facilityType:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
         description: Observing facility type
         $comment: https://codes.wmo.int/wmdr/FacilityType

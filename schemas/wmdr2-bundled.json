@@ -136,7 +136,7 @@
             "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
           }
         },
-        "observingFacilityType": {
+        "facilityType": {
           "$ref": "#/properties/properties/properties/wmoRegion",
           "description": "Observing facility type",
           "$comment": "https://codes.wmo.int/wmdr/FacilityType"
@@ -566,11 +566,6 @@
         "geometry": {
           "$ref": "#/properties/geometry"
         },
-        "observedGeometry": {
-          "$ref": "#/properties/properties/properties/wmoRegion",
-          "description": "observed geometry",
-          "$comment": "- https://codes.wmo.int/wmdr/Geometry"
-        },
         "time": {
           "$ref": "#/properties/time"
         },
@@ -602,17 +597,25 @@
           "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
         },
         "verticalDistances": {
-          "type": "object",
-          "properties": {
-            "value": {
-              "type": "number",
-              "description": "Height above reference surface"
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Height above reference surface"
+              },
+              "unit": {
+                "$ref": "#/properties/properties/properties/wmoRegion",
+                "description": "Measurement unit",
+                "$comment": "https://codes.wmo.int/wmdr/unit"
+              }
             },
-            "unit": {
-              "$ref": "#/properties/properties/properties/wmoRegion",
-              "description": "Measurement unit",
-              "$comment": "https://codes.wmo.int/wmdr/unit"
-            }
+            "required": [
+              "value",
+              "unit"
+            ]
           }
         }
       },
@@ -647,6 +650,11 @@
     "Observations": {
       "type": "object",
       "properties": {
+        "observedGeometry": {
+          "$ref": "#/properties/properties/properties/wmoRegion",
+          "description": "observed geometry",
+          "$comment": "- https://codes.wmo.int/wmdr/Geometry"
+        },
         "observedProperty": {
           "$ref": "#/properties/properties/properties/wmoRegion",
           "description": "observed property",
@@ -680,13 +688,16 @@
               "dates": {
                 "$ref": "#/properties/properties/properties/territories/items/properties/dates"
               }
-            }
+            },
+            "required": [
+              "programAffiliation"
+            ]
           }
         },
         "configurations": {
           "type": "array",
           "description": "configurations",
-          "maxItems": 1,
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/Configurations"
           }

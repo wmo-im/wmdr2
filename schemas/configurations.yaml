@@ -8,11 +8,6 @@ properties:
     description: instrument identifier
   geometry:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
-  observedGeometry:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
-    description: observed geometry
-    $comment: |-
-      - https://codes.wmo.int/wmdr/Geometry
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
   observingMethod:
@@ -41,8 +36,11 @@ properties:
     description: Type of reference surface
     $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
   verticalDistances:
-    type: object
-    properties:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      properties:
         value:
           type: number
           description: Height above reference surface
@@ -50,6 +48,9 @@ properties:
           $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
           description: Measurement unit
           $comment: https://codes.wmo.int/wmdr/unit
+      required:
+        - value
+        - unit
 required:
   - id
   - time
