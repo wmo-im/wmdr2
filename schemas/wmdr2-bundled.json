@@ -437,13 +437,6 @@
           "description": "The most recent date on which the record was changed.",
           "format": "date-time"
         },
-        "keywords": {
-          "type": "array",
-          "description": "The topic or topics of the resource. Typically\nrepresented using free-form keywords, tags, key\nphrases, or classification codes.",
-          "items": {
-            "type": "string"
-          }
-        },
         "territories": {
           "type": "array",
           "description": "time series of territories",
