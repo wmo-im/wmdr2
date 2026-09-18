@@ -113,18 +113,18 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "facility name (primary)"
+          "description": "observing facility name (primary)"
         },
         "description": {
           "type": "string",
-          "description": "facility description"
+          "description": "observing facility description"
         },
         "additionalTitles": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "string",
-            "description": "additional facility names"
+            "description": "additional observing facility names"
           }
         },
         "additionalIds": {
@@ -136,7 +136,7 @@
             "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
           }
         },
-        "facilityType": {
+        "observingFacilityType": {
           "type": "string",
           "description": "Station/platform type",
           "$comment": "https://codes.wmo.int/wmdr/FacilityType"
@@ -417,54 +417,6 @@
             "type": "string"
           }
         },
-        "themes": {
-          "type": "array",
-          "description": "A knowledge organization system used to classify\nthe resource.",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "required": [
-              "concepts",
-              "scheme"
-            ],
-            "properties": {
-              "concepts": {
-                "type": "array",
-                "description": "One or more entity/concept identifiers from this knowledge\nsystem. it is recommended that a resolvable URI be used for\neach entity/concept identifier.",
-                "minItems": 1,
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "id"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "An identifier for the concept."
-                    },
-                    "title": {
-                      "type": "string",
-                      "description": "A human readable title for the concept."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "A human readable description for the concept."
-                    },
-                    "url": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "A URI providing further description of the concept."
-                    }
-                  }
-                }
-              },
-              "scheme": {
-                "type": "string",
-                "description": "An identifier for the knowledge organization system used\nto classify the resource.  It is recommended that the\nidentifier be a resolvable URI.  The list of schemes used\nin a searchable catalog can be determined by inspecting\nthe server's OpenAPI document or, if the server implements\nCQL2, by exposing a queryable (e.g. named `scheme`) and\nenumerating the list of schemes in the queryable's schema\ndefinition."
-              }
-            }
-          }
-        },
         "territories": {
           "type": "array",
           "description": "time series of territories",
@@ -508,23 +460,45 @@
           "items": {
             "type": "object",
             "properties": {
-              "facilityId": {
+              "observingFacilityId": {
                 "type": "string",
-                "description": "Programme specific facility identifier"
+                "description": "Programme specific observing facility identifier"
               },
-              "facilityTitle": {
+              "observingFacilityTitle": {
                 "type": "string",
-                "description": "Programme specific facility name"
+                "description": "Programme specific observing facility name"
               },
               "programAffiliation": {
-                "type": "string",
+                "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
                 "description": "Programme/network affiliation",
                 "$comment": "https://codes.wmo.int/wmdr/ProgramAffiliation"
               },
               "reportingStatus": {
-                "type": "string",
                 "description": "Station/Platform operating status",
-                "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
+                "$comment": "https://codes.wmo.int/wmdr/ReportingStatus",
+                "type": "object",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "An identifier for the concept."
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "A human readable title for the concept."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "A human readable description for the concept."
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "A URI providing further description of the concept."
+                  }
+                }
               },
               "dates": {
                 "$ref": "#/properties/properties/properties/territories/items/properties/dates"
@@ -532,12 +506,12 @@
             }
           }
         },
-        "observingCapabilities": {
+        "observations": {
           "type": "array",
-          "description": "observing configurations (placement / location of specific equipment)",
+          "description": "TODO : update observing configurations (placement / location of specific equipment)",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/ObservingCapability"
+            "$ref": "#/definitions/Observations"
           }
         }
       },
@@ -545,7 +519,7 @@
         "contacts",
         "created",
         "title",
-        "observingCapabilities"
+        "observations"
       ]
     },
     "links": {
@@ -610,7 +584,7 @@
     "links"
   ],
   "definitions": {
-    "Deployment": {
+    "Configurations": {
       "type": "object",
       "properties": {
         "id": {
@@ -623,11 +597,28 @@
         "geometry": {
           "$ref": "#/properties/geometry"
         },
+        "observedGeometry": {
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+          "description": "observed geometry",
+          "$comment": "- https://codes.wmo.int/wmdr/Geometry"
+        },
         "time": {
           "$ref": "#/properties/time"
         },
-        "keywords": {
-          "$ref": "#/properties/properties/properties/keywords"
+        "observingMethod": {
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+          "description": "observing method",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
+        },
+        "operatingStatus": {
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+          "description": "operating status",
+          "$comment": "- https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
+        },
+        "sourceOfObservation": {
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+          "description": "Source of observation",
+          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
         },
         "instrument": {
           "oneOf": [
@@ -650,32 +641,33 @@
             }
           ]
         },
-        "referenceSurfaces": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "referenceSurface": {
-                "type": "string",
-                "description": "Type of reference surface",
-                "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
-              },
-              "verticalDistance": {
-                "type": "number",
-                "description": "Height above reference surface"
-              }
+        "instrumentSerialNumber": {
+          "type": "string",
+          "description": "instrument serial number"
+        },
+        "referenceSurface": {
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+          "description": "Type of reference surface",
+          "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
+        },
+        "verticalDistances": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Height above reference surface"
             },
-            "required": [
-              "referenceSurface",
-              "verticalDistance"
-            ]
+            "unit": {
+              "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
+              "description": "Measurement unit",
+              "$comment": "https://codes.wmo.int/wmdr/unit"
+            }
           }
         }
       },
       "required": [
         "id",
-        "instrument"
+        "time"
       ]
     },
     "Instrument": {
@@ -695,48 +687,26 @@
         "model": {
           "type": "string",
           "description": "instrument model"
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "instrument serial number"
         }
       },
       "required": [
         "id"
       ]
     },
-    "ObservingCapability": {
+    "Observations": {
       "type": "object",
       "properties": {
-        "time": {
-          "$ref": "#/properties/time"
-        },
         "observedProperty": {
-          "type": "string",
+          "$ref": "#/properties/properties/properties/programAffiliations/items/properties/reportingStatus",
           "description": "observed property",
           "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
         },
-        "observingMethod": {
-          "type": "string",
-          "description": "observing method",
-          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
-        },
-        "operatingStatus": {
-          "type": "string",
-          "description": "operating status",
-          "$comment": "- https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
-        },
-        "sourceOfObservation": {
-          "type": "string",
-          "description": "Source of observation",
-          "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
-        },
-        "deployments": {
+        "configurations": {
           "type": "array",
-          "description": "deployments",
+          "description": "configurations",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Deployment"
+            "$ref": "#/definitions/Configurations"
           }
         }
       },

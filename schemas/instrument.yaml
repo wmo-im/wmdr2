@@ -12,8 +12,5 @@ properties:
   model:
     type: string
     description: instrument model
-  serialNumber:
-    type: string
-    description: instrument serial number
 required:
   - id

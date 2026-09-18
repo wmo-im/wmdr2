@@ -19,7 +19,7 @@
         "http://wigos.wmo.int/spec/wmdr/2/conf/core"
     ],
     "properties": {
-        "type": "facility",
+        "type": "observingFacility",
         "title": "Thessaloniki",
         "created": "2024-12-11T00:00:00Z",
         "updated": "2024-12-11T00:00:00Z",
@@ -85,7 +85,7 @@
                 ]
             }
         ],
-        "facilityType": "landFixed",
+        "observingFacilityType": "landFixed",
         "wmoRegion": "europe",
         "programAffiliations": [
             {
@@ -94,7 +94,7 @@
                         ".."
                     ],
                 "programAffiliation": "GAWregional",
-                "facilityId": "THE",
+                "observingFacilityId": "THE",
                 "reportingStatus": "operational"
             },
             {
@@ -103,7 +103,7 @@
                         "2024-12-11"
                     ],
                 "programAffiliation": "GALION",
-                "facilityId": "THE",
+                "observingFacilityId": "THE",
                 "reportingStatus": "operational"
             },
             {
@@ -112,7 +112,7 @@
                         "2024-12-11"
                     ],
                 "programAffiliation": "AERONET",
-                "facilityId": "Thessaloniki",
+                "observingFacilityId": "Thessaloniki",
                 "reportingStatus": "operational"
             }
         ],
