@@ -10,6 +10,30 @@ properties:
       - https://codes.wmo.int/wmdr/ObservedVariableOcean
       - https://codes.wmo.int/wmdr/ObservedVariableOuterSpace
       - https://codes.wmo.int/wmdr/ObservedVariableTerrestrial
+  programAffiliations:
+    type: array
+    description: program affiliations
+    minItems: 1
+    items:
+      type: object
+      properties:
+        observingFacilityId:
+          type: string
+          description: Programme specific observing facility identifier
+        observingFacilityTitle:
+          type: string
+          description: Programme specific observing facility name
+        programAffiliation:
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          description: Programme/network affiliation
+          $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
+        reportingStatus:
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          description: Station/Platform operating status
+          $comment: https://codes.wmo.int/wmdr/ReportingStatus
+        dates:
+              $ref: 'temporal.yaml#/dates'
+  instrument:
   configurations:
     type: array
     description: configurations
@@ -18,3 +42,4 @@ properties:
       $ref: 'configurations.yaml'
 required:
   - observedProperty
+  - programAffiliation

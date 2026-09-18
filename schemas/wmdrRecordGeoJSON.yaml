@@ -42,11 +42,11 @@ properties:
           description: additional WIGOS Station Identifiers (WSI)
           pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
       observingFacilityType:
-        type: string
-        description: Station/platform type
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+        description: Observing facility type
         $comment: https://codes.wmo.int/wmdr/FacilityType
       wmoRegion:
-        type: string
+        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
         description: WMO Region
         $comment: https://codes.wmo.int/wmdr/WMORegion
       contacts:
@@ -74,36 +74,13 @@ properties:
           type: object
           properties:
             territory:
-              type: string
+              $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
               description: Territory of origin of data
               $comment: https://codes.wmo.int/wmdr/TerritoryName
             dates:
               $ref: 'temporal.yaml#/dates'
           required:
             - territory
-      programAffiliations:
-        type: array
-        description: program affiliations
-        minItems: 1
-        items:
-          type: object
-          properties:
-            observingFacilityId:
-              type: string
-              description: Programme specific observing facility identifier
-            observingFacilityTitle:
-              type: string
-              description: Programme specific observing facility name
-            programAffiliation:
-              $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
-              description: Programme/network affiliation
-              $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
-            reportingStatus:
-              $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
-              description: Station/Platform operating status
-              $comment: https://codes.wmo.int/wmdr/ReportingStatus
-            dates:
-              $ref: 'temporal.yaml#/dates'
       observations:
           type: array
           description: "TODO : update observing configurations (placement / location of specific equipment)"
@@ -115,7 +92,6 @@ properties:
       - created
       - title
       - observations
-
   links:
     type: array
     minItems: 1
