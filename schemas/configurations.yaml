@@ -32,16 +32,7 @@ properties:
     description: Source of observation
     $comment: https://codes.wmo.int/wmdr/SourceOfObservation
   instrument:
-    oneOf:
-      - type: object
-        properties:
-          id:
-            type:
-              - string
-              - integer
-        required:
-          - id
-      - $ref: 'instrument.yaml'
+    $ref: 'instrument.yaml'
   instrumentSerialNumber:
     type: string
     description: instrument serial number

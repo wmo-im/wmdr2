@@ -96,7 +96,7 @@
                     "2011-02-16",
                     ".."
                 ],
-                "territory": "GRC"
+                "territory": {"id": "GRC"}
             }
         ],
         "observations": [
@@ -153,7 +153,7 @@
                 ],
                 "configurations": [
                     {
-                        "id": "deployment:456",
+                        "id": "configuration-456",
                         "time": {
                             "interval": [
                                 "1982-03-13",
@@ -161,7 +161,7 @@
                             ]
                         },
                         "instrument": {
-                            "id": "instrument:789"
+                            "id": "instrument-789"
                         }
                     }
                 ]

@@ -590,25 +590,7 @@
           "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
         },
         "instrument": {
-          "oneOf": [
-            {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": [
-                    "string",
-                    "integer"
-                  ]
-                }
-              },
-              "required": [
-                "id"
-              ]
-            },
-            {
-              "$ref": "#/definitions/Instrument"
-            }
-          ]
+          "$ref": "#/definitions/Instrument"
         },
         "instrumentSerialNumber": {
           "type": "string",
@@ -701,7 +683,6 @@
             }
           }
         },
-        "instrument": null,
         "configurations": {
           "type": "array",
           "description": "configurations",
@@ -713,7 +694,8 @@
       },
       "required": [
         "observedProperty",
-        "programAffiliation"
+        "programAffiliations",
+        "configurations"
       ]
     }
   }

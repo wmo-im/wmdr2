@@ -33,7 +33,6 @@ properties:
           $comment: https://codes.wmo.int/wmdr/ReportingStatus
         dates:
               $ref: 'temporal.yaml#/dates'
-  instrument:
   configurations:
     type: array
     description: configurations
@@ -42,4 +41,5 @@ properties:
       $ref: 'configurations.yaml'
 required:
   - observedProperty
-  - programAffiliation
+  - programAffiliations
+  - configurations
