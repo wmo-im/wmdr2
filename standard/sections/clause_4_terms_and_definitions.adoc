@@ -36,8 +36,8 @@ The following additional terms and definitions also apply.
 |GISC
 |Global Information System Centre
 
-|GSC
-|Global Station Catalogue
+|GOFC
+|Global Observing Facility Catalogue
 
 |HTML
 |Hypertext Markup Language

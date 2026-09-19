@@ -8,14 +8,14 @@ TODO
 
 TODO
 
-==== Station metadata design considerations
+==== Observing facility metadata design considerations
 
-The following describes envisioned workflows of WMDR in the context of station metadata publication and search.
+The following describes envisioned workflows of WMDR in the context of observing facility metadata publication and search.
 
-* Flexible metadata publishing mechanisms so providers can publish station metadata in the easiest and most efficient way possible.
-* Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing station metadata as JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.
+* Flexible metadata publishing mechanisms so providers can publish observing facility metadata in the easiest and most efficient way possible.
+* Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing observing facility metadata as JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.
 * The browser as the catalogue. Browsers utilize mass market search engines as the gateway to low barrier
-discovery.  This pattern may work by way of the WIGOS Global Station Catalogue, with the idea that search engines can index from the authoritative source.
+discovery.  This pattern may work by way of the WIGOS Global Observing Facility Catalogue, with the idea that search engines can index from the authoritative source.
 
 ==== Granularity
 
@@ -35,20 +35,20 @@ The OGC Records - API - Part 1: Core specification:
 * provides a subset of core queryables (e.g. by resource type, by external identifier) which enables
   federation and cross catalogue discovery functionality
 
-=== The WIGOS Global Station Catalogue (GSC)
+=== The WIGOS Global Observing Facility Catalogue (GOFC)
 
-The GSC will provide a central search endpoint, enabling users to traverse, browse and search
-station metadata holdings in OSCAR.  Key search predicate capabilities include:
+The GOFC will provide a central search endpoint, enabling users to traverse, browse and search
+observing facility metadata holdings in OSCAR.  Key search predicate capabilities include:
 
 * geospatial (`+bbox=+`)
 * temporal (time instant or time period) (`+datetime=+`)
 * equality predicates (i.e. `+property=value+`) for any defined discovery metadata property
 * full-text (`+q=+`)
 
-Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Station Catalogue, WMDR provides a standards-based, clear and well-defined information model to facilitate the management and discovery of data within WIGOS.
+Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Observing Facility Catalogue, WMDR provides a standards-based, clear and well-defined information model to facilitate the management and discovery of data within WIGOS.
 
 === Mass market considerations
 
 Given WIS2 principle 10 (publishing metadata in a way that commercial search engines can index),
-WMDR station metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
+WMDR observing facility metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
 structured data discovery, search, and relevant results.
