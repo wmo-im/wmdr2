@@ -1,0 +1,46 @@
+---
+type: object
+properties:
+  observedGeometry:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    description: observed geometry
+    $comment: |-
+      - https://codes.wmo.int/wmdr/Geometry
+  observedProperty:
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    description: observed property
+    $comment: |-
+      - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
+      - https://codes.wmo.int/wmdr/ObservedVariableEarth
+      - https://codes.wmo.int/wmdr/ObservedVariableOcean
+      - https://codes.wmo.int/wmdr/ObservedVariableOuterSpace
+      - https://codes.wmo.int/wmdr/ObservedVariableTerrestrial
+  programAffiliations:
+    type: array
+    description: program affiliations
+    minItems: 1
+    items:
+      type: object
+      properties:
+        programAffiliation:
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          description: Programme/network affiliation
+          $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
+        reportingStatus:
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          description: Station/Platform operating status
+          $comment: https://codes.wmo.int/wmdr/ReportingStatus
+        dates:
+              $ref: 'temporal.yaml#/dates'
+      required:
+        - programAffiliation
+  configurations:
+    type: array
+    description: configurations
+    minItems: 1
+    items:
+      $ref: 'configurations.yaml'
+required:
+  - observedProperty
+  - programAffiliations
+  - configurations

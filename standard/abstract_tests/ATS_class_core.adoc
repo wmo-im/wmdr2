@@ -3,7 +3,7 @@
 [%metadata]
 label:: http://wigos.wmo.int/spec/wmdr/2/conf/core
 subject:: Requirements Class "core"
-classification:: Target Type:Station Metadata
+classification:: Target Type:Observing facility metadata
 ====
 
 ==== Validation

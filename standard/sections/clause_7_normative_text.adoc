@@ -31,6 +31,10 @@ The table below provides an overview of the set of properties that may be includ
 |**Required**
 |Geospatial location associated with the dataset, in a geographic coordinate reference system (see TODO)
 
+|``properties.type``
+|**Required**
+|Record type (fixed to ``facility``)
+
 |``properties.externalIds``
 |Optional
 |Persistent identifiers or handles for the dataset (see TODO)
@@ -93,7 +97,7 @@ include::../requirements/core/REQ_conformance.adoc[]
 
 ==== Geospatial extent
 
-The `+geometry+` property is the location of the station/platform in the geographic coordinate system. , and provides a useful indicator of the location of the station/platform to facilitate search and map displays in the GSC.
+The `+geometry+` property is the location of the station/platform in the geographic coordinate system. , and provides a useful indicator of the location of the station/platform to facilitate search and map displays in the GOFC.
 
 .Examples:
 
