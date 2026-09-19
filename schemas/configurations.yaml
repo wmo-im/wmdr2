@@ -5,7 +5,7 @@ properties:
     type:
       - string
       - integer
-    description: instrument identifier
+    description: configuration identifier
   geometry:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:

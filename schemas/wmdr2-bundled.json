@@ -561,7 +561,7 @@
             "string",
             "integer"
           ],
-          "description": "instrument identifier"
+          "description": "configuration identifier"
         },
         "geometry": {
           "$ref": "#/properties/geometry"
