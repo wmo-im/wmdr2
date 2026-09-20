@@ -18,7 +18,6 @@ properties:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
-
   properties:
     type: object
     properties:
@@ -32,27 +31,6 @@ properties:
       description:
         type: string
         description: observing facility description
-      additionalTitles:
-        type: array
-        minItems: 1
-        items:
-          type: string
-          description: additional observing facility names
-      additionalIds:
-        type: array
-        minItems: 1
-        items:
-          type: string
-          description: additional WIGOS Station Identifiers (WSI)
-          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
-      facilityType:
-        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
-        description: Observing facility type
-        $comment: https://codes.wmo.int/wmdr/FacilityType
-      wmoRegion:
-        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
-        description: WMO Region
-        $comment: https://codes.wmo.int/wmdr/WMORegion
       contacts:
         type: array
         minItems: 1
@@ -68,6 +46,29 @@ properties:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/created'
       updated:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/updated'
+      additionalIds:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional WIGOS Station Identifiers (WSI)
+          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+      additionalTitles:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional observing facility names
+      facilityType:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: Observing facility type
+        $comment: https://codes.wmo.int/wmdr/FacilityType
+      wmoRegion:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: WMO Region
+        $comment: https://codes.wmo.int/wmdr/WMORegion
       territories:
         type: array
         description: time series of territories
@@ -76,7 +77,8 @@ properties:
           type: object
           properties:
             territory:
-              $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+              allOf:
+                - $ref: 'definitions.yaml#/concept_or_null'
               description: Territory of origin of data
               $comment: https://codes.wmo.int/wmdr/TerritoryName
             dates:

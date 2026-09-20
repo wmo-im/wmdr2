@@ -2,12 +2,14 @@
 type: object
 properties:
   observedGeometry:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: observed geometry
     $comment: |-
       - https://codes.wmo.int/wmdr/Geometry
   observedProperty:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: observed property
     $comment: |-
       - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
@@ -23,11 +25,13 @@ properties:
       type: object
       properties:
         programAffiliation:
-          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          allOf:
+            - $ref: 'definitions.yaml#/concept_or_null'
           description: Programme/network affiliation
           $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
         reportingStatus:
-          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          allOf:
+            - $ref: 'definitions.yaml#/concept_or_null'
           description: Station/Platform operating status
           $comment: https://codes.wmo.int/wmdr/ReportingStatus
         dates:

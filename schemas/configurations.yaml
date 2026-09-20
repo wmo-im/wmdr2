@@ -11,19 +11,22 @@ properties:
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
   observingMethod:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: observing method
     $comment: |-
       - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
       - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
       - https://codes.wmo.int/wmdr/ObservingMethodEarth
   operatingStatus:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: operating status
     $comment: |-
       - https://codes.wmo.int/wmdr/InstrumentOperatingStatus
   sourceOfObservation:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: Source of observation
     $comment: https://codes.wmo.int/wmdr/SourceOfObservation
   instrument:
@@ -32,7 +35,8 @@ properties:
     type: string
     description: instrument serial number
   referenceSurface:
-    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
     description: Type of reference surface
     $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
   verticalDistances:
@@ -45,7 +49,8 @@ properties:
           type: number
           description: Height above reference surface
         unit:
-          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
+          allOf:
+            - $ref: 'definitions.yaml#/concept_or_null'
           description: Measurement unit
           $comment: https://codes.wmo.int/wmdr/unit
       required:
