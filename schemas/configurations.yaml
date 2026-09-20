@@ -17,7 +17,7 @@ properties:
     $comment: |-
       - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
       - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
-      - https://codes.wmo.int/wmdr/ObservingMethodEarth
+      - https://codes.wmo.int/wmdr/ObservingMethodOcean
   operatingStatus:
     allOf:
       - $ref: 'definitions.yaml#/concept_or_null'
