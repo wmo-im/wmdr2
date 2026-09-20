@@ -29,7 +29,3 @@ include::./core/ATS_test_contacts.adoc[]
 ==== Record Creation Date
 
 include::./core/ATS_test_record_creation_date.adoc[]
-
-==== WMO Data Policy
-
-include::./core/ATS_test_data_policy.adoc[]
