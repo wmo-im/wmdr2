@@ -87,7 +87,7 @@ properties:
             - territory
       observations:
           type: array
-          description: "TODO : update observing configurations (placement / location of specific equipment)"
+          description: "observations made at the facility, including the observed geometry and observed property"
           minItems: 1
           items:
               $ref: 'observations.yaml'

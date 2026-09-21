@@ -105,12 +105,6 @@
                 "observedProperty": {
                     "id": "12164"
                 },
-                "observingMethod": {
-                    "id": "78"
-                },
-                "sourceOfObservation": {
-                    "id": "automaticReading"
-                },
                 "programAffiliations": [
                     {
                         "dates": [
@@ -157,6 +151,12 @@
                                 "1982-03-13",
                                 ".."
                             ]
+                        },
+                        "observingMethod": {
+                            "id": "78"
+                        },
+                        "sourceOfObservation": {
+                            "id": "automaticReading"
                         },
                         "instrument": {
                             "id": "instrument-789"
