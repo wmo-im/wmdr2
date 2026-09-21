@@ -4,8 +4,7 @@ properties:
   observedGeometry:
     $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
     description: observed geometry
-    $comment: |-
-      - https://codes.wmo.int/wmdr/Geometry
+    $comment: https://codes.wmo.int/wmdr/Geometry
   observedProperty:
     $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
     description: observed property
