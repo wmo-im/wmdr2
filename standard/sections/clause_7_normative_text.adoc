@@ -364,6 +364,14 @@ TODO
 
 TODO
 
+==== Properties / Observations / Configurations
+
+TODO
+
+==== Properties / Observations / Configurations / Instrument
+
+TODO
+
 ==== Links and distribution information 
 
 TODO
