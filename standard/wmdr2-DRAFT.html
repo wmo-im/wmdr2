@@ -96,7 +96,7 @@ body {
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-07-07</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-09-21</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.99.dev0</p></td>
@@ -157,13 +157,13 @@ body {
 <li><a href="#_overview">6.1. Overview</a>
 <ul class="sectlevel3">
 <li><a href="#_wigos">6.1.1. WIGOS</a></li>
-<li><a href="#_station_metadata_design_considerations">6.1.2. Station metadata design considerations</a></li>
+<li><a href="#_observing_facility_metadata_design_considerations">6.1.2. Observing facility metadata design considerations</a></li>
 <li><a href="#_granularity">6.1.3. Granularity</a></li>
 </ul>
 </li>
 <li><a href="#_user_stories">6.2. User stories</a></li>
 <li><a href="#_ogc_api_records_part_1_core">6.3. OGC API - Records - Part 1: Core</a></li>
-<li><a href="#_the_wigos_global_station_catalogue_gsc">6.4. The WIGOS Global Station Catalogue (GSC)</a></li>
+<li><a href="#_the_wigos_global_observing_facility_catalogue_gofc">6.4. The WIGOS Global Observing Facility Catalogue (GOFC)</a></li>
 <li><a href="#_mass_market_considerations">6.5. Mass market considerations</a></li>
 </ul>
 </li>
@@ -177,16 +177,26 @@ body {
 <li><a href="#_identifier">7.1.4. Identifier</a></li>
 <li><a href="#_conformance_2">7.1.5. Conformance</a></li>
 <li><a href="#_geospatial_extent">7.1.6. Geospatial extent</a></li>
-<li><a href="#_properties_contacts">7.1.7. Properties / Contacts</a></li>
-<li><a href="#_properties_persistent_identifiers">7.1.8. Properties / Persistent identifiers</a></li>
-<li><a href="#_properties_record_creation_date">7.1.9. Properties / Record creation date</a></li>
-<li><a href="#_properties_record_update_date">7.1.10. Properties / Record update date</a></li>
-<li><a href="#_properties_wmo_data_policy">7.1.11. Properties / WMO data policy</a></li>
-<li><a href="#_links_and_distribution_information">7.1.12. Links and distribution information</a></li>
-<li><a href="#_additional_properties">7.1.13. Additional properties</a></li>
+<li><a href="#_properties_type">7.1.7. Properties / Type</a></li>
+<li><a href="#_properties_title">7.1.8. Properties / Title</a></li>
+<li><a href="#_properties_description">7.1.9. Properties / Description</a></li>
+<li><a href="#_properties_contacts">7.1.10. Properties / Contacts</a></li>
+<li><a href="#_properties_persistent_identifiers">7.1.11. Properties / Persistent identifiers</a></li>
+<li><a href="#_properties_record_creation_date">7.1.12. Properties / Record creation date</a></li>
+<li><a href="#_properties_record_update_date">7.1.13. Properties / Record update date</a></li>
+<li><a href="#_properties_additional_identifiers">7.1.14. Properties / Additional identifiers</a></li>
+<li><a href="#_properties_additional_titles">7.1.15. Properties / Additional titles</a></li>
+<li><a href="#_properties_facility_type">7.1.16. Properties / Facility type</a></li>
+<li><a href="#_properties_wmo_region">7.1.17. Properties / WMO region</a></li>
+<li><a href="#_properties_territories">7.1.18. Properties / Territories</a></li>
+<li><a href="#_properties_observations">7.1.19. Properties / Observations</a></li>
+<li><a href="#_properties_observations_configurations">7.1.20. Properties / Observations / Configurations</a></li>
+<li><a href="#_properties_observations_configurations_instrument">7.1.21. Properties / Observations / Configurations / Instrument</a></li>
+<li><a href="#_links_and_distribution_information">7.1.22. Links and distribution information</a></li>
+<li><a href="#_additional_properties">7.1.23. Additional properties</a></li>
 </ul>
 </li>
-<li><a href="#_wmo_core_metadata_profile_resources">7.2. WMO Core Metadata Profile resources</a>
+<li><a href="#_wigos_metadata_representation_resources">7.2. WIGOS Metadata Representation resources</a>
 <ul class="sectlevel3">
 <li><a href="#_wmo_codes_registry">7.2.1. WMO Codes Registry</a></li>
 <li><a href="#_wmo_schemas_server">7.2.2. WMO schemas server</a></li>
@@ -209,7 +219,6 @@ body {
 <li><a href="#_geospatial_extent_2">A.1.4. Geospatial Extent</a></li>
 <li><a href="#_contacts">A.1.5. Contacts</a></li>
 <li><a href="#_record_creation_date">A.1.6. Record Creation Date</a></li>
-<li><a href="#_wmo_data_policy">A.1.7. WMO Data Policy</a></li>
 </ul>
 </li>
 </ul>
@@ -259,7 +268,7 @@ body {
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
-<p>wmo, wigos, station, instrument, weather, climate, water, metadata, search</p>
+<p>wmo, wigos, station, observing facility, observations, instrument, weather, climate, water, metadata, search</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iii.    Security Considerations</strong></p>
@@ -277,19 +286,19 @@ body {
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document defines the content, structure, and encoding of discovery metadata published
-as part of the WIGOS Global Station Catalogue (GSC).</p>
+as part of the WIGOS Global Observing Facility Catalogue (GOFC).</p>
 </div>
 <div class="paragraph">
 <p>The WIGOS Metadata Representation (WMDR) standard defined herein is an extension of the International Standard <em>OGC API - Records - Part 1: Core</em>.</p>
 </div>
 <div class="paragraph">
-<p>WMDR station metadata records shall be encoded as GeoJSON as defined in <em>OGC API - Records - Part 1: Core</em>.</p>
+<p>WMDR observing facility metadata records shall be encoded as GeoJSON as defined in <em>OGC API - Records - Part 1: Core</em>.</p>
 </div>
 <div class="paragraph">
 <p>The primary purpose of WMDR is to describe <strong>stations</strong>, or observing facilities.  Services and APIs operating on resources are represented as part of discovery metadata via links to WIS2 discovery metadata (WCMP2).</p>
 </div>
 <div class="paragraph">
-<p>WMDR station metadata record provides descriptions at the granularity level of a station, or observing facilty.  Dataset discovery metadata are supported by the <em>Manual on the WMO Information System, Volume II - WMO Information System 2.0</em> <sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>.</p>
+<p>WMDR observing facility metadata record provides descriptions at the granularity level of a station, or observing facilty.  Dataset discovery metadata are supported by the <em>Manual on the WMO Information System, Volume II - WMO Information System 2.0</em> <sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup>.</p>
 </div>
 <div class="paragraph">
 <p>This specification defines the conformance requirements for the WIGOS Metadata Representation.  Annex A defines the abstract test suite. Annex B provides normative information on schemas.  Annex C provides informative examples.  Annex D provides informative codelists.</p>
@@ -306,10 +315,10 @@ as part of the WIGOS Global Station Catalogue (GSC).</p>
 <p><em>OGC API - Records</em> (OARec) provides a record metadata model in support of resource discovery.  This standard is an extension of <em>OGC API - Records - Part 1: Core</em>.  Conformance to this standard requires demonstrated conformance to the applicable Conformance Classes of <em>OGC API - Records - Part 1: Core</em>.</p>
 </div>
 <div class="paragraph">
-<p>Authors of station metadata records published within the WIGOS Global Station Catalogue (GSC) are required to comply with the WIGOS Metadata Representation (WMDR).  WMDR station metadata shall therefore be compliant with OGC API - Records - Part 1: Core: Requirements Class: Record Core.</p>
+<p>Authors of observing facility metadata records published within the WIGOS Global Observing Facility Catalogue (GOFC) are required to comply with the WIGOS Metadata Representation (WMDR).  WMDR observing facility metadata shall therefore be compliant with OGC API - Records - Part 1: Core: Requirements Class: Record Core.</p>
 </div>
 <div class="paragraph">
-<p>WMO shall publish guidance material to assist authors of WMDR station metadata for maintaining
+<p>WMO shall publish guidance material to assist authors of WMDR observing facility metadata for maintaining
 consistency across multiple metadata records and perform quality assessment and reporting.</p>
 </div>
 <div class="paragraph">
@@ -435,8 +444,8 @@ The requirements are specified in Chapter 7 and in Annex A in more detail.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Information System Centre</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GSC</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Station Catalogue</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GOFC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Global Observing Facility Catalogue</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HTML</p></td>
@@ -638,21 +647,21 @@ The requirements are specified in Chapter 7 and in Annex A in more detail.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_station_metadata_design_considerations"><a class="anchor" href="#_station_metadata_design_considerations"></a>6.1.2. Station metadata design considerations</h4>
+<h4 id="_observing_facility_metadata_design_considerations"><a class="anchor" href="#_observing_facility_metadata_design_considerations"></a>6.1.2. Observing facility metadata design considerations</h4>
 <div class="paragraph">
-<p>The following describes envisioned workflows of WMDR in the context of station metadata publication and search.</p>
+<p>The following describes envisioned workflows of WMDR in the context of observing facility metadata publication and search.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Flexible metadata publishing mechanisms so providers can publish station metadata in the easiest and most efficient way possible.</p>
+<p>Flexible metadata publishing mechanisms so providers can publish observing facility metadata in the easiest and most efficient way possible.</p>
 </li>
 <li>
-<p>Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing station metadata as JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.</p>
+<p>Basic, HTTP crawlable metadata files (filesystem, object storage). For example, publishing observing facility metadata as JSON files to an S3 bucket, and then making that bucket available for harvesting and traversal to search engines and metadata harvesters.</p>
 </li>
 <li>
 <p>The browser as the catalogue. Browsers utilize mass market search engines as the gateway to low barrier
-discovery.  This pattern may work by way of the WIGOS Global Station Catalogue, with the idea that search engines can index from the authoritative source.</p>
+discovery.  This pattern may work by way of the WIGOS Global Observing Facility Catalogue, with the idea that search engines can index from the authoritative source.</p>
 </li>
 </ul>
 </div>
@@ -694,10 +703,10 @@ federation and cross catalogue discovery functionality</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_wigos_global_station_catalogue_gsc"><a class="anchor" href="#_the_wigos_global_station_catalogue_gsc"></a>6.4. The WIGOS Global Station Catalogue (GSC)</h3>
+<h3 id="_the_wigos_global_observing_facility_catalogue_gofc"><a class="anchor" href="#_the_wigos_global_observing_facility_catalogue_gofc"></a>6.4. The WIGOS Global Observing Facility Catalogue (GOFC)</h3>
 <div class="paragraph">
-<p>The GSC will provide a central search endpoint, enabling users to traverse, browse and search
-station metadata holdings in OSCAR.  Key search predicate capabilities include:</p>
+<p>The GOFC will provide a central search endpoint, enabling users to traverse, browse and search
+observing facility metadata holdings in OSCAR.  Key search predicate capabilities include:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -716,14 +725,14 @@ station metadata holdings in OSCAR.  Key search predicate capabilities include:<
 </ul>
 </div>
 <div class="paragraph">
-<p>Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Station Catalogue, WMDR provides a standards-based, clear and well-defined information model to facilitate the management and discovery of data within WIGOS.</p>
+<p>Given the WIS2 principles, use cases, OGC API - Records - Part 1: Core, and the WIGOS Global Observing Facility Catalogue, WMDR provides a standards-based, clear and well-defined information model to facilitate the management and discovery of data within WIGOS.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_mass_market_considerations"><a class="anchor" href="#_mass_market_considerations"></a>6.5. Mass market considerations</h3>
 <div class="paragraph">
 <p>Given WIS2 principle 10 (publishing metadata in a way that commercial search engines can index),
-WMDR station metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
+WMDR observing facility metadata enables annotations that can facilitate Search Engine Optimization (SEO) and
 structured data discovery, search, and relevant results.</p>
 </div>
 </div>
@@ -749,7 +758,7 @@ structured data discovery, search, and relevant results.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Station metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Observing facility metadata</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
@@ -812,6 +821,11 @@ structured data discovery, search, and relevant results.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>geometry</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Geospatial location associated with the dataset, in a geographic coordinate reference system (see TODO)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.type</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Required</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Record type (fixed to <code>facility</code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>properties.externalIds</code></p></td>
@@ -904,7 +918,7 @@ structured data discovery, search, and relevant results.</p>
 <h4 id="_identifier"><a class="anchor" href="#_identifier"></a>7.1.4. Identifier</h4>
 <div class="paragraph">
 <p>The <code>id</code> property is a unique identifier
-of the dataset.  A record identifier is essential for querying and identifying records within the Global Discovery Catalogue (GDC).</p>
+of the dataset.  A record identifier is essential for querying and identifying records within the Global Observing Facility Catalogue (GOFC).</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -983,7 +997,7 @@ detection and handling of content.</p>
 <div class="sect3">
 <h4 id="_geospatial_extent"><a class="anchor" href="#_geospatial_extent"></a>7.1.6. Geospatial extent</h4>
 <div class="paragraph">
-<p>The <code>geometry</code> property is the location of the station/platform in the geographic coordinate system. , and provides a useful indicator of the location of the station/platform to facilitate search and map displays in the GSC.</p>
+<p>The <code>geometry</code> property is the location of the station/platform in the geographic coordinate system. , and provides a useful indicator of the location of the station/platform to facilitate search and map displays in the GOFC.</p>
 </div>
 <div class="listingblock">
 <div class="title">Examples:</div>
@@ -1105,9 +1119,131 @@ detection and handling of content.</p>
 </tr>
 </tbody>
 </table>
+<div class="sect4">
+<h5 id="_temporal_extent"><a class="anchor" href="#_temporal_extent"></a>7.1.6.1. Temporal extent</h5>
+<div class="paragraph">
+<p>The <code>time</code> property describes the aggregate extent of the facility.</p>
+</div>
+<div class="paragraph">
+<p>Temporal extents provide a useful indicator of the date and time period of the facility and facilitate temporal searching in the GOFC.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": {
+  "date": "2021-10-30"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": {
+  "timestamp": "2021-10-30T11:11:11Z"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": {
+  "interval" : ["2020-10-30", "2021-10-30"],
+  "resolution": "P1D"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": {
+  "interval" : ["T00Z", "T23Z"],
+  "resolution": "PT1H"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": {
+  "interval": ["2018-04-22", ".."],
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"time": null</code></pre>
+</div>
+</div>
+<table id="req_core_extent_temporal" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/req/core/extent_temporal</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>A WMDR record SHALL provide one <code>time</code> property using the Gregorian calendar.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The <code>time</code> property SHALL provide either one <code>date</code>, <code>timestamp</code>, <code>interval</code>, or the value of <code>null</code> when a conformant time cannot be derived.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>All non-null <code>time</code> values SHALL be valid ISO8601 representations or <code>..</code> for an open-ended extent.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table id="rec_core_extent_temporal" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 4</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/core/extent_temporal</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>For datasets with known or discrete intervals, a WMDR record SHOULD provide the temporal resolution (<code>time.resolution</code>) as a valid ISO 8601 duration (for example, <code>P1D</code>).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_properties_contacts"><a class="anchor" href="#_properties_contacts"></a>7.1.7. Properties / Contacts</h4>
+<h4 id="_properties_type"><a class="anchor" href="#_properties_type"></a>7.1.7. Properties / Type</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_title"><a class="anchor" href="#_properties_title"></a>7.1.8. Properties / Title</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_description"><a class="anchor" href="#_properties_description"></a>7.1.9. Properties / Description</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_contacts"><a class="anchor" href="#_properties_contacts"></a>7.1.10. Properties / Contacts</h4>
 <div class="paragraph">
 <p>The <code>contacts</code> property is the information associated with one or more parties responsible for the resource.</p>
 </div>
@@ -1169,7 +1305,7 @@ detection and handling of content.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/core/contacts</strong></p>
 </div></div></td>
@@ -1216,7 +1352,7 @@ detection and handling of content.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_properties_persistent_identifiers"><a class="anchor" href="#_properties_persistent_identifiers"></a>7.1.8. Properties / Persistent identifiers</h4>
+<h4 id="_properties_persistent_identifiers"><a class="anchor" href="#_properties_persistent_identifiers"></a>7.1.11. Properties / Persistent identifiers</h4>
 <div class="paragraph">
 <p>The <code>externalIds</code> property is a persistent (or handle) identifier used to provide a long lasting reference to a digital resource.  Persistent identifiers are commonly used for scientific publications and datasets.</p>
 </div>
@@ -1275,7 +1411,7 @@ detection and handling of content.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 4</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/rec/core/pids</strong></p>
 </div></div></td>
@@ -1316,7 +1452,7 @@ detection and handling of content.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_properties_record_creation_date"><a class="anchor" href="#_properties_record_creation_date"></a>7.1.9. Properties / Record creation date</h4>
+<h4 id="_properties_record_creation_date"><a class="anchor" href="#_properties_record_creation_date"></a>7.1.12. Properties / Record creation date</h4>
 <div class="paragraph">
 <p>The <code>created</code> property is a single date, being the date that the WMDR was created. Note that this date is not related to any aspect of the station/platform.</p>
 </div>
@@ -1337,7 +1473,7 @@ detection and handling of content.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/core/record_creation_date</strong></p>
 </div></div></td>
@@ -1358,7 +1494,7 @@ detection and handling of content.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_properties_record_update_date"><a class="anchor" href="#_properties_record_update_date"></a>7.1.10. Properties / Record update date</h4>
+<h4 id="_properties_record_update_date"><a class="anchor" href="#_properties_record_update_date"></a>7.1.13. Properties / Record update date</h4>
 <div class="paragraph">
 <p>The <code>created</code> property is a single date, being the date that the WMDR was created. Note that this date not related to any aspect of the station/platform.</p>
 </div>
@@ -1379,7 +1515,7 @@ detection and handling of content.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 5</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/rec/core/record_update_date</strong></p>
 </div></div></td>
@@ -1394,203 +1530,67 @@ detection and handling of content.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_properties_wmo_data_policy"><a class="anchor" href="#_properties_wmo_data_policy"></a>7.1.11. Properties / WMO data policy</h4>
+<h4 id="_properties_additional_identifiers"><a class="anchor" href="#_properties_additional_identifiers"></a>7.1.14. Properties / Additional identifiers</h4>
 <div class="paragraph">
-<p>The <code>wmo:dataPolicy</code> property is a codelist that identifies the classification of the dataset exchange as described by the WMO Unified Data Policy (Resolution 1 (Cg-Ext(2021)))<sup class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnotedef_26" title="View footnote.">26</a>]</sup> for the international exchange of Earth system data. The code list values are <code>core</code> or <code>recommended</code>.  The <code>wmo:dataPolicy</code> property is required if the metadata record describes a dataset.</p>
+<p>TODO</p>
 </div>
-<div class="paragraph">
-<p>Licensing and copyright are expressed via the <code>links</code> property (see TODO), providing access, license and attribution details as required. Conditions on use of the data should be indicated for transparency and clarification.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example: Core data</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
-  ...
-  "wmo:dataPolicy": "core"
-  ...
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Example: Recommended data</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
-  ...
-  "wmo:dataPolicy": "recommended"
-  ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It is useful to add provider-specific details to have the most detailed information about data policy and additional conditions.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example: Recommended data with additional conditions and provider-specific details</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
-  ...
-  "wmo:dataPolicy": "recommended"
-  ...
-},
-"links": [{
-  "rel": "license",
-  "href": "https://example.org/license",
-  "type": "text/html",
-  "title": "EUMETSAT DATA LICENSING"
-}]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Example: License for recommended data in the public domain</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
-  ...
-  "wmo:dataPolicy": "recommended"
-  ...
-},
-"links": [{
-  "rel": "license",
-  "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "type": "text/html",
-  "title": "CC0 1.0 Deed | CC0 1.0 Universal | Creative Commons"
-}]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To express rights not addressed by a license, the <code>rights</code> property can be used as follows:</p>
-</div>
-<div class="listingblock">
-<div class="title">Example: Rights</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">"properties": {
- ...
- "rights": "Users are granted free and unrestricted access to this data, without charge and with no conditions on use. Users are requested to attribute the producer of this data. WMO Unified Data Policy (Resolution 1 (Cg-Ext 2021))."
- ...
-}</code></pre>
-</div>
-</div>
-<table id="req_core_data_policy" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/data_policy</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The <code>properties.wmo:dataPolicy</code> property SHALL be <code>core</code> or <code>recommended</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>When the <code>properties.wmo:dataPolicy</code> property is <code>recommended</code>, data licensing SHALL be provided by at least one <code>links</code> item with link relations (<code>rel</code>) of <code>license</code>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table id="rec_core_data_policy_conditions" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 6</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/rec/core/data_policy_conditions</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Additional conditions represented by a <code>links</code> item SHOULD also provide a <code>title</code> property to include human-readable information about the link.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>To express any conditions on use of a given dataset, the <code>properties.rights</code> property SHOULD be used.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core data or recommended data compatible with free and unrestricted principles, <code>properties.rights</code> SHOULD be declared with exactly the following statement:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Users are granted free and unrestricted access to this data, without charge and with no conditions on use. Users are requested to attribute the producer of this data. WMO Unified Data Policy (Resolution 1 (Cg-Ext 2021)).</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core or recommended data not in the public domain, a copyright statement SHOULD be expressed as either a <code>properties.rights</code> statement or a link object with <code>rel=copyright</code>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table id="per_core_data_policy" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 4</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/per/core/data_policy</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core data (when <code>properties.wmo:dataPolicy</code> property is <code>core</code>), attribution licensing MAY be provided as needed.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>, and the data is compatible with free and unrestricted principles), a license or public domain statement that is compatible with free and unrestricted principles (such as <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0</a>) MAY be expressed as a link object with the <code>license</code> link relation.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>), a copyright statement MAY be expressed in <code>properties.rights</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>For core data (when <code>properties.wmo:dataPolicy</code> is <code>core</code>) or recommended data (when <code>properties.wmo:dataPolicy</code> is <code>recommended</code>), a link object MAY be expressed with <code>rel=copyright</code>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sect3">
-<h4 id="_links_and_distribution_information"><a class="anchor" href="#_links_and_distribution_information"></a>7.1.12. Links and distribution information</h4>
+<h4 id="_properties_additional_titles"><a class="anchor" href="#_properties_additional_titles"></a>7.1.15. Properties / Additional titles</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_facility_type"><a class="anchor" href="#_properties_facility_type"></a>7.1.16. Properties / Facility type</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_wmo_region"><a class="anchor" href="#_properties_wmo_region"></a>7.1.17. Properties / WMO region</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_territories"><a class="anchor" href="#_properties_territories"></a>7.1.18. Properties / Territories</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_observations"><a class="anchor" href="#_properties_observations"></a>7.1.19. Properties / Observations</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_observations_configurations"><a class="anchor" href="#_properties_observations_configurations"></a>7.1.20. Properties / Observations / Configurations</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_properties_observations_configurations_instrument"><a class="anchor" href="#_properties_observations_configurations_instrument"></a>7.1.21. Properties / Observations / Configurations / Instrument</h4>
+<div class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_links_and_distribution_information"><a class="anchor" href="#_links_and_distribution_information"></a>7.1.22. Links and distribution information</h4>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 <div class="sect4">
-<h5 id="_overview_3"><a class="anchor" href="#_overview_3"></a>7.1.12.1. Overview</h5>
+<h5 id="_overview_3"><a class="anchor" href="#_overview_3"></a>7.1.22.1. Overview</h5>
 <div class="paragraph">
 <p>TODO</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_additional_properties"><a class="anchor" href="#_additional_properties"></a>7.1.13. Additional properties</h4>
+<h4 id="_additional_properties"><a class="anchor" href="#_additional_properties"></a>7.1.23. Additional properties</h4>
 <div class="paragraph">
 <p>A WMDR can be extended as required for organizational purposes by adding properties (of any type) in the
 record.  Additional properties do not render a record non-compliant with WMDR.</p>
@@ -1618,7 +1618,7 @@ record.  Additional properties do not render a record non-compliant with WMDR.</
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 5</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 4</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/per/core/additional_properties</strong></p>
 </div></div></td>
@@ -1634,7 +1634,7 @@ record.  Additional properties do not render a record non-compliant with WMDR.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="_wmo_core_metadata_profile_resources"><a class="anchor" href="#_wmo_core_metadata_profile_resources"></a>7.2. WMO Core Metadata Profile resources</h3>
+<h3 id="_wigos_metadata_representation_resources"><a class="anchor" href="#_wigos_metadata_representation_resources"></a>7.2. WIGOS Metadata Representation resources</h3>
 <div class="sect3">
 <h4 id="_wmo_codes_registry"><a class="anchor" href="#_wmo_codes_registry"></a>7.2.1. WMO Codes Registry</h4>
 <div class="ulist">
@@ -1658,15 +1658,12 @@ record.  Additional properties do not render a record non-compliant with WMDR.</
 <h2 id="_cataloguing_considerations"><a class="anchor" href="#_cataloguing_considerations"></a>8. Cataloguing considerations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In addition to documenting and describing WIGOS metadata holdings, WMDR station metadata will be
-searchable via the WIGOS Global Station Catalogue (GSC).  As part of discovery and search
-workflow, a GSC may choose to apply filters to help narrow search results.  This is realized by
-the API of the GSC, as well as applying facets in the catalogue.</p>
+<p>In addition to documenting and describing WIGOS metadata holdings, WMDR observing facility metadata will be searchable via the WIGOS Global Observing Facility Catalogue (GOFC).  As part of discovery and search workflow, a GOFC may choose to apply filters to help narrow search results.  This is realized by the API of the GOFC, as well as applying facets in the catalogue.</p>
 </div>
 <div class="sect2">
 <h3 id="_faceting"><a class="anchor" href="#_faceting"></a>8.1. Faceting</h3>
 <div class="paragraph">
-<p>The API of the GSC, in addition to allowing for spatial/temporal/attribute queries and filters,
+<p>The API of the GOFC, in addition to allowing for spatial/temporal/attribute queries and filters,
 may choose to apply facets to WMDRs.  Facets are effective when applied against controlled
 vocabularies and classifications.</p>
 </div>
@@ -1692,7 +1689,7 @@ vocabularies and classifications.</p>
 </dd>
 <dt class="hdlist1">classification</dt>
 <dd>
-<p>Target Type:Station Metadata</p>
+<p>Target Type:Observing facility metadata</p>
 </dd>
 </dl>
 </div>
@@ -1993,72 +1990,6 @@ vocabularies and classifications.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_wmo_data_policy"><a class="anchor" href="#_wmo_data_policy"></a>A.1.7. WMO Data Policy</h4>
-<div id="ats_core_data_policy" class="exampleblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">label</dt>
-<dd>
-<p>/conf/core/data_policy</p>
-</dd>
-<dt class="hdlist1">subject</dt>
-<dd>
-<p>/req/core/data_policy</p>
-</dd>
-<dt class="hdlist1">test-purpose</dt>
-<dd>
-<p>Validate that a WMDR provides information about data policy and, if applicable additional information about licensing and/or copyright.</p>
-</dd>
-</dl>
-</div>
-<div class="exampleblock component">
-<div class="content">
-<div class="openblock component">
-<div class="content">
-<div class="paragraph">
-<p>Check for the type of WMDR (<code>properties.type</code>).</p>
-</div>
-</div>
-</div>
-<div class="openblock component">
-<div class="content">
-<div class="paragraph">
-<p>If <code>properties.type</code> is found, and <code>properties.type</code> is equal to <code>dataset</code> check that <code>properties.wmo:dataPolicy</code> exists.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="exampleblock component">
-<div class="content">
-<div class="openblock component">
-<div class="content">
-<div class="paragraph">
-<p>Check for the existence of a <code>properties.wmo:dataPolicy</code> property in the WMDR.</p>
-</div>
-</div>
-</div>
-<div class="openblock component">
-<div class="content">
-<div class="paragraph">
-<p>If <code>properties.wmo:dataPolicy</code> is found, check that <code>properties.wmo:dataPolicy</code> has a value equal to <code>core</code> or <code>recommended</code>.</p>
-</div>
-</div>
-</div>
-<div class="openblock component">
-<div class="content">
-<div class="paragraph">
-<p>If <code>properties.wmo:dataPolicy</code> is equal to <code>recommended</code>, check for the existence of at least one <code>links</code> item containing a <code>license</code> link relation (<code>rel</code>).</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2194,36 +2125,18 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
     "properties": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "record type",
+          "const": "facility"
+        },
         "title": {
           "type": "string",
-          "description": "facility name (primary)"
+          "description": "observing facility name (primary)"
         },
-        "additionalTitles": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "description": "additional facility names"
-          }
-        },
-        "additionalIds": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "description": "additional WIGOS Station Identifiers (WSI)",
-            "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
-          }
-        },
-        "facilityType": {
+        "description": {
           "type": "string",
-          "description": "Station/platform type",
-          "$comment": "https://codes.wmo.int/wmdr/FacilityType"
-        },
-        "wmoRegion": {
-          "type": "string",
-          "description": "WMO Region",
-          "$comment": "https://codes.wmo.int/wmdr/WMORegion"
+          "description": "observing facility description"
         },
         "contacts": {
           "type": "array",
@@ -2489,29 +2402,37 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
           "description": "The most recent date on which the record was changed.",
           "format": "date-time"
         },
-        "keywords": {
+        "additionalIds": {
           "type": "array",
-          "description": "The topic or topics of the resource. Typically\nrepresented using free-form keywords, tags, key\nphrases, or classification codes.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "themes": {
-          "type": "array",
-          "description": "A knowledge organization system used to classify\nthe resource.",
           "minItems": 1,
           "items": {
-            "type": "object",
-            "required": [
-              "concepts",
-              "scheme"
-            ],
-            "properties": {
-              "concepts": {
-                "type": "array",
-                "description": "One or more entity/concept identifiers from this knowledge\nsystem. it is recommended that a resolvable URI be used for\neach entity/concept identifier.",
-                "minItems": 1,
-                "items": {
+            "type": "string",
+            "description": "additional WIGOS Station Identifiers (WSI)",
+            "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+          }
+        },
+        "additionalTitles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "additional observing facility names"
+          }
+        },
+        "facilityType": {
+          "allOf": [
+            {
+              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+            }
+          ],
+          "description": "Observing facility type",
+          "$comment": "https://codes.wmo.int/wmdr/FacilityType"
+        },
+        "wmoRegion": {
+          "allOf": [
+            {
+              "oneOf": [
+                {
                   "type": "object",
                   "required": [
                     "id"
@@ -2535,14 +2456,17 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
                       "description": "A URI providing further description of the concept."
                     }
                   }
+                },
+                {
+                  "enum": [
+                    null
+                  ]
                 }
-              },
-              "scheme": {
-                "type": "string",
-                "description": "An identifier for the knowledge organization system used\nto classify the resource.  It is recommended that the\nidentifier be a resolvable URI.  The list of schemes used\nin a searchable catalog can be determined by inspecting\nthe server's OpenAPI document or, if the server implements\nCQL2, by exposing a queryable (e.g. named `scheme`) and\nenumerating the list of schemes in the queryable's schema\ndefinition."
-              }
+              ]
             }
-          }
+          ],
+          "description": "WMO Region",
+          "$comment": "https://codes.wmo.int/wmdr/WMORegion"
         },
         "territories": {
           "type": "array",
@@ -2552,13 +2476,18 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
             "type": "object",
             "properties": {
               "territory": {
-                "type": "string",
+                "allOf": [
+                  {
+                    "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                  }
+                ],
                 "description": "Territory of origin of data",
                 "$comment": "https://codes.wmo.int/wmdr/TerritoryName"
               },
               "dates": {
                 "type": "array",
                 "minItems": 1,
+                "maxItems": 2,
                 "items": {
                   "oneOf": [
                     {
@@ -2580,60 +2509,21 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
             ]
           }
         },
-        "programAffiliations": {
+        "observations": {
           "type": "array",
-          "description": "program affiliations",
+          "description": "observations made at the facility, including the observed geometry and observed property",
           "minItems": 1,
           "items": {
-            "type": "object",
-            "properties": {
-              "facilityId": {
-                "type": "string",
-                "description": "Programme specific facility identifier"
-              },
-              "facilityTitle": {
-                "type": "string",
-                "description": "Programme specific facility name"
-              },
-              "programAffiliation": {
-                "type": "string",
-                "description": "Programme/network affiliation",
-                "$comment": "https://codes.wmo.int/wmdr/ProgramAffiliation"
-              },
-              "reportingStatus": {
-                "type": "string",
-                "description": "Station/Platform operating status",
-                "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
-              },
-              "dates": {
-                "$ref": "#/properties/properties/properties/territories/items/properties/dates"
-              }
-            }
-          }
-        },
-        "deployments": {
-          "type": "array",
-          "description": "facility deployments (placement / location of specific equipment)",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/Deployment"
-          }
-        },
-        "instruments": {
-          "type": "array",
-          "description": "facility instruments",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/Instrument"
+            "$ref": "#/definitions/Observations"
           }
         }
       },
       "required": [
-        "contacts",
-        "created",
+        "type",
         "title",
-        "deployments",
-        "instruments"
+        "created",
+        "contacts",
+        "observations"
       ]
     },
     "links": {
@@ -2698,19 +2588,15 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
     "links"
   ],
   "definitions": {
-    "Deployment": {
+    "Configurations": {
       "type": "object",
       "properties": {
         "id": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
+          "type": [
+            "string",
+            "integer"
           ],
-          "description": "deployment identifier"
+          "description": "configuration identifier"
         },
         "geometry": {
           "$ref": "#/properties/geometry"
@@ -2718,81 +2604,91 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
         "time": {
           "$ref": "#/properties/time"
         },
-        "instrument": {
-          "type": "string",
-          "description": "instrument identifier"
+        "observingMethod": {
+          "allOf": [
+            {
+              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+            }
+          ],
+          "description": "observing method",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodOcean"
+        },
+        "operatingStatus": {
+          "allOf": [
+            {
+              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+            }
+          ],
+          "description": "operating status",
+          "$comment": "- https://codes.wmo.int/wmdr/InstrumentOperatingStatus"
         },
         "sourceOfObservation": {
-          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+            }
+          ],
           "description": "Source of observation",
           "$comment": "https://codes.wmo.int/wmdr/SourceOfObservation"
         },
-        "referenceSurfaces": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "tye": "object",
-            "properties": {
-              "referenceSurface": {
-                "type": "string",
-                "description": "Type of reference surface",
-                "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
-              },
-              "verticalDistance": {
-                "type": "number",
-                "description": "Height above reference surface"
+        "instrument": {
+          "$ref": "#/definitions/Instrument"
+        },
+        "instrumentSerialNumber": {
+          "type": "string",
+          "description": "instrument serial number"
+        },
+        "verticalDistance": {
+          "type": "object",
+          "properties": {
+            "distances": {
+              "type": "array",
+              "description": "Signed vertical distances from reference surface",
+              "minItems": 1,
+              "items": {
+                "type": "number"
               }
             },
-            "required": [
-              "referenceSurface",
-              "verticalDistance"
-            ]
-          }
-        },
-        "keywords": {
-          "$ref": "#/properties/properties/properties/keywords"
+            "unit": {
+              "allOf": [
+                {
+                  "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                }
+              ],
+              "description": "Measurement unit",
+              "$comment": "https://codes.wmo.int/wmdr/unit"
+            },
+            "referenceSurface": {
+              "allOf": [
+                {
+                  "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                }
+              ],
+              "description": "Type of reference surface",
+              "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
+            }
+          },
+          "required": [
+            "distances",
+            "unit",
+            "referenceSurface"
+          ]
         }
       },
       "required": [
-        "id"
+        "id",
+        "time"
       ]
     },
     "Instrument": {
       "type": "object",
       "properties": {
         "id": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            }
+          "type": [
+            "string",
+            "integer"
           ],
           "description": "instrument identifier"
-        },
-        "observingCapabilities": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "observingMethod": {
-                "type": "string",
-                "description": "observing method",
-                "$comment": "- https://codes.wmo.int/wmdr/ObservingMethodAtmosphere\n- https://codes.wmo.int/wmdr/ObservingMethodTerrestrial\n- https://codes.wmo.int/wmdr/ObservingMethodEarth"
-              },
-              "observedProperty": {
-                "type": "string",
-                "description": "observed property",
-                "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
-              }
-            },
-            "required": [
-              "observingMethod",
-              "observedProperty"
-            ]
-          }
         },
         "manufacturer": {
           "type": "string",
@@ -2801,15 +2697,68 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
         "model": {
           "type": "string",
           "description": "instrument model"
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "instrument serial number"
         }
       },
       "required": [
-        "id",
-        "observingCapabilities"
+        "id"
+      ]
+    },
+    "Observations": {
+      "type": "object",
+      "properties": {
+        "observedGeometry": {
+          "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
+          "description": "observed geometry",
+          "$comment": "- https://codes.wmo.int/wmdr/Geometry"
+        },
+        "observedProperty": {
+          "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
+          "description": "observed property",
+          "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
+        },
+        "programAffiliations": {
+          "type": "array",
+          "description": "program affiliations",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "programAffiliation": {
+                "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
+                "description": "Programme/network affiliation",
+                "$comment": "https://codes.wmo.int/wmdr/ProgramAffiliation"
+              },
+              "reportingStatus": {
+                "allOf": [
+                  {
+                    "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                  }
+                ],
+                "description": "Station/Platform operating status",
+                "$comment": "https://codes.wmo.int/wmdr/ReportingStatus"
+              },
+              "dates": {
+                "$ref": "#/properties/properties/properties/territories/items/properties/dates"
+              }
+            },
+            "required": [
+              "programAffiliation"
+            ]
+          }
+        },
+        "configurations": {
+          "type": "array",
+          "description": "configurations",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Configurations"
+          }
+        }
+      },
+      "required": [
+        "observedProperty",
+        "programAffiliations",
+        "configurations"
       ]
     }
   }
@@ -2849,10 +2798,13 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
     ],
     "properties": {
         "type": "facility",
+        "facilityType": {
+            "id": "landFixed"
+        },
         "title": "Thessaloniki",
         "created": "2024-12-11T00:00:00Z",
         "updated": "2024-12-11T00:00:00Z",
-        "description": "The Brewer spectrophotometers and all radaition instruments are located on the roof of the 4-storey building of the Physics Dept., of the Aristotle University of Thessaloniki. The Campus is located in the city center about 500 m east of the seashore. The highest elevation of about 1100 m is at a distance of about 15 km towards the east. Thessaloniki is the second largest city of Greece with about 1000000 inhabitants in the greater metropolitan area.",
+        "description": "The Brewer spectrophotometers and all radiation instruments are located on the roof of the 4-storey building of the Physics Dept., of the Aristotle University of Thessaloniki. The Campus is located in the city center about 500 m east of the seashore. The highest elevation of about 1100 m is at a distance of about 15 km towards the east. Thessaloniki is the second largest city of Greece with about 1000000 inhabitants in the greater metropolitan area.",
         "contacts": [
             {
                 "identifier": "contact:aristotle-university-of-thessaloniki--ed7b7e4a",
@@ -2914,63 +2866,81 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
                 ]
             }
         ],
-        "facilityType": "landFixed",
-        "wmoRegion": "europe",
-        "programAffiliations": [
-            {
-                "dates": [
-                        "1982-03-13",
-                        ".."
-                    ],
-                "programAffiliation": "GAWregional",
-                "facilityId": "THE",
-                "reportingStatus": "operational"
-            },
-            {
-                "dates":[
-                        "2008-01-01",
-                        "2024-12-11"
-                    ],
-                "programAffiliation": "GALION",
-                "facilityId": "THE",
-                "reportingStatus": "operational"
-            },
-            {
-                "dates": [
-                        "2003-06-01",
-                        "2024-12-11"
-                    ],
-                "programAffiliation": "AERONET",
-                "facilityId": "Thessaloniki",
-                "reportingStatus": "operational"
-            }
-        ],
+        "wmoRegion": {
+            "id": "europe"
+        },
         "territories": [
             {
-                "dates": ["2011-02-16", ".."],
-                "territory": "GRC"
+                "dates": [
+                    "2011-02-16",
+                    ".."
+                ],
+                "territory": {"id": "GRC"}
             }
         ],
-        "deployments": [
+        "observations": [
             {
-                "id": "deployment:123",
-                "instrument": "instrument:456",
-                "sourceOfObservation": "automaticReading",
-                "time": {
-                    "interval": [
-                        "1982-03-13",
-                        ".."
-                    ]
-                }
-            }
-        ],
-        "instruments": [
-            {
-                "id": "instrument:456",
-                "observingCapabilities": [{
-                     "observingMethod": "78",
-                     "observedProperty": "12164"
-                }]
+                "observedProperty": {
+                    "id": "12164"
+                },
+                "programAffiliations": [
+                    {
+                        "dates": [
+                            "1982-03-13",
+                            ".."
+                        ],
+                        "programAffiliation": {
+                            "id": "GAWregional"
+                        },
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
+                    },
+                    {
+                        "dates": [
+                            "2008-01-01",
+                            "2024-12-11"
+                        ],
+                        "programAffiliation": {
+                            "id": "GALION"
+                        },
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
+                    },
+                    {
+                        "dates": [
+                            "2003-06-01",
+                            "2024-12-11"
+                        ],
+                        "programAffiliation": {
+                            "id": "AERONET"
+                        },
+                        "reportingStatus": {
+                            "id": "operational"
+                        }
+                    }
+                ],
+                "configurations": [
+                    {
+                        "id": "configuration-456",
+                        "time": {
+                            "interval": [
+                                "1982-03-13",
+                                ".."
+                            ]
+                        },
+                        "observingMethod": {
+                            "id": "78"
+                        },
+                        "sourceOfObservation": {
+                            "id": "automaticReading"
+                        },
+                        "instrument": {
+                            "id": "instrument-789"
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -3146,13 +3116,10 @@ of use when encoding the <code>properties.status</code> property..</p>
 <div class="footnote" id="_footnotedef_25">
 <a href="#_footnoteref_25">25</a>. <a href="https://en.wikipedia.org/wiki/YAML" class="bare">https://en.wikipedia.org/wiki/YAML</a>
 </div>
-<div class="footnote" id="_footnotedef_26">
-<a href="#_footnoteref_26">26</a>. Resolution 1 (Cg-Ext(2021)) – WMO Unified Policy for the International Exchange of Earth System Data (World Meteorological Congress: Abridged Final Report of the Extraordinary Session (WMO-No. 1281))
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-07-07 16:20:36 UTC
+Last updated 2026-09-21 11:51:22 UTC
 </div>
 </div>
 </body>
