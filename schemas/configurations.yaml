@@ -1,0 +1,62 @@
+---
+type: object
+properties:
+  id:
+    type:
+      - string
+      - integer
+    description: configuration identifier
+  geometry:
+    $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
+  time:
+    $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
+  observingMethod:
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
+    description: observing method
+    $comment: |-
+      - https://codes.wmo.int/wmdr/ObservingMethodAtmosphere
+      - https://codes.wmo.int/wmdr/ObservingMethodTerrestrial
+      - https://codes.wmo.int/wmdr/ObservingMethodOcean
+  operatingStatus:
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
+    description: operating status
+    $comment: |-
+      - https://codes.wmo.int/wmdr/InstrumentOperatingStatus
+  sourceOfObservation:
+    allOf:
+      - $ref: 'definitions.yaml#/concept_or_null'
+    description: Source of observation
+    $comment: https://codes.wmo.int/wmdr/SourceOfObservation
+  instrument:
+    $ref: 'instrument.yaml'
+  instrumentSerialNumber:
+    type: string
+    description: instrument serial number
+  verticalDistance:
+    type: object
+    properties:
+      distances:
+        type: array
+        description: Signed vertical distances from reference surface
+        minItems: 1
+        items:
+          type: number
+      unit:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: Measurement unit
+        $comment: https://codes.wmo.int/wmdr/unit
+      referenceSurface:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: Type of reference surface
+        $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
+    required:
+      - distances
+      - unit
+      - referenceSurface
+required:
+  - id
+  - time

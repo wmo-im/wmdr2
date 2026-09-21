@@ -18,34 +18,19 @@ properties:
     $ref: 'https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/pointGeoJSON.yaml'
   time:
     $ref: 'https://raw.githubusercontent.com/wmo-im/wcmp2/refs/heads/main/schemas/wcmpRecordGeoJSON.yaml#/properties/time'
-
   properties:
     type: object
     properties:
+      type:
+        type: string
+        description: record type
+        const: facility
       title:
         type: string
-        description: facility name (primary)
-      additionalTitles:
-        type: array
-        minItems: 1
-        items:
-          type: string
-          description: additional facility names
-      additionalIds:
-        type: array
-        minItems: 1
-        items:
-          type: string
-          description: additional WIGOS Station Identifiers (WSI)
-          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
-      facilityType:
+        description: observing facility name (primary)
+      description:
         type: string
-        description: Station/platform type
-        $comment: https://codes.wmo.int/wmdr/FacilityType
-      wmoRegion:
-        type: string
-        description: WMO Region
-        $comment: https://codes.wmo.int/wmdr/WMORegion
+        description: observing facility description
       contacts:
         type: array
         minItems: 1
@@ -61,10 +46,29 @@ properties:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/created'
       updated:
         $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/updated'
-      keywords:
-        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/keywords'
-      themes:
-        $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/recordCommonProperties.yaml#/properties/themes'
+      additionalIds:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional WIGOS Station Identifiers (WSI)
+          pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+      additionalTitles:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          description: additional observing facility names
+      facilityType:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: Observing facility type
+        $comment: https://codes.wmo.int/wmdr/FacilityType
+      wmoRegion:
+        allOf:
+          - $ref: 'definitions.yaml#/concept_or_null'
+        description: WMO Region
+        $comment: https://codes.wmo.int/wmdr/WMORegion
       territories:
         type: array
         description: time series of territories
@@ -73,55 +77,26 @@ properties:
           type: object
           properties:
             territory:
-              type: string
+              allOf:
+                - $ref: 'definitions.yaml#/concept_or_null'
               description: Territory of origin of data
               $comment: https://codes.wmo.int/wmdr/TerritoryName
             dates:
               $ref: 'temporal.yaml#/dates'
           required:
             - territory
-      programAffiliations:
-        type: array
-        description: program affiliations
-        minItems: 1
-        items:
-          type: object
-          properties:
-            facilityId:
-              type: string
-              description: Programme specific facility identifier
-            facilityTitle:
-              type: string
-              description: Programme specific facility name
-            programAffiliation:
-              type: string
-              description: Programme/network affiliation
-              $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
-            reportingStatus:
-              type: string
-              description: Station/Platform operating status
-              $comment: https://codes.wmo.int/wmdr/ReportingStatus
-            dates:
-              $ref: 'temporal.yaml#/dates'
-      deployments:
+      observations:
           type: array
-          description: facility deployments (placement / location of specific equipment)
+          description: "observations made at the facility, including the observed geometry and observed property"
           minItems: 1
           items:
-              $ref: 'deployment.yaml'
-      instruments:
-          type: array
-          description: facility instruments
-          minItems: 1
-          items:
-              $ref: 'instrument.yaml'
+              $ref: 'observations.yaml'
     required:
-      - contacts
-      - created
+      - type
       - title
-      - deployments
-      - instruments
-
+      - created
+      - contacts
+      - observations
   links:
     type: array
     minItems: 1

@@ -14,7 +14,7 @@ Weather/climate/water data is by nature geospatial and temporal.  The W3C Data o
 
 The following are keywords to be used by search engines and document catalogues.
 
-wmo, wigos, station, instrument, weather, climate, water, metadata, search
+wmo, wigos, station, observing facility, observations, instrument, weather, climate, water, metadata, search
 
 [big]*iii.    Security Considerations*
 
