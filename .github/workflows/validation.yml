@@ -9,6 +9,7 @@ on:
     paths:
       - '**.json'   
       - '**.yaml'   
+      - '**.yml'   
 
 jobs:
   main:
@@ -26,12 +27,14 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install check-jsonschema
-#        pip3 install pywmdr
-#        pywmdr bundle sync
+        git clone https://github.com/wmo-im/pywmdr.git
+        cd pywmdr
+        pip3 install -e.
+        pywmdr bundle sync
     - name: Run JSON Schema validation
       run: |
         check-jsonschema --check-metaschema schemas/wmdr2-bundled.json
         for e in examples/*.json; do check-jsonschema --schemafile schemas/wmdr2-bundled.json $e; done
-#    - name: Run pywmdr ETS validation
-#      run: |
-#        for e in examples/*.json; do pywmdr ets validate $e; done
+    - name: Run pywmdr ETS validation
+      run: |
+        for e in examples/*.json; do pywmdr ets validate $e; done

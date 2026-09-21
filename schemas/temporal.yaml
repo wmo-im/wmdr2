@@ -4,9 +4,7 @@ dates:
   minItems: 1
   maxItems: 2
   items:
-    oneOf:
+    anyOf:
       - type: string
         format: date
-      - type: string
-        enum:
-          - ".."
+      - const: ".."
