@@ -34,10 +34,10 @@ properties:
   instrumentSerialNumber:
     type: string
     description: instrument serial number
-  verticalDistances:
+  verticalDistance:
     type: object
     properties:
-      values:
+      distances:
         type: array
         description: Signed vertical distances from reference surface
         minItems: 1
@@ -54,7 +54,7 @@ properties:
         description: Type of reference surface
         $comment: https://codes.wmo.int/wmdr/ReferenceSurfaceType
     required:
-      - values
+      - distances
       - unit
       - referenceSurface
 required:
