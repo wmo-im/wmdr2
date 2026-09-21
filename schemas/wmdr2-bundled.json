@@ -624,40 +624,41 @@
           "type": "string",
           "description": "instrument serial number"
         },
-        "referenceSurface": {
-          "allOf": [
-            {
-              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
-            }
-          ],
-          "description": "Type of reference surface",
-          "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
-        },
         "verticalDistances": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "number",
-                "description": "Height above reference surface"
-              },
-              "unit": {
-                "allOf": [
-                  {
-                    "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
-                  }
-                ],
-                "description": "Measurement unit",
-                "$comment": "https://codes.wmo.int/wmdr/unit"
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "description": "Signed vertical distances from reference surface",
+              "minItems": 1,
+              "items": {
+                "type": "number"
               }
             },
-            "required": [
-              "value",
-              "unit"
-            ]
-          }
+            "unit": {
+              "allOf": [
+                {
+                  "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                }
+              ],
+              "description": "Measurement unit",
+              "$comment": "https://codes.wmo.int/wmdr/unit"
+            },
+            "referenceSurface": {
+              "allOf": [
+                {
+                  "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
+                }
+              ],
+              "description": "Type of reference surface",
+              "$comment": "https://codes.wmo.int/wmdr/ReferenceSurfaceType"
+            }
+          },
+          "required": [
+            "values",
+            "unit",
+            "referenceSurface"
+          ]
         }
       },
       "required": [
@@ -692,20 +693,12 @@
       "type": "object",
       "properties": {
         "observedGeometry": {
-          "allOf": [
-            {
-              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
-            }
-          ],
+          "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
           "description": "observed geometry",
           "$comment": "- https://codes.wmo.int/wmdr/Geometry"
         },
         "observedProperty": {
-          "allOf": [
-            {
-              "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
-            }
-          ],
+          "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
           "description": "observed property",
           "$comment": "- https://codes.wmo.int/wmdr/ObservedVariableAtmosphere\n- https://codes.wmo.int/wmdr/ObservedVariableEarth\n- https://codes.wmo.int/wmdr/ObservedVariableOcean\n- https://codes.wmo.int/wmdr/ObservedVariableOuterSpace\n- https://codes.wmo.int/wmdr/ObservedVariableTerrestrial"
         },
@@ -717,11 +710,7 @@
             "type": "object",
             "properties": {
               "programAffiliation": {
-                "allOf": [
-                  {
-                    "$ref": "#/properties/properties/properties/wmoRegion/allOf/0"
-                  }
-                ],
+                "$ref": "#/properties/properties/properties/wmoRegion/allOf/0/oneOf/0",
                 "description": "Programme/network affiliation",
                 "$comment": "https://codes.wmo.int/wmdr/ProgramAffiliation"
               },

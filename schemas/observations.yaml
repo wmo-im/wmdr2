@@ -2,14 +2,12 @@
 type: object
 properties:
   observedGeometry:
-    allOf:
-      - $ref: 'definitions.yaml#/concept_or_null'
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
     description: observed geometry
     $comment: |-
       - https://codes.wmo.int/wmdr/Geometry
   observedProperty:
-    allOf:
-      - $ref: 'definitions.yaml#/concept_or_null'
+    $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
     description: observed property
     $comment: |-
       - https://codes.wmo.int/wmdr/ObservedVariableAtmosphere
@@ -25,8 +23,7 @@ properties:
       type: object
       properties:
         programAffiliation:
-          allOf:
-            - $ref: 'definitions.yaml#/concept_or_null'
+          $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/theme.yaml#/properties/concepts/items'
           description: Programme/network affiliation
           $comment: https://codes.wmo.int/wmdr/ProgramAffiliation
         reportingStatus:
