@@ -96,10 +96,10 @@ body {
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-09-21</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-09-26</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.99.dev0</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.99.dev1</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document status: DRAFT</p></td>
@@ -2113,7 +2113,7 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
             "resolution": {
               "type": "string",
               "description": "Minimum time period resolvable in the dataset, as an ISO 8601 duration",
-              "pattern": "^(-?)P(?=\\\\d|T\\\\d)(?:(\\\\d+)Y)?(?:(\\\\d+)M)?(?:(\\\\d+)([DW]))?(?:T(?:(\\\\d+)H)?(?:(\\\\d+)M)?(?:(\\\\d+(?:\\\\.\\\\d+)?)S)?)?$",
+              "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$",
               "example": [
                 "P1D"
               ]
@@ -2489,16 +2489,13 @@ The schema document will be published on <a href="https://schemas.wmo.int/wmdr/2
                 "minItems": 1,
                 "maxItems": 2,
                 "items": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "type": "string",
                       "format": "date"
                     },
                     {
-                      "type": "string",
-                      "enum": [
-                        ".."
-                      ]
+                      "const": ".."
                     }
                   ]
                 }
@@ -3119,7 +3116,7 @@ of use when encoding the <code>properties.status</code> property..</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-09-21 11:51:22 UTC
+Last updated 2026-09-26 18:26:05 UTC
 </div>
 </div>
 </body>
