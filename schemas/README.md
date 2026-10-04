@@ -39,5 +39,5 @@ include automated workflow via GitHub Actions.
 pip3 install check-jsonschema
 
 # validate a WMDR2 file on the command line
-check-jsonschema --schemafile schemas/wmdr2-bundled.json examples/20250504_0-20008-0-NRB.json
+check-jsonschema --schemafile schemas/wmdr2-bundled.json examples/0-20008-0-THE.json
 ```
