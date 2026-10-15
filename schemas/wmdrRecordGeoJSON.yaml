@@ -6,7 +6,7 @@ description: WMDR station metadata record definition
 properties:
   id:
     type: string
-    description: WIGOS station identifier
+    description: Primary WIGOS station identifier
     pattern: "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
   conformsTo:
     type: array
@@ -90,7 +90,7 @@ properties:
           description: "observations made at the facility, including the observed geometry and observed property"
           minItems: 1
           items:
-              $ref: 'observations.yaml'
+              $ref: 'observation.yaml'
     required:
       - type
       - title

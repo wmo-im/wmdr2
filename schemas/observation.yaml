@@ -36,10 +36,10 @@ properties:
         - programAffiliation
   configurations:
     type: array
-    description: configurations
+    description: Describes the configuration of the observations during a specified time period
     minItems: 1
     items:
-      $ref: 'configurations.yaml'
+      $ref: 'configuration.yaml'
 required:
   - observedProperty
   - programAffiliations
