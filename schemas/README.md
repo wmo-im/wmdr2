@@ -11,12 +11,31 @@ or desktop) for designing schemas, models and APIs (JSON/YAML/OpenAPI).
 
 To generate the WMDR2 JSON schema, following these steps:
 
+### Generate an all in one YAML bundle
 - open Stoplight Studio
 - click "Open Existing Folder"
 - point to the `schemas/` directory
 - ensure schema has no errors ("0 Issues" in the top right pane)
 - click "Open"
 - on the right hand pane, right-click the file `wmdrRecordGeoJSON.yaml` and select "Export"
+- select the following from the dialogue box:
+  - Format: YAML
+  - References: Dereferened
+  - X-Extensions: unchecked
+- click "Save to file"
+- save file to `schemas/wmdr2-bundled.yaml`
+- **DO NOT commit this file**
+
+Note that this step is required as an intermediary to generate an all in one YAML bundle in order
+for downstream schemas to reference properly.
+
+### Generate an all in one JSON bundle
+- open Stoplight Studio
+- click "Open Existing Folder"
+- point to the `schemas/` directory
+- ensure schema has no errors ("0 Issues" in the top right pane)
+- click "Open"
+- on the right hand pane, right-click the ``schemas/wmdr2-bundled.yaml and select "Export"
 - select the following from the dialogue box:
   - Format: JSON
   - References: Dereferened
