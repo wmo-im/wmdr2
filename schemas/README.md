@@ -43,6 +43,7 @@ for downstream schemas to reference properly.
 - click "Save to file"
 - save file to `schemas/wmdr2-bundled.json`
 - commit changes
+- in file `schemas/wmdr2-bundled.json`, replace instances of `\\\\` with `\\`
 
 A screenshot is shown below:
 
