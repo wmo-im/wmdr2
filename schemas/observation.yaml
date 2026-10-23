@@ -40,6 +40,11 @@ properties:
     minItems: 1
     items:
       $ref: 'configuration.yaml'
+  contacts:
+    type: array
+    minItems: 1
+    items:
+      $ref: 'contact.yaml'
 required:
   - observedProperty
   - programAffiliations
