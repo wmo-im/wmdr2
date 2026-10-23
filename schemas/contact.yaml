@@ -1,0 +1,6 @@
+---
+allOf:
+  - $ref: 'https://schemas.opengis.net/ogcapi/records/part1/1.0/openapi/schemas/contact.yaml'
+    required:
+      - organization
+    additionalProperties: false
