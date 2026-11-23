@@ -17,7 +17,7 @@ The table below provides an overview of the set of properties that may be includ
 
 |``id``
 |**Required**
-|A unique identifier of the station/platform (see TODO)
+|A unique identifier of the observing facility (see TODO)
 
 |``type``
 |**Required**
@@ -67,14 +67,13 @@ include::../requirements/core/REQ_validation.adoc[]
 
 ==== Identifier
 
-The `+id+` property is a unique identifier
-of the dataset.  A record identifier is essential for querying and identifying records within the Global Observing Facility Catalogue (GOFC).
+The ``id`` property is a unique identifier of the observing facility. A record identifier is essential for querying and identifying records within the Global Observing Facility Catalogue (GOFC).
 
 .Example
 
 [source,json]
 ----
-"id": "urn:wmo:md:ca-eccc-msc:observations.swob"
+"id": "urn:wmo:md:jp-jma:0-20000-0-47765"
 ----
 
 include::../requirements/core/REQ_identifier.adoc[]
@@ -158,16 +157,14 @@ Temporal extents provide a useful indicator of the date and time period of the f
 [source,json]
 ----
 "time": {
-  "interval" : ["2020-10-30", "2021-10-30"],
-  "resolution": "P1D"
+  "interval" : ["2020-10-30", "2021-10-30"]
 }
 ----
 
 [source,json]
 ----
 "time": {
-  "interval" : ["T00Z", "T23Z"],
-  "resolution": "PT1H"
+  "interval" : ["T00Z", "T23Z"]
 }
 ----
 
@@ -408,7 +405,7 @@ include::../recommendations/core/PER_additional_properties.adoc[]
 
 ==== WMO Codes Registry
 
-* http://codes.wmo.int/wmdr
+* https://codes.wmo.int/wmdr
 
 ==== WMO schemas server
 

@@ -5,9 +5,15 @@
   "description": "WMDR station metadata record definition",
   "properties": {
     "id": {
-      "type": "string",
-      "description": "Primary WIGOS station identifier",
-      "pattern": "^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$"
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "description": "A unique identifier of the catalog record."
     },
     "conformsTo": {
       "type": "array",
