@@ -2,7 +2,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/identifier*
-^|A |A WMDR SHALL provide an identifier via the `+id+` property.
-^|B |The `+id+` property SHALL be a WIGOS Station Identifier (WSI).
+^|A |A WMDR record SHALL provide an identifier via the `+id+` property.
+^|B |The `+id+` property SHALL have the following notation: `+urn:wmo:md:{centre_id}:{wigos-station-identifier}+`.
+^|C |The ``centre_id`` SHALL be based on the associated vocabulary specified in Appendix D. WIS2 Topic Hierarchy.
+^|D |The `+id+` property SHALL include a local identifier which is the primary WIGOS station identifier (WSI).
 |===
 //req2

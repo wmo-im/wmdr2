@@ -29,6 +29,10 @@ In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the fou
 
 [.component,class=step]
 --
+In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the fifth token (the local identifier) is a valid WIGOS Station Identifier (WSI), satisfying the following regular expression: ``^(0|1|2|3)-([1-9]\\d*)-([0-9]+)-([A-Za-z0-9\\._-]+)$``.
+--
+[.component,class=step]
+--
 In the WMDR's `+id+` property, delimiting the value on `+:+`, check that the fifth token (the local identifier) has no spaces or accented characters.
 --
 =====
